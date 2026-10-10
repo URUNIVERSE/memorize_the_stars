@@ -1372,7 +1372,7 @@ KEYWORD / / —"></textarea>
     $('setSeconds').value=state.settings.seconds;$('setMasterStars').value=state.settings.masterStars;$('setBaseGap').value=state.settings.baseGap;$('setMouseTrail').checked=!!state.settings.mouseTrail;$('setTimeoutFail').checked=!!state.settings.timeoutFail;
     $('imagePreview').innerHTML=state.settings.mainImage?`<img src="${state.settings.mainImage}" alt="preview">`:'<span style="font-size:50px">🌟</span>';renderStickerLibrary();
   }
-  function exportData(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='sticker-study-diary.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+  function exportData(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='memorize-the-stars.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
   function compactImageDataUrl(dataUrl, maxSide=1000, quality=0.62){
     return new Promise(resolve=>{
       if(typeof dataUrl!=='string'||!dataUrl.startsWith('data:image/')||dataUrl.length<180000){resolve(dataUrl||'');return}
