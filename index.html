@@ -16,6 +16,7 @@
 :root{
   --ui-font: 'starry_emoji', 'starry_english', 'starry_ui';
   --quiz-font: 'starry_emoji', 'starry_english', 'starry_quiz', 'starry_hanja';
+  --sticker-font: 'starry_ui';
   --bg:#fff5f8;
   --paper:#fffdfd;
   --paper-2:#ffebf3;
@@ -110,6 +111,7 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .sticker.dragging{cursor:grabbing;filter:drop-shadow(0 6px 10px rgba(130,50,80,.25));z-index:30}
 .sticker img{width:100%;height:100%;object-fit:contain;border:0;border-radius:0;background:transparent;display:block}
 .sticker.emoji{
+  font-family:var(--sticker-font);
   font-size:42px;line-height:1;padding:0;background:transparent;border:0;border-radius:0;
   text-shadow:0 1px 0 rgba(0,0,0,.08);
 }
@@ -159,7 +161,7 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .quiz-question,.quiz-answer,.bridge-answer{flex-shrink:0}
 .quiz-actions{flex:0 0 auto;min-width:0;width:100%;padding-top:12px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
 .timer-number{position:absolute;right:18px;top:18px;font-size:28px;font-weight:950;font-variant-numeric:tabular-nums;transform-origin:center;z-index:3}
-.quiz-context{font-size:12px;color:var(--muted);margin-bottom:6px}
+.quiz-context{font-size:12px;color:var(--muted);margin-bottom:6px}.quiz-folder-context{font-size:11px;color:var(--muted);line-height:1.4;margin-top:-3px;margin-bottom:2px;max-width:100%;overflow-wrap:anywhere}
 .quiz-name{font-size:43px;font-weight:950;letter-spacing:-.06em;line-height:1.15}
 .quiz-question{font-size:21px;font-weight:900;line-height:1.55;margin-top:clamp(12px,4vh,34px);transition:filter .18s,opacity .18s}
 .quiz-answer{margin-top:22px;padding:16px 22px;background:#fff2f6;border:2px dashed #fca3be;border-radius:18px;min-width:min(540px,100%);font-size:18px;font-weight:850;line-height:1.65}
@@ -169,7 +171,7 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .btn-unknown{background:var(--red);color:#fff}.btn-unsure{background:var(--blue);color:#fff}.btn-known{background:var(--mint);color:#245e47}
 .btn-correct{background:var(--mint);color:#245e47}.btn-wrong{background:var(--red);color:#fff}.btn-confirm{background:var(--lav);color:#4a3875}
 .bridge-answer{width:min(540px,100%);margin-top:8px;padding:11px 14px;background:#f7f3ff;border:1.5px solid #d0c2f7;border-radius:15px;font-size:11px;line-height:1.65;text-align:left;color:#4c3f73}.bridge-answer b{font-size:10px;color:#614abf}.bridge-item{display:block;margin-top:3px;color:var(--ink)}
-.pause-button,.save-exit-button{position:absolute;top:16px;z-index:4;border:1px solid var(--line);background:#fff;border-radius:10px;padding:6px 9px}.pause-button{left:16px}.save-exit-button{left:63px}
+.pause-button{position:absolute;top:16px;left:16px;z-index:4;border:1px solid var(--line);background:#fff;border-radius:10px;padding:6px 9px}
 .test-config-card{margin:16px auto 0;width:min(720px,100%);background:#fff2f6;border:1px solid var(--line);border-radius:17px;padding:14px;text-align:left;flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-gutter:stable}.test-config-card .availability{text-align:left}.test-config-card .scope-grid{justify-content:flex-start}.test-config-card .session-options{justify-content:space-between}
 .config-title{font-size:12px;font-weight:950;text-align:left}.config-subtitle{font-size:10px;color:var(--muted);font-weight:950;margin-top:11px;text-align:left}
 .scope-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-top:10px}.folder-scope{max-height:none;overflow:visible;align-content:flex-start;padding:5px 5px;border:1px dashed var(--line);border-radius:12px;background:rgba(255,255,255,.65)}.scope-chip{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 10px;font-size:11px;font-weight:850}.scope-chip.all{background:var(--pink-soft);border-color:#f8a8c0}.scope-chip input{accent-color:var(--pink)}
@@ -519,22 +521,22 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
         <div class="quiz-card">
           <div class="timer-line"><i id="timerLine"></i></div>
           <button class="pause-button" id="pauseButton">⏸️</button>
-          <button class="save-exit-button" id="saveExitButton">⏹️ 임시저장</button>
           <div class="timer-number" id="timerNumber">5.0</div>
           <div class="quiz-inner" id="quizInner">
             <div class="quiz-content" id="quizContent">
               <div class="quiz-context" id="quizContext">한의학</div>
+              <div class="quiz-folder-context" id="quizFolderContext" style="display:none"></div>
               <div class="quiz-question"><div class="quiz-name" id="quizName">오행귀류표</div><div id="quizPrompt">오행</div></div>
               <div class="quiz-answer" id="quizAnswer" style="display:none"><div class="answer-label" id="answerLabel">목 화 토 금 수</div><div id="answerValue"></div></div>
               <div class="bridge-answer" id="bridgeAnswer" style="display:none"></div>
             </div>
             <div class="quiz-actions" id="quizActions">
               <div class="confidence-row" id="confidenceRow"><button class="confidence-btn btn-unknown" data-confidence="unknown">⬅️ 모르겠어</button><button class="confidence-btn btn-unsure" data-confidence="unsure">⬇️ 헷갈려</button><button class="confidence-btn btn-known" data-confidence="known">➡️ 알고있어</button></div>
-              <div class="judge-row" id="judgeRow" style="display:none"><button class="judge-btn btn-correct" id="correctButton">⬆️ 맞았어</button><button class="judge-btn btn-wrong" id="wrongButton">⬇️ 틀렸어</button></div>
+              <div class="judge-row" id="judgeRow" style="display:none"><button class="judge-btn btn-wrong" id="wrongButton">⬇️ 틀렸어</button><button class="judge-btn btn-correct" id="correctButton">⬆️ 맞았어</button></div>
               <div class="confirm-row" id="confirmRow" style="display:none"><button class="judge-btn btn-confirm" id="confirmButton">☑️ 확인했어</button></div>
             </div>
           </div>
-          <div class="pause-overlay" id="pauseOverlay"><div class="pause-box"><div style="font-size:24px;font-weight:950">⏸️ 일시정지</div><div class="action-row" style="justify-content:center"><button class="mini-button primary" id="resumeButton">▶️ 이어하기</button><button class="mini-button" id="resumeExitButton">↩️ 이따풀기</button></div></div></div>
+          <div class="pause-overlay" id="pauseOverlay"><div class="pause-box"><div style="font-size:24px;font-weight:950">⏸️ 일시정지</div><div class="action-row" style="justify-content:center"><button class="mini-button primary" id="resumeButton">▶️ 계속 풀기</button><button class="mini-button" id="resumeExitButton">⏹️ 이따 풀기</button></div></div></div>
         </div>
       </div>
     </section>
@@ -1055,7 +1057,11 @@ KEYWORD / / —"></textarea>
 
   function renderQuestion(){
     const s=subject(),a=s.activeTest;
-    $('quizContext').textContent=`${s.name} · Cycle #${a.cycleNo} · Test #${a.testNo}`;
+    $('quizContext').textContent=`Cycle #${a.cycleNo} · Test #${a.testNo}`;
+    const folderContext=$('quizFolderContext');
+    const isReferenceHeading=!!currentCard.row.folder&&s.folderQuiz?.[currentCard.row.folder]===false;
+    folderContext.textContent=isReferenceHeading?currentCard.row.folder:'';
+    folderContext.style.display=isReferenceHeading?'block':'none';
     renderBridgeAnswer();
     $('quizName').textContent=currentCard.row.name;
     $('quizPrompt').textContent=`[${currentCard.field}]?`;
@@ -1138,7 +1144,11 @@ KEYWORD / / —"></textarea>
     $('pauseOverlay').classList.toggle('show',paused);$('pauseButton').textContent=paused?'▶️':'⏸️';
   }
 
-  function saveAndExitQuiz(){saveActiveSession();stopTimer();currentCard=null;confidence=null;setPage('test');}
+  function saveAndExitQuiz(){
+    stopTimer();saveActiveSession();currentCard=null;confidence=null;paused=true;
+    $('quizView').style.display='none';$('testLanding').style.display='grid';
+    renderTestLanding();save();
+  }
 
   function chooseConfidence(c){
     if(!currentCard||confidence)return;
@@ -1189,13 +1199,34 @@ KEYWORD / / —"></textarea>
   }
 
   function setPage(page){
-    if(state.page==='test'&&page!=='test'&&subject().activeTest)saveActiveSession();
-    stopTimer();state.page=page;
+    const previousPage=state.page;
+    // Tapping the already-open QUIZ tab must not blank the active question.
+    if(page===previousPage&&page==='test'&&subject().activeTest&&$('quizView').style.display!=='none')return;
+
+    if(previousPage==='test'&&page!=='test'&&subject().activeTest){
+      stopTimer();
+      paused=true;
+      saveActiveSession();
+    }else{
+      stopTimer();
+    }
+    state.page=page;
     document.body.classList.toggle('mobile-main-scroll',page==='main');
     document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+page));
     document.querySelectorAll('.page-tab').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
     renderSubjects();renderMain();renderTestLanding();renderWeak();renderData();renderCheer();save();
-    if(page==='test'){currentCard=null;confidence=null;$('quizView').style.display='none';$('testLanding').style.display='grid';}
+
+    if(page==='test'){
+      const active=subject().activeTest;
+      if(previousPage!=='test'&&active){
+        // Return straight to the preserved question with its controls restored.
+        if(!active.currentKey&&active.queueKeys?.[active.index])active.currentKey=active.queueKeys[active.index];
+        active.paused=false;paused=false;save();startQuizView();
+      }else{
+        currentCard=null;confidence=null;
+        $('quizView').style.display='none';$('testLanding').style.display='grid';
+      }
+    }
   }
 
   function renderSubjects(){
@@ -1622,7 +1653,7 @@ KEYWORD / / —"></textarea>
   document.querySelectorAll('.page-tab').forEach(b=>b.onclick=()=>setPage(b.dataset.page));
   $('settingsButton').onclick=openSettings;$('closeSettings').onclick=closeSettings;$('settingsModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeSettings()});$('bridgeManager').addEventListener('click',e=>{if(e.target===e.currentTarget)closeBridgeManager()});
   $('cheerImage').parentElement.onclick=cheerClick;
-  $('startQuiz').onclick=startSession;$('pauseButton').onclick=togglePause;$('resumeButton').onclick=togglePause;$('saveExitButton').onclick=saveAndExitQuiz;$('resumeExitButton').onclick=saveAndExitQuiz;$('correctButton').onclick=()=>recordResult(true);$('wrongButton').onclick=()=>recordResult(false);$('confirmButton').onclick=confirmWeak;
+  $('startQuiz').onclick=startSession;$('pauseButton').onclick=togglePause;$('resumeButton').onclick=togglePause;$('resumeExitButton').onclick=saveAndExitQuiz;$('correctButton').onclick=()=>recordResult(true);$('wrongButton').onclick=()=>recordResult(false);$('confirmButton').onclick=confirmWeak;
   document.querySelectorAll('[data-confidence]').forEach(b=>b.onclick=()=>chooseConfidence(b.dataset.confidence));
   document.querySelectorAll('.filter-btn').forEach(b=>b.onclick=()=>{state.filter=b.dataset.filter;save();renderWeak()});
   $('saveStructure').onclick=saveStructure;$('newSubject').onclick=addSubject;$('deleteSubjectData').onclick=deleteSubject;$('deleteSubjectSetting').onclick=deleteSubject;$('importSheet').onclick=importSheet;$('loadCurrentData').onclick=loadCurrentData;$('clearSubjectData').onclick=clearSubjectData;$('openBridgeManager').onclick=openBridgeManager;$('closeBridgeManager').onclick=closeBridgeManager;$('bridgeSaveButton').onclick=saveBridge;$('bridgeResetButton').onclick=resetBridgeForm;$('bridgeTargetFolder').onchange=updateBridgeTargetItems;$('bridgeTargetTypeFolder').onchange=updateBridgeFormMode;$('bridgeTargetTypeItem').onchange=updateBridgeFormMode;$('folderModeTest').onclick=()=>setFolderQuizMode('test');$('folderModeReference').onclick=()=>setFolderQuizMode('reference');$('folderModeSelect').onchange=e=>{state.folder=e.target.value;save();renderData();renderWeak()};$('fillExample').onclick=example;$('clearSheet').onclick=()=>{$('sheetInput').value=''};
@@ -1637,6 +1668,24 @@ KEYWORD / / —"></textarea>
   $('questionLimit').onchange=()=>{if(subject()?.activeTest)return;const n=Math.max(1,Math.min(9999,parseInt($('questionLimit').value)||DEFAULT_TEST_LIMIT));$('questionLimit').value=n;subject().lastLimit=n;save();};
   $('setMouseTrail').onchange=e=>{state.settings.mouseTrail=e.target.checked;save()};
   $('setTimeoutFail').onchange=e=>{state.settings.timeoutFail=e.target.checked;save();};
+
+  let resumeQuizAfterVisibility=false;
+  document.addEventListener('visibilitychange',()=>{
+    const s=subject(),active=s?.activeTest;
+    if(document.hidden){
+      resumeQuizAfterVisibility=!!(state.page==='test'&&active&&currentCard&&!confidence&&!paused&&$('quizView').style.display!=='none');
+      if(resumeQuizAfterVisibility){
+        stopTimer();paused=true;saveActiveSession();
+      }
+      return;
+    }
+    if(!resumeQuizAfterVisibility)return;
+    resumeQuizAfterVisibility=false;
+    const current=subject()?.activeTest;
+    if(state.page==='test'&&current&&$('quizView').style.display!=='none'&&!confidence){
+      current.paused=false;paused=false;save();startQuizView();
+    }
+  });
 
   window.addEventListener('beforeunload',()=>{if(subject()?.activeTest)saveActiveSession()});
 
