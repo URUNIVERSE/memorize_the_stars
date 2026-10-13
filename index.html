@@ -212,10 +212,9 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .weak-row{display:grid;grid-template-columns:145px minmax(0,1fr);gap:10px;align-items:center;padding:12px 13px;border-bottom:1px dashed var(--line)}
 .weak-row:last-child{border-bottom:0}
 .weak-name{font-weight:950;font-size:14px}
-.weak-details{display:flex;gap:7px;flex-wrap:wrap}
+.weak-details{display:flex;gap:7px;flex-wrap:wrap;align-items: center;}
 .detail-tag{font-size:10px;padding:6px 8px;border-radius:999px;background:#f0e8ee;color:#5a4a5c;font-weight:850}
-.detail-tag.red{background:var(--red-soft);color:#c4334f}.detail-tag.blue{background:var(--blue-soft);color:#2e64a8}
-.detail-tag.green{background:#d8f5e8;color:#226e50}.detail-tag.gold{background:var(--gold-soft);color:#8f6513}.detail-tag.purple{background:#eddcfc;color:#6b3fa8}.detail-tag.gray{background:#ededee;color:#6e6673}.detail-tag.keyword-tag{background:linear-gradient(135deg,#ffdfeb,#f4e7ff);border:1.5px solid #f17ca6;color:#a92d60;font-weight:950;box-shadow:0 2px 7px rgba(240,76,120,.16);padding:7px 10px}
+.detail-tag.red{background:var(--red-soft);color:#c4334f}.detail-tag.blue{background:var(--blue-soft);color:#2e64a8}.detail-tag.green{background:#d8f5e8;color:#226e50}.detail-tag.gold{background:var(--gold-soft);color:#8f6513}.detail-tag.purple{background:#eddcfc;color:#6b3fa8}.detail-tag.gray{background:#ededee;color:#6e6673}.detail-tag.keyword-tag{background:linear-gradient(135deg,#ffdfeb,#f4e7ff);border:1.5px solid #f17ca6;color:#a92d60;font-weight:950;box-shadow:0 2px 7px rgba(240,76,120,.16);padding:7px 10px}
 .filter-rail{display:flex;flex-direction:column;gap:7px;min-width:0;min-height:0;overflow:hidden}
 .filter-btn{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 5px;font-size:10px;font-weight:900}
 .filter-emoji{display:none}
@@ -421,6 +420,7 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
     flex-wrap:wrap;
     align-items:flex-start;
     gap:5px;
+    align-items: center;
   }
   .weak-details .detail-tag {
     max-width:100%;
@@ -505,7 +505,8 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
           <div class="test-config-card">
             <div class="quiz-direction-heading" style="display:flex;align-items:center;justify-content:flex-start;gap:10px;flex-wrap:wrap;margin:0 0 10px">
               <div class="config-title">이번 쪽지 시험에서는:</div>
-              <label style="display:flex;align-items:center;gap:7px;margin:0"><select class="input" id="quizDirectionSelect" aria-label="속성/키워드" style="width:auto;font-size:12px"><option value="keyword-to-detail">속성을 맞출 거야</option><option value="detail-to-keyword">키워드를 맞출 거야</option></select></label>
+              <label style="display:flex;align-items:center;gap:7px;
+              margin:0"><select class="input" id="quizDirectionSelect" aria-label="속성/키워드" style="width:auto;font-size:12px"><option value="keyword-to-detail">속성을 맞출 거야</option><option value="detail-to-keyword">키워드를 맞출 거야</option></select></label>
             </div>
             <div class="config-subtitle" id="scopeSubtitle">① 출제 속성</div>
             <div class="scope-grid" id="scopeChoices"></div>
@@ -1508,7 +1509,7 @@ KEYWORD / / —"></textarea>
       const details=[];
       if(r.quizEnabled!==false){
         const km=r.keywordMeta||meta(r.name),ks=cardStatus({m:km});
-        if(filterMatch(ks,state.filter))details.push(`<span class="detail-tag keyword-tag">🔑 키워드 · ${esc(r.name)} ${ks==='master'?'✨'+km.stars:ks==='red'?'🧣':ks==='blue'?'🫧':ks==='purple'?'💎':ks==='green'?'🌿':'☁️'}${km.stars?` · ⭐${km.stars}`:''}</span>`);
+        if(filterMatch(ks,state.filter))details.push(`<span class="detail-tag keyword-tag">키워드${ks==='master'?'✨'+km.stars:ks==='red'?'🧣':ks==='blue'?'🫧':ks==='purple'?'💎':ks==='green'?'🌿':'☁️'}${km.stars?` · ⭐${km.stars}`:''}</span>`);
       }
       s.detailFields.forEach(f=>{const m=r.fields[f];if(isNoQuiz(m?.value))return;const st=cardStatus({m});if(filterMatch(st,state.filter))details.push(tag(f,st,m));});
       if(details.length)html+=`<div class="weak-row"><div class="weak-name">${esc(r.name)}</div><div class="weak-details">${details.join('')}</div></div>`;
@@ -1535,7 +1536,7 @@ KEYWORD / / —"></textarea>
     $('sheetInput').value=groups.join('\n');
   }
   function clearSubjectData(){
-    const s=subject();if(!confirm(`'${s.name}' 토픽 지울게!`))return;
+    const s=subject();if(!confirm(`'${s.name}' 토픽 데이터 지울게!`))return;
     s.rows=[];s.cycle=null;s.activeTest=null;s.testNo=0;s.cycleNo=1;s.totalAnswered=0;s.folderQuiz={};s.bridges=[];save();renderAll();
   }
   function setFolderQuizMode(mode){
