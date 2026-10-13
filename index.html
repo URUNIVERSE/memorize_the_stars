@@ -185,6 +185,40 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .config-title{font-size:12px;font-weight:950;text-align:left}.config-subtitle{font-size:10px;color:var(--muted);font-weight:950;margin-top:11px;text-align:left}
 .scope-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-top:10px}.folder-scope{max-height:none;overflow:visible;align-content:flex-start;padding:5px 5px;border:1px dashed var(--line);border-radius:12px;background:rgba(255,255,255,.65)}.scope-chip{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 10px;font-size:11px;font-weight:850}.scope-chip.all{background:var(--pink-soft);border-color:#f8a8c0}.scope-chip input{accent-color:var(--pink)}
 .session-options{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;font-size:11px;flex-wrap:wrap}.session-options label{display:flex;align-items:center;gap:7px}.session-options input{width:86px;border:1px solid var(--line);border-radius:9px;padding:6px 8px;background:#fff}.availability{flex:1 1 170px;margin-top:0;font-size:10px;color:#a85371;text-align:right;line-height:1.5}
+
+:root{
+  --dreamy-rose-shine:#ffb9c8;
+  --dreamy-rose-bright:var(--pink);
+  --dreamy-rose-sparkle:var(--pink-deep);
+}
+input[type="checkbox"]{
+  appearance:none;-webkit-appearance:none;
+  display:inline-block;flex:0 0 18px;width:18px;height:18px;min-width:18px;
+  margin:0;padding:0;border:0;border-radius:0;outline:none;vertical-align:middle;
+  background-color:var(--dreamy-rose-bright);cursor:pointer;
+  transition:background-color .16s ease,transform .16s ease;
+  -webkit-mask-size:85%;mask-size:85%;
+  -webkit-mask-position:center;mask-position:center;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-image:url('data:image/svg+xml,<svg width="800" height="800" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.624 4.532C3.965 5.29 2.75 7.094 2.75 9.245c0 2.197.9 3.891 2.188 5.343 1.063 1.196 2.349 2.187 3.603 3.154q.448.344.885.688c.526.414.995.778 1.448 1.043s.816.385 1.126.385.674-.12 1.126-.385c.453-.265.922-.629 1.448-1.043q.437-.344.885-.688c1.254-.967 2.54-1.958 3.603-3.154 1.289-1.452 2.188-3.146 2.188-5.343 0-2.15-1.215-3.955-2.874-4.713-1.612-.737-3.778-.542-5.836 1.597a.75.75 0 0 1-1.08 0C9.402 3.99 7.236 3.795 5.624 4.532M12 4.567c-2.312-2.069-4.901-2.358-7-1.4-2.215 1.014-3.75 3.366-3.75 6.078 0 2.665 1.11 4.699 2.567 6.339 1.166 1.313 2.593 2.412 3.854 3.382q.43.33.826.642c.513.404 1.063.834 1.62 1.16s1.193.59 1.883.59 1.326-.265 1.883-.59c.558-.326 1.107-.756 1.62-1.16q.396-.312.826-.642c1.26-.97 2.688-2.07 3.854-3.382 1.456-1.64 2.567-3.674 2.567-6.339 0-2.712-1.535-5.064-3.75-6.077-2.099-.96-4.688-.67-7 1.399" fill="%231c274c"/></svg>');
+  mask-image:url('data:image/svg+xml,<svg width="800" height="800" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.624 4.532C3.965 5.29 2.75 7.094 2.75 9.245c0 2.197.9 3.891 2.188 5.343 1.063 1.196 2.349 2.187 3.603 3.154q.448.344.885.688c.526.414.995.778 1.448 1.043s.816.385 1.126.385.674-.12 1.126-.385c.453-.265.922-.629 1.448-1.043q.437-.344.885-.688c1.254-.967 2.54-1.958 3.603-3.154 1.289-1.452 2.188-3.146 2.188-5.343 0-2.15-1.215-3.955-2.874-4.713-1.612-.737-3.778-.542-5.836 1.597a.75.75 0 0 1-1.08 0C9.402 3.99 7.236 3.795 5.624 4.532M12 4.567c-2.312-2.069-4.901-2.358-7-1.4-2.215 1.014-3.75 3.366-3.75 6.078 0 2.665 1.11 4.699 2.567 6.339 1.166 1.313 2.593 2.412 3.854 3.382q.43.33.826.642c.513.404 1.063.834 1.62 1.16s1.193.59 1.883.59 1.326-.265 1.883-.59c.558-.326 1.107-.756 1.62-1.16q.396-.312.826-.642c1.26-.97 2.688-2.07 3.854-3.382 1.456-1.64 2.567-3.674 2.567-6.339 0-2.712-1.535-5.064-3.75-6.077-2.099-.96-4.688-.67-7 1.399" fill="%231c274c"/></svg>');
+}
+input[type="checkbox"]:hover{background-color:var(--dreamy-rose-sparkle);transform:scale(1.06)}
+input[type="checkbox"]:checked{
+  background-color:var(--dreamy-rose-sparkle);
+  -webkit-mask-image:url('data:image/svg+xml,<svg width="800" height="800" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path style="display:inline;fill:%231c274c;fill-opacity:1" d="M5.624 4.532C3.965 5.29 2.75 7.094 2.75 9.245c0 2.197.9 3.891 2.188 5.343 1.063 1.196 2.349 2.187 3.603 3.154q.448.344.885.688c.526.414.995.778 1.448 1.043s.816.385 1.126.385.674-.12 1.126-.385c.453-.265.922-.629 1.448-1.043q.437-.344.885-.688c1.254-.967 2.54-1.958 3.603-3.154 1.289-1.452 2.188-3.146 2.188-5.343 0-2.15-1.215-3.955-2.874-4.713-1.612-.737-3.778-.542-5.836 1.597a.75.75 0 0 1-1.08 0C9.402 3.99 7.236 3.795 5.624 4.532M12 4.567c-2.312-2.069-4.901-2.358-7-1.4-2.215 1.014-3.75 3.366-3.75 6.078 0 2.665 1.11 4.699 2.567 6.339 1.166 1.313 2.593 2.412 3.854 3.382q.43.33.826.642c.513.404 1.063.834 1.62 1.16s1.193.59 1.883.59 1.326-.265 1.883-.59c.558-.326 1.107-.756 1.62-1.16q.396-.312.826-.642c1.26-.97 2.688-2.07 3.854-3.382 1.456-1.64 2.567-3.674 2.567-6.339 0-2.712-1.535-5.064-3.75-6.077-2.099-.96-4.688-.67-7 1.399M2 9.245c0 4.863 4.02 7.454 6.962 9.773C10 19.837 11 20.608 12 20.608s2-.771 3.038-1.59C17.981 16.698 22 14.108 22 9.245S16.5.933 12 5.608C7.5.933 2 4.382 2 9.245"/></svg>');
+  mask-image:url('data:image/svg+xml,<svg width="800" height="800" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path style="display:inline;fill:%231c274c;fill-opacity:1" d="M5.624 4.532C3.965 5.29 2.75 7.094 2.75 9.245c0 2.197.9 3.891 2.188 5.343 1.063 1.196 2.349 2.187 3.603 3.154q.448.344.885.688c.526.414.995.778 1.448 1.043s.816.385 1.126.385.674-.12 1.126-.385c.453-.265.922-.629 1.448-1.043q.437-.344.885-.688c1.254-.967 2.54-1.958 3.603-3.154 1.289-1.452 2.188-3.146 2.188-5.343 0-2.15-1.215-3.955-2.874-4.713-1.612-.737-3.778-.542-5.836 1.597a.75.75 0 0 1-1.08 0C9.402 3.99 7.236 3.795 5.624 4.532M12 4.567c-2.312-2.069-4.901-2.358-7-1.4-2.215 1.014-3.75 3.366-3.75 6.078 0 2.665 1.11 4.699 2.567 6.339 1.166 1.313 2.593 2.412 3.854 3.382q.43.33.826.642c.513.404 1.063.834 1.62 1.16s1.193.59 1.883.59 1.326-.265 1.883-.59c.558-.326 1.107-.756 1.62-1.16q.396-.312.826-.642c1.26-.97 2.688-2.07 3.854-3.382 1.456-1.64 2.567-3.674 2.567-6.339 0-2.712-1.535-5.064-3.75-6.077-2.099-.96-4.688-.67-7 1.399M2 9.245c0 4.863 4.02 7.454 6.962 9.773C10 19.837 11 20.608 12 20.608s2-.771 3.038-1.59C17.981 16.698 22 14.108 22 9.245S16.5.933 12 5.608C7.5.933 2 4.382 2 9.245"/></svg>');
+}
+input[type="checkbox"]:checked:hover{background-color:var(--dreamy-rose-bright)}
+input[type="checkbox"]:focus-visible{outline:2px solid var(--lav);outline-offset:3px;border-radius:3px}
+input[type="checkbox"]:disabled{opacity:.42;cursor:not-allowed}
+.session-options input[type="checkbox"]{width:18px;height:18px;min-width:18px;padding:0;border:0;background-color:var(--dreamy-rose-bright)}
+.session-options input[type="checkbox"]:checked{background-color:var(--dreamy-rose-sparkle)}
+.sequence-option{gap:6px!important;white-space:nowrap}
+.order-options{display:flex;align-items:center;gap:10px;flex:0 0 auto;min-width:0}
+.order-options>label{display:flex;align-items:center;gap:7px;white-space:nowrap}
+.sequence-option{display:flex;align-items:center;gap:6px!important;padding:6px 8px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer}
+.sequence-option:hover{border-color:var(--pink);background:#fff7fa}
 .resume-banner{margin:10px auto 0;width:min(620px,100%);background:var(--lav-soft);border:1px solid #cbbdf8;border-radius:13px;padding:10px;font-size:11px;line-height:1.6;text-align:left}.resume-banner b{color:#5441a8}
 .bridge-manager{position:fixed;inset:0;background:rgba(60,35,55,.38);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:18px;z-index:110}
 .bridge-manager.show{display:flex}
@@ -514,12 +548,18 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
             <div class="scope-grid folder-scope" id="folderScopeChoices"></div>
             <div class="session-options">
               <label>질문 수<input id="questionLimit" type="number" min="1" max="9999" step="1"></label>
-              <label>질문 순서
-                <select class="input" id="testOrderMode" style="width:auto">
-                  <option value="random">랜덤</option>
-                  <option value="folder">분류</option>
-                </select>
-              </label>
+              <div class="order-options">
+                <label>질문 순서
+                  <select class="input" id="testOrderMode" style="width:auto">
+                    <option value="random">랜덤</option>
+                    <option value="folder">분류</option>
+                  </select>
+                </label>
+                <label class="sequence-option" title="디폴트는 랜덤 출제!">
+                  <input id="sequentialOrder" type="checkbox">
+                  <span>순서대로 출제!</span>
+                </label>
+              </div>
               <div class="availability" id="testAvailability"></div>
             </div>
           </div>
@@ -735,7 +775,7 @@ KEYWORD / / —"></textarea>
   function makeSubject(name,folderLabel,nameLabel,detailFields){
     return {
       id:uid(),name,folderLabel,nameLabel,detailFields:[...detailFields],
-      testNo:0,cycleNo:1,totalAnswered:0,lastLimit:DEFAULT_TEST_LIMIT,lastFields:null,lastFolders:null,lastOrderMode:'random',
+      testNo:0,cycleNo:1,totalAnswered:0,lastLimit:DEFAULT_TEST_LIMIT,lastFields:null,lastFolders:null,lastOrderMode:'random',lastSequential:false,
       rows:[],folderQuiz:{},bridges:[],cycle:null,activeTest:null
     };
   }
@@ -788,6 +828,7 @@ KEYWORD / / —"></textarea>
       sub.lastFields=Array.isArray(sub.lastFields)&&sub.lastFields.length?sub.lastFields:null;
       sub.lastFolders=Array.isArray(sub.lastFolders)?sub.lastFolders:null;
       sub.lastOrderMode=['random','folder'].includes(sub.lastOrderMode)?sub.lastOrderMode:'random';
+      sub.lastSequential=typeof sub.lastSequential==='boolean'?sub.lastSequential:false;
       delete sub.quizDirection;
       sub.folderQuiz=sub.folderQuiz&&typeof sub.folderQuiz==='object'?sub.folderQuiz:{};
       sub.bridges=Array.isArray(sub.bridges)?sub.bridges:[];
@@ -803,6 +844,7 @@ KEYWORD / / —"></textarea>
       if(sub.cycle){
         sub.cycle.folders=Array.isArray(sub.cycle.folders)&&sub.cycle.folders.length?sub.cycle.folders:initial;
         sub.cycle.orderMode=['random','folder'].includes(sub.cycle.orderMode)?sub.cycle.orderMode:'random';
+        sub.cycle.sequential=!!sub.cycle.sequential;
       }
     });
     return x;
@@ -922,7 +964,7 @@ KEYWORD / / —"></textarea>
     return out;
   }
 
-  function buildRowChunk(r,fields,cycleNo,direction='keyword-to-detail'){
+  function buildRowChunk(r,fields,cycleNo,direction='keyword-to-detail',sequential=false){
     const s=subject();
     if(r.quizEnabled===false)return [];
     if(direction==='detail-to-keyword'){
@@ -945,10 +987,10 @@ KEYWORD / / —"></textarea>
       if(isNoQuiz(c.value))return;
       if(cycleDue(c,cycleNo))rowCards.push(c);
     });
-    return shuffleInPlace(rowCards);
+    return sequential?rowCards:shuffleInPlace(rowCards);
   }
 
-  function buildCyclePool(fields,cycleNo,folderSelection,orderMode='random',direction='keyword-to-detail'){
+  function buildCyclePool(fields,cycleNo,folderSelection,orderMode='random',direction='keyword-to-detail',sequential=false){
     const s=subject();
     const selected=(folderSelection?.length?folderSelection:defaultFolderSelection()).filter(f=>allFolders().includes(f));
     const selectedSet=new Set(selected);
@@ -956,44 +998,55 @@ KEYWORD / / —"></textarea>
 
     if(orderMode==='folder'){
       const chunks=[];
-      selected.forEach(folder=>{
-        const folderRows=shuffleInPlace(rows.filter(r=>r.folder===folder).slice());
-        folderRows.forEach(r=>{const chunk=buildRowChunk(r,fields,cycleNo,direction);if(chunk.length)chunks.push(chunk)});
+      // Sequential mode keeps each folder's rows in data-sheet order,
+      // while allowing the folder blocks themselves to be shuffled.
+      const folderOrder=sequential
+        ? shuffleInPlace(selected.filter(folder=>rows.some(r=>r.folder===folder)).slice())
+        : selected;
+      folderOrder.forEach(folder=>{
+        const matchingRows=rows.filter(r=>r.folder===folder);
+        const folderRows=sequential?matchingRows:shuffleInPlace(matchingRows.slice());
+        folderRows.forEach(r=>{const chunk=buildRowChunk(r,fields,cycleNo,direction,sequential);if(chunk.length)chunks.push(chunk)});
       });
       return chunks.flat();
     }
 
-    const chunks=shuffleInPlace(rows.slice()).map(r=>buildRowChunk(r,fields,cycleNo,direction)).filter(chunk=>chunk.length);
+    if(sequential){
+      // Random mode + checked checkbox means one continuous data-sheet sequence,
+      // even when the selected rows belong to different folders.
+      return rows.map(r=>buildRowChunk(r,fields,cycleNo,direction,true)).filter(chunk=>chunk.length).flat();
+    }
+    const chunks=shuffleInPlace(rows.slice()).map(r=>buildRowChunk(r,fields,cycleNo,direction,false)).filter(chunk=>chunk.length);
     return shuffleInPlace(chunks).flat();
   }
 
-  function createCycle(fields,folderSelection,orderMode,direction='keyword-to-detail'){
+  function createCycle(fields,folderSelection,orderMode,direction='keyword-to-detail',sequential=false){
     const s=subject();
     const folders=(folderSelection?.length?folderSelection:defaultFolderSelection()).slice();
     const mode=orderMode||'random';
     let cycleNo=s.cycleNo;
-    let pool=buildCyclePool(fields,cycleNo,folders,mode,direction);
+    let pool=buildCyclePool(fields,cycleNo,folders,mode,direction,sequential);
     if(!pool.length){
-      const futurePool=buildCyclePool(fields,Number.MAX_SAFE_INTEGER,folders,mode,direction);
+      const futurePool=buildCyclePool(fields,Number.MAX_SAFE_INTEGER,folders,mode,direction,sequential);
       const nextCycles=futurePool
         .filter(card=>isMaster(card))
         .map(card=>Number(card.m.nextCycle)||1)
         .filter(next=>next>cycleNo);
       if(nextCycles.length){
         cycleNo=Math.min(...nextCycles);
-        pool=buildCyclePool(fields,cycleNo,folders,mode,direction);
+        pool=buildCyclePool(fields,cycleNo,folders,mode,direction,sequential);
       }
     }
     if(!pool.length)return false;
     s.cycleNo=cycleNo;
-    s.cycle={number:cycleNo,fields:fields.slice(),folders,orderMode:mode,directions:[direction],poolKeys:pool.map(c=>c.key),remainingKeys:pool.map(c=>c.key),answers:{}};
-    s.lastFields=fields.slice();s.lastFolders=folders.slice();s.lastOrderMode=mode;s.activeTest=null;
+    s.cycle={number:cycleNo,fields:fields.slice(),folders,orderMode:mode,sequential:!!sequential,directions:[direction],poolKeys:pool.map(c=>c.key),remainingKeys:pool.map(c=>c.key),answers:{}};
+    s.lastFields=fields.slice();s.lastFolders=folders.slice();s.lastOrderMode=mode;s.lastSequential=!!sequential;s.activeTest=null;
     save();return true;
   }
 
-  function nextScheduledCycle(fields,folders,orderMode,direction='keyword-to-detail'){
+  function nextScheduledCycle(fields,folders,orderMode,direction='keyword-to-detail',sequential=false){
     const current=subject().cycleNo;
-    const future=buildCyclePool(fields,Number.MAX_SAFE_INTEGER,folders,orderMode,direction)
+    const future=buildCyclePool(fields,Number.MAX_SAFE_INTEGER,folders,orderMode,direction,sequential)
       .filter(card=>isMaster(card))
       .map(card=>Number(card.m.nextCycle)||1)
       .filter(next=>next>current);
@@ -1033,7 +1086,7 @@ KEYWORD / / —"></textarea>
   function addDirectionToCycle(cycle,direction){
     if(!cycle)return 0;
     cycle.directions=Array.isArray(cycle.directions)?cycle.directions:[];
-    const pool=buildCyclePool(cycle.fields,cycle.number,cycle.folders,cycle.orderMode,direction);
+    const pool=buildCyclePool(cycle.fields,cycle.number,cycle.folders,cycle.orderMode,direction,!!cycle.sequential);
     const seen=new Set(cycle.poolKeys||[]);
     const additions=pool.filter(card=>!seen.has(card.key));
     additions.forEach(card=>{seen.add(card.key);cycle.poolKeys.push(card.key);cycle.remainingKeys.push(card.key)});
@@ -1056,9 +1109,10 @@ KEYWORD / / —"></textarea>
       const checked=[...document.querySelectorAll('#scopeChoices input[data-field]:checked')].map(i=>i.dataset.field);
       const folders=[...document.querySelectorAll('#folderScopeChoices input[data-folder]:checked')].map(i=>i.dataset.folder);
       const orderMode=$('testOrderMode').value||'random';
+      const sequential=!!$('sequentialOrder').checked;
       if(!checked.length){alert('출제 속성을 골라줘!');return}
       if(!folders.length){alert('출제 범위를 골라줘!');return}
-      if(!createCycle(checked,folders,orderMode,direction)){
+      if(!createCycle(checked,folders,orderMode,direction,sequential)){
         alert('선택한 속성과 범위에서 더이상 출제할 문제가 없어.');return;}
     }else{addDirectionToCycle(s.cycle,direction);}
     const limit=Math.max(1,Math.floor(Number($('questionLimit').value)||s.lastLimit||DEFAULT_TEST_LIMIT));
@@ -1420,6 +1474,7 @@ KEYWORD / / —"></textarea>
       syncScopeChoices(cycle?.fields||[]);
       syncFolderScopeChoices(cycle?.folders||[]);
       $('testOrderMode').value=cycle?.orderMode||'random';
+      $('sequentialOrder').checked=!!cycle?.sequential;
     }else{
       $('resumeBanner').style.display='none';
       $('startQuiz').classList.remove('resume-mode');
@@ -1429,19 +1484,23 @@ KEYWORD / / —"></textarea>
         syncScopeChoices(cycle.fields);
         syncFolderScopeChoices(cycle.folders);
         $('testOrderMode').value=cycle.orderMode||'random';
+        $('sequentialOrder').checked=!!cycle.sequential;
       }else{
         $('startQuiz').textContent='QUIZ START';
         disableScopeChoices(false);
         syncScopeChoices(defaultFieldSelection());
         syncFolderScopeChoices(defaultFolderSelection());
         $('testOrderMode').value=s.lastOrderMode||'random';
+        $('sequentialOrder').checked=!!s.lastSequential;
       }
     }
+    $('sequentialOrder').disabled=!!s.activeTest||!!cycle;
     const limit=cycle&&s.activeTest?s.activeTest.limit:(s.lastLimit||DEFAULT_TEST_LIMIT);
     $('questionLimit').value=limit;$('questionLimit').disabled=!!s.activeTest;
     $('testOrderMode').disabled=!!s.activeTest||!!cycle;
     const folders=cycle?.folders||defaultFolderSelection(),fields=cycle?.fields||defaultFieldSelection(),orderMode=cycle?.orderMode||s.lastOrderMode||'random';
-    const pool=buildCyclePool(fields,cycle?.number||s.cycleNo,folders,orderMode,selectedDirection);
+    const sequential=cycle?!!cycle.sequential:!!s.lastSequential;
+    const pool=buildCyclePool(fields,cycle?.number||s.cycleNo,folders,orderMode,selectedDirection,sequential);
     const existingKeys=new Set(cycle?.poolKeys||[]);
     const available=cycle
       ? cycle.remainingKeys.filter(key=>keyMatchesDirection(key,selectedDirection)).length+pool.filter(card=>!existingKeys.has(card.key)).length
@@ -1449,7 +1508,7 @@ KEYWORD / / —"></textarea>
     if(available){
       $('testAvailability').textContent=`출제될 질문 ${available}개`;
     }else if(!cycle){
-      const next=nextScheduledCycle(fields,folders,orderMode,selectedDirection);
+      const next=nextScheduledCycle(fields,folders,orderMode,selectedDirection,sequential);
       $('testAvailability').textContent=next
         ? `이번 회독에서 출제할 문제가 없어. ${next}번째 회독부터 다시하면 돼!`
         : `출제할 문제가 없어.`;
@@ -1797,6 +1856,7 @@ KEYWORD / / —"></textarea>
   $('removeMainImage').onclick=()=>{state.settings.mainImage='';save();renderSettings();renderMain()};$('exportData').onclick=exportData;$('importData').onchange=e=>{if(e.target.files?.[0])importDataFile(e.target.files[0])};$('resetProgress').onclick=resetProgress;$('fullReset').onclick=fullReset;
   ['setSeconds','setMasterStars','setBaseGap'].forEach(k=>$(k).onchange=()=>{state.settings.seconds=Math.max(1,Math.min(30,parseFloat($('setSeconds').value)||5));state.settings.masterStars=Math.max(1,Math.min(10,parseInt($('setMasterStars').value)||3));state.settings.baseGap=Math.max(1,Math.min(50,parseInt($('setBaseGap').value)||1));save();renderAll()});
   $('questionLimit').onchange=()=>{if(subject()?.activeTest)return;const n=Math.max(1,Math.min(9999,parseInt($('questionLimit').value)||DEFAULT_TEST_LIMIT));$('questionLimit').value=n;subject().lastLimit=n;save();};
+  $('sequentialOrder').onchange=e=>{const s=subject();if(s?.activeTest||s?.cycle){e.target.checked=!!s?.cycle?.sequential;return;}s.lastSequential=!!e.target.checked;save();renderTestLanding();};
   $('setMouseTrail').onchange=e=>{state.settings.mouseTrail=e.target.checked;save()};
   $('setTimeoutFail').onchange=e=>{state.settings.timeoutFail=e.target.checked;save();};
 
