@@ -7,11 +7,11 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2285%22>💖</text></svg>">
 <style>
 
-@font-face{font-family:"starry_emoji";src:url('./fonts/TossFaceFontWeb.otf');unicode-range:U+2190-2193,U+231A-25FE,U+2600,U+2602-2698,U+269A-26FF,U+2700-27BF,U+2B05-2B07,U+2B1B-2B1C,U+2B50,U+2B55,U+1F1E6-1F1FF,U+1F300-1F388,U+1F38A-1F4C3,U+1F4C5-1F516,U+1F518-1F52D,U+1F52F-1F5FF,U+1F600-1F64F,U+1F680-1F6FF,U+1F700-1F77F,U+1F780-1F7FF,U+1F800-1F8FF,U+1F900-1F9E2,U+1F9E4-1F9FF,U+1FA00-1FA83,U+1FA85-1FAE6,U+1FAE8-1FAFF;}
+@font-face{font-family:"starry_emoji";src:local("TossFaceFontWeb"),url('./fonts/TossFaceFontWeb.otf');unicode-range:U+2190-2193,U+231A-25FE,U+2600,U+2602-2698,U+269A-26FF,U+2700-27BF,U+2B05-2B07,U+2B1B-2B1C,U+2B50,U+2B55,U+1F1E6-1F1FF,U+1F300-1F388,U+1F38A-1F4C3,U+1F4C5-1F516,U+1F518-1F52D,U+1F52F-1F5FF,U+1F600-1F64F,U+1F680-1F6FF,U+1F700-1F77F,U+1F780-1F7FF,U+1F800-1F8FF,U+1F900-1F9E2,U+1F9E4-1F9FF,U+1FA00-1FA83,U+1FA85-1FAE6,U+1FAE8-1FAFF;}
 @font-face{font-family:"starry_english";src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Light.woff2') format('woff2');unicode-range:U+0041-007A,U+2460-2473,U+2776-277F,U+24EB-24F4;}
 @font-face{font-family:"starry_ui";src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ChosunSg.woff') format('woff');}
-@font-face{font-family:"starry_quiz";src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Arita-dotum-Medium.woff') format('woff');}
-@font-face{font-family:"starry_hanja";src:local('./fonts/SourceHanSansK-Light.otf');}
+@font-face{font-family:"starry_quiz";src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Arita-dotum-Medium.woff') format('woff');unicode-range: U+AC00-D7A3;}
+@font-face{font-family:"starry_hanja";src:local("본고딕 Light"),url('./fonts/SourceHanSansK-Light.otf');}
 
 :root{
   --ui-font: 'starry_emoji', 'starry_english', 'starry_ui';
@@ -125,6 +125,10 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .pick-sticker{width:40px;height:40px;border:0;background:#fff;border-radius:10px;font-size:20px;display:grid;place-items:center}
 .pick-sticker:hover{background:var(--pink-soft)}
 .stats-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.stats-mode-toggle{flex:0 0 auto;width:40px;height:40px;display:grid;place-items:center;border:1px solid #f5c6d7;border-radius:14px;background:linear-gradient(145deg,#fff4f8,#f8efff);box-shadow:0 4px 11px rgba(210,94,142,.13);font-size:23px;line-height:1;cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,filter .16s ease}
+.stats-mode-toggle:hover{transform:translateY(-2px) rotate(-4deg);box-shadow:0 7px 15px rgba(210,94,142,.18);filter:saturate(1.08)}
+.stats-mode-toggle:active{transform:scale(.94)}
+.stats-mode-toggle:focus-visible{outline:3px solid #eaa0bf;outline-offset:3px}
 .section-title{font-weight:950;font-size:18px;margin-bottom:10px;}
 .section-note{font-size:11px;color:var(--muted);line-height:1.55}
 .donut-wrap{position:relative;width:210px;height:210px;margin:9px auto 12px}
@@ -147,6 +151,7 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .test-logo{font-size:18px;color:var(--pink-deep);font-weight:900;margin-top:8px}
 .start-quiz{flex:0 0 auto;margin-top:22px;border:0;background:var(--pink);color:#fff;border-radius:18px;padding:16px 44px;font-size:18px;font-weight:950;box-shadow:0 12px 24px rgba(255,90,130,.32)}
 .start-quiz:hover{transform:translateY(-2px)}
+.start-quiz.resume-mode {background:var(--lav);box-shadow:0 12px 24px rgba(150, 120, 220, .32);}
 .quiz-wrap{max-width:760px;width:100%;height:100%;margin:0 auto;display:flex;flex-direction:column}
 .quiz-meta{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px}
 .quiz-progress{font-size:11px;color:var(--muted)}
@@ -164,7 +169,12 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .quiz-context{font-size:12px;color:var(--muted);margin-bottom:6px}.quiz-folder-context{font-size:11px;color:var(--muted);line-height:1.4;margin-top:-3px;margin-bottom:2px;max-width:100%;overflow-wrap:anywhere}
 .quiz-name{font-size:43px;font-weight:950;letter-spacing:-.06em;line-height:1.15}
 .quiz-question{font-size:21px;font-weight:900;line-height:1.55;margin-top:clamp(12px,4vh,34px);transition:filter .18s,opacity .18s}
-.quiz-answer{margin-top:22px;padding:16px 22px;background:#fff2f6;border:2px dashed #fca3be;border-radius:18px;min-width:min(540px,100%);font-size:18px;font-weight:850;line-height:1.65}
+.quiz-question.is-reverse{width:min(540px,100%)}
+.quiz-hints{width:100%;box-sizing:border-box;display:grid;gap:10px;margin:14px auto 0;padding:12px;text-align:left;font-size:15px;font-weight:800;line-height:1.5;border:1.5px solid #f1cada;border-radius:20px;background:linear-gradient(145deg,#fff7fb 0%,#fff 72%,#fbf7ff 100%);box-shadow:0 7px 20px rgba(214,115,155,.10)}
+.quiz-hint{display:grid;gap:5px;padding:12px 14px;border:1px solid #f5dbe5;background:rgba(255,255,255,.92);border-radius:14px;overflow-wrap:anywhere;box-shadow:0 2px 6px rgba(180,85,125,.05)}
+.quiz-hint-label{display:inline-flex;align-items:center;width:fit-content;max-width:100%;padding:3px 9px;border-radius:999px;background:#ffebf3;color:#a83c68;font-size:11px;font-weight:950;line-height:1.4}
+.quiz-hint-value{color:var(--ink);font-size:15px;font-weight:800;line-height:1.65;white-space:pre-wrap}
+.quiz-answer{width:min(540px,100%);min-width:0;margin-top:22px;padding:16px 22px;background:#fff2f6;border:2px dashed #fca3be;border-radius:18px;font-size:18px;font-weight:850;line-height:1.65}
 .confidence-row,.judge-row,.confirm-row{display:flex;gap:9px;width:min(540px,100%);height:54px;min-height:54px;margin:0;}
 .confidence-btn,.judge-btn{flex:1;min-width:0;min-height:54px;border:0;border-radius:13px;padding:10px 8px;font-weight:950;line-height:1.3;box-shadow:0 4px 10px rgba(100,40,70,.12)}
 .btn-unknown{background:var(--red);color:#fff}.btn-unsure{background:var(--blue);color:#fff}.btn-known{background:var(--mint);color:#245e47}
@@ -183,10 +193,11 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .bridge-form{background:#fff2f6;border:1px solid var(--line);border-radius:15px;padding:12px}.bridge-form-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:8px}.bridge-target-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
 .bridge-list{display:grid;gap:7px;margin-top:12px}.bridge-entry{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:9px 10px;background:#fff}
 .bridge-entry-main{min-width:0}.bridge-entry-name{font-weight:900;font-size:11px}.bridge-entry-target{font-size:10px;color:var(--muted);margin-top:2px}.bridge-entry-actions{display:flex;gap:5px}
-.folder-mode{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.folder-mode-label{font-size:10px;color:var(--muted);font-weight:900}.folder-mode-btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 9px;font-size:10px;font-weight:900}.folder-mode-btn.active.test{background:var(--pink);color:#fff;border-color:var(--pink)}.folder-mode-btn.active.reference{background:var(--lav);color:#fff;border-color:var(--lav)}
+.folder-mode{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+#folderModeSelect{align-self:center;vertical-align:middle;line-height:1.2;height:34px;margin:0;display:inline-flex;align-items:center}
+#page-data .action-row:has(#folderModeSelect){align-items:center;min-height:36px;line-height:1.25}.folder-mode-label{font-size:10px;color:var(--muted);font-weight:900}.folder-mode-btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 9px;font-size:10px;font-weight:900}.folder-mode-btn.active.test{background:var(--pink);color:#fff;border-color:var(--pink)}.folder-mode-btn.active.reference{background:var(--lav);color:#fff;border-color:var(--lav)}
 .danger-card{background:#fff0f2;border-color:#f5b0bc}.danger-button{color:#ba293e;border-color:#f09ea9}.trail-particle{position:fixed;z-index:9999;pointer-events:none;user-select:none;font-size:14px;animation:trailFloat .7s ease-out forwards}@keyframes trailFloat{0%{opacity:.95;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-30px) scale(.55)}}
 
-/* Layout guard: keep the diary frame and main cards fully inside the viewport. */
 #app{min-height:0}
 .diary-shell{min-height:0}
 
@@ -204,10 +215,9 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .weak-details{display:flex;gap:7px;flex-wrap:wrap}
 .detail-tag{font-size:10px;padding:6px 8px;border-radius:999px;background:#f0e8ee;color:#5a4a5c;font-weight:850}
 .detail-tag.red{background:var(--red-soft);color:#c4334f}.detail-tag.blue{background:var(--blue-soft);color:#2e64a8}
-.detail-tag.green{background:#d8f5e8;color:#226e50}.detail-tag.gold{background:var(--gold-soft);color:#8f6513}.detail-tag.purple{background:#eddcfc;color:#6b3fa8}.detail-tag.gray{background:#ededee;color:#6e6673}
+.detail-tag.green{background:#d8f5e8;color:#226e50}.detail-tag.gold{background:var(--gold-soft);color:#8f6513}.detail-tag.purple{background:#eddcfc;color:#6b3fa8}.detail-tag.gray{background:#ededee;color:#6e6673}.detail-tag.keyword-tag{background:linear-gradient(135deg,#ffdfeb,#f4e7ff);border:1.5px solid #f17ca6;color:#a92d60;font-weight:950;box-shadow:0 2px 7px rgba(240,76,120,.16);padding:7px 10px}
 .filter-rail{display:flex;flex-direction:column;gap:7px;min-width:0;min-height:0;overflow:hidden}
 .filter-btn{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 5px;font-size:10px;font-weight:900}
-/* Desktop/tablet: show filter labels only; emoji icons are mobile-only. */
 .filter-emoji{display:none}
 .filter-label{display:inline}
 .filter-btn.active{background:var(--pink);color:#fff;border-color:var(--pink)}
@@ -220,6 +230,9 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .field{margin-bottom:9px}.field label{display:block;font-size:10px;font-weight:900;margin-bottom:5px;color:var(--muted)}
 .input,textarea{width:100%;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:11px;padding:9px 10px;outline:none}
 .input:focus,textarea:focus{border-color:var(--lav);box-shadow:0 0 0 3px rgba(184,165,242,.25)}
+#quizDirectionSelect,#testOrderMode{height:34px;line-height:1.2;padding:0 9px;margin:0;vertical-align:middle;display:inline-flex;align-items:center;box-sizing:border-box}
+.quiz-direction-heading{align-items:center}
+.quiz-direction-heading label{display:flex;align-items:center;min-height:34px;line-height:1.2}
 textarea{min-height:330px;resize:vertical;line-height:1.7}
 .toggle-line{display:flex;align-items:center;gap:7px;font-size:11px;padding:8px 0}
 .action-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
@@ -256,10 +269,7 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
   .quiz-name{font-size:34px}.quiz-question{font-size:18px}.quiz-inner{padding:42px 12px 12px}.quiz-actions{padding-top:8px}.confidence-row,.judge-row,.confirm-row{gap:5px;height:56px;min-height:56px}.confidence-btn,.judge-btn{font-size:12px;padding:8px 4px;min-height:56px}.session-options .availability{flex-basis:100%;text-align:left}.weak-row{grid-template-columns:1fr}
 }
 
-
-/* Mobile-only layout refinements: scrollable MAIN and compact LOG controls. */
 @media (max-width:620px) {
-  /* MAIN: let the document grow vertically so both the board and stats can be reached. */
   html:has(body.mobile-main-scroll) {
     height:auto;
     min-height:100%;
@@ -317,7 +327,6 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
   }
   body.mobile-main-scroll .donut {width:100%;height:100%}
 
-  /* LOG: move the five filters to one horizontal row above the folder and results. */
   .weak-layout {
     display:grid;
     grid-template-columns:84px minmax(0,1fr);
@@ -397,7 +406,6 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
   .weak-row {
     grid-template-columns:minmax(64px, 0.42fr) minmax(0, 1fr);
     gap:6px;
-    /* Center the item label vertically against the wrapped status tags. */
     align-items:center;
     padding:9px 7px;
   }
@@ -469,7 +477,7 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
               <div class="section-title" id="subjectTitle">TOPIC</div>
               <div class="section-note" id="subjectSummary">STATS</div>
             </div>
-            <div style="font-size:22px">🍒</div>
+            <button class="stats-mode-toggle" id="statsModeToggle" type="button" aria-label="속성 맞추기">🍒</button>
           </div>
           <div class="donut-wrap">
             <div class="donut" id="donut"></div>
@@ -495,15 +503,18 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
           <div class="test-logo">TODAY'S QUIZ</div>
           <div class="resume-banner" id="resumeBanner" style="display:none"></div>
           <div class="test-config-card">
-            <div class="config-title">이번 쪽지 시험에서는:</div>
-            <div class="config-subtitle">① 출제 속성</div>
+            <div class="quiz-direction-heading" style="display:flex;align-items:center;justify-content:flex-start;gap:10px;flex-wrap:wrap;margin:0 0 10px">
+              <div class="config-title">이번 쪽지 시험에서는:</div>
+              <label style="display:flex;align-items:center;gap:7px;margin:0"><select class="input" id="quizDirectionSelect" aria-label="속성/키워드" style="width:auto;font-size:12px"><option value="keyword-to-detail">속성을 맞출 거야</option><option value="detail-to-keyword">키워드를 맞출 거야</option></select></label>
+            </div>
+            <div class="config-subtitle" id="scopeSubtitle">① 출제 속성</div>
             <div class="scope-grid" id="scopeChoices"></div>
             <div class="config-subtitle">② 출제 범위</div>
             <div class="scope-grid folder-scope" id="folderScopeChoices"></div>
             <div class="session-options">
               <label>질문 수<input id="questionLimit" type="number" min="1" max="9999" step="1"></label>
               <label>질문 순서
-                <select class="input" id="testOrderMode" style="width:auto;padding:6px 9px">
+                <select class="input" id="testOrderMode" style="width:auto">
                   <option value="random">랜덤</option>
                   <option value="folder">분류</option>
                 </select>
@@ -525,7 +536,7 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
             <div class="quiz-content" id="quizContent">
               <div class="quiz-context" id="quizContext">한의학</div>
               <div class="quiz-folder-context" id="quizFolderContext" style="display:none"></div>
-              <div class="quiz-question"><div class="quiz-name" id="quizName">오행귀류표</div><div id="quizPrompt">오행</div></div>
+              <div class="quiz-question" id="quizQuestion"><div class="quiz-name" id="quizName">오행귀류표</div><div id="quizPrompt">오행</div><div class="quiz-hints" id="quizHints" style="display:none"></div></div>
               <div class="quiz-answer" id="quizAnswer" style="display:none"><div id="answerValue"></div></div>
               <div class="bridge-answer" id="bridgeAnswer" style="display:none"></div>
             </div>
@@ -535,7 +546,7 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
               <div class="confirm-row" id="confirmRow" style="display:none"><button class="judge-btn btn-confirm" id="confirmButton">☑️ 확인했어</button></div>
             </div>
           </div>
-          <div class="pause-overlay" id="pauseOverlay"><div class="pause-box"><div style="font-size:24px;font-weight:950">⏸️ 일시정지</div><div class="action-row" style="justify-content:center"><button class="mini-button primary" id="resumeButton">▶️ 이어하기</button><button class="mini-button" id="resumeExitButton">↩️ 이따풀기</button></div></div></div>
+          <div class="pause-overlay" id="pauseOverlay"><div class="pause-box"><div style="font-size:24px;font-weight:950">일시정지</div><div class="action-row" style="justify-content:center"><button class="mini-button primary" id="resumeButton">✅ 이어풀기</button><button class="mini-button" id="resumeExitButton">❎ 이따풀기</button></div></div></div>
         </div>
       </div>
     </section>
@@ -612,7 +623,7 @@ KEYWORD / / —"></textarea>
 <div class="bridge-manager" id="bridgeManager">
   <div class="bridge-manager-card">
     <div class="bridge-manager-head"><div class="bridge-manager-title">Acronyms</div><button class="close-btn" id="closeBridgeManager">×</button></div>
-    <div class="helper">암기에 도움될 힌트를 추가해줘!</div>
+    <div class="helper">힌트를 추가해줘!</div>
     <div class="bridge-form" style="margin-top:10px">
       <input id="bridgeEditId" type="hidden">
       <div class="bridge-form-grid">
@@ -695,7 +706,6 @@ KEYWORD / / —"></textarea>
 <script>
 (() => {
   const STORAGE_KEY = 'memorize_stars';
-  const PREVIOUS_STORAGE_KEY = 'stickerStudyDiaryV8'; // 한 번만 새 저장 키로 옮기기 위한 호환 경로
   const DEFAULT_EMOJIS = ['🍀','🫧','🌸','🎀','✨','💗','🌈','🪽','🍒','🌙','⭐'];
   const NO_QUIZ = '—';
   const DEFAULT_TEST_LIMIT = 25;
@@ -713,6 +723,8 @@ KEYWORD / / —"></textarea>
       page:'main',
       folder:'',
       filter:'all',
+      quizDirection:'keyword-to-detail',
+      statsMode:'attributes',
       todayQuizDate:'',
       settings:{seconds:5,masterStars:3,baseGap:1,mouseTrail:false,timeoutFail:false,mainImage:''},
       stickers:{library:DEFAULT_EMOJIS.map(value=>({id:uid(),type:'emoji',value})),placed:[]}
@@ -735,13 +747,6 @@ KEYWORD / / —"></textarea>
     try{
       const current=JSON.parse(localStorage.getItem(STORAGE_KEY));
       if(current && Array.isArray(current.subjects)) return migrate(current);
-      const previous=JSON.parse(localStorage.getItem(PREVIOUS_STORAGE_KEY));
-      if(previous && Array.isArray(previous.subjects)){
-        const restored=migrate(previous);
-        localStorage.setItem(STORAGE_KEY,JSON.stringify(restored));
-        localStorage.removeItem(PREVIOUS_STORAGE_KEY);
-        return restored;
-      }
     }catch(e){}
     return fresh();
   }
@@ -767,6 +772,8 @@ KEYWORD / / —"></textarea>
     x.page=['main','test','weak','data'].includes(x.page)?x.page:'main';
     x.folder=typeof x.folder==='string'?x.folder:'';
     x.filter=x.filter||'all';
+    x.quizDirection=['keyword-to-detail','detail-to-keyword'].includes(x.quizDirection)?x.quizDirection:(['keyword-to-detail','detail-to-keyword'].includes(x.subjects[x.currentSubject]?.quizDirection)?x.subjects[x.currentSubject].quizDirection:'keyword-to-detail');
+    x.statsMode=['attributes','keyword'].includes(x.statsMode)?x.statsMode:'attributes';
     x.todayQuizDate=x.todayQuizDate||'';
 
     x.subjects.forEach(sub=>{
@@ -780,13 +787,12 @@ KEYWORD / / —"></textarea>
       sub.lastFields=Array.isArray(sub.lastFields)&&sub.lastFields.length?sub.lastFields:null;
       sub.lastFolders=Array.isArray(sub.lastFolders)?sub.lastFolders:null;
       sub.lastOrderMode=['random','folder'].includes(sub.lastOrderMode)?sub.lastOrderMode:'random';
+      delete sub.quizDirection;
       sub.folderQuiz=sub.folderQuiz&&typeof sub.folderQuiz==='object'?sub.folderQuiz:{};
       sub.bridges=Array.isArray(sub.bridges)?sub.bridges:[];
       sub.rows=Array.isArray(sub.rows)?sub.rows:[];
       sub.cycle=sub.cycle&&typeof sub.cycle==='object'?sub.cycle:null;
       sub.activeTest=sub.activeTest&&typeof sub.activeTest==='object'?sub.activeTest:null;
-      // Legacy sessions have no explicit distinction between accidental tab changes
-      // and an intentional "이따풀기". Safest first restore is the landing screen.
       if(sub.activeTest && typeof sub.activeTest.waitingForResume!=='boolean')sub.activeTest.waitingForResume=true;
       sub.rows.forEach(row=>normalizeRow(sub,row));
       const all=[...new Set(sub.rows.map(row=>row.folder).filter(Boolean))];
@@ -811,10 +817,11 @@ KEYWORD / / —"></textarea>
 
   function normalizeRow(s,r){
     r.id=r.id||uid();r.folder=r.folder||'';r.name=r.name||'';r.fields=r.fields||{};r.quizEnabled=r.quizEnabled!==false;
+    if(!r.keywordMeta||typeof r.keywordMeta!=='object'||String(r.keywordMeta.value??'')!==r.name)r.keywordMeta=meta(r.name);
     s.detailFields.forEach(f=>{if(!r.fields[f])r.fields[f]=meta('')});
     if(!r.folderMeta)r.folderMeta=meta(r.folder);
     if(r.fields)Object.values(r.fields).forEach(m=>normalizeMeta(m));
-    normalizeMeta(r.folderMeta);
+    normalizeMeta(r.folderMeta);normalizeMeta(r.keywordMeta);
   }
   function normalizeMeta(m){
     if(!m || typeof m!=='object')return;
@@ -831,6 +838,7 @@ KEYWORD / / —"></textarea>
     const p=parseKey(key);if(!p)return null;
     const s=subject(),row=s.rows.find(r=>r.id===p[0]);if(!row)return null;
     if(p[1]==='folder')return {type:'folder',row,field:s.folderLabel,m:row.folderMeta,value:row.folder,key};
+    if(p[1]==='keyword')return row.keywordMeta?{type:'keyword',row,field:s.nameLabel,m:row.keywordMeta,value:row.name,key}:null;
     const m=row.fields[p[2]];if(!m)return null;
     return {type:'detail',row,field:p[2],m,value:m.value,key};
   }
@@ -845,6 +853,9 @@ KEYWORD / / —"></textarea>
         const m=r.fields[f];if(!m || isNoQuiz(m.value))return;
         arr.push({type:'detail',row:r,field:f,m,value:m.value,key:cardKey({row:r,type:'detail',field:f})});
       });
+      if(r.quizEnabled!==false){
+        arr.push({type:'keyword',row:r,field:'keyword',m:r.keywordMeta,value:r.name,key:cardKey({row:r,type:'keyword',field:'keyword'})});
+      }
     });
     return arr;
   }
@@ -895,9 +906,30 @@ KEYWORD / / —"></textarea>
     return testable.length?testable:all;
   }
 
-  function buildRowChunk(r,fields,cycleNo){
+  function reverseHintEntries(r,fields,s=subject()){
+    const out=[];
+    fields.forEach(f=>{
+      if(f==='folder'){
+        if(s.folderQuiz?.[r.folder]!==false && String(r.folder||'').trim() && !isNoQuiz(r.folder))out.push({label:s.folderLabel,value:r.folder});
+        else if(s.folderQuiz?.[r.folder]===false && String(r.folder||'').trim())out.push({label:s.folderLabel,value:r.folder});
+        return;
+      }
+      const value=String(r.fields?.[f]?.value??'').trim();
+      if(!value||isNoQuiz(value))return;
+      out.push({label:f,value});
+    });
+    return out;
+  }
+
+  function buildRowChunk(r,fields,cycleNo,direction='keyword-to-detail'){
     const s=subject();
     if(r.quizEnabled===false)return [];
+    if(direction==='detail-to-keyword'){
+      const hints=reverseHintEntries(r,fields,s);
+      if(!hints.length||!r.keywordMeta)return [];
+      const c={type:'keyword',row:r,field:'keyword',m:r.keywordMeta,value:r.name,key:cardKey({row:r,type:'keyword',field:'keyword'})};
+      return cycleDue(c,cycleNo)?[c]:[];
+    }
     const rowCards=[];
     fields.forEach(f=>{
       let c;
@@ -915,7 +947,7 @@ KEYWORD / / —"></textarea>
     return shuffleInPlace(rowCards);
   }
 
-  function buildCyclePool(fields,cycleNo,folderSelection,orderMode='random'){
+  function buildCyclePool(fields,cycleNo,folderSelection,orderMode='random',direction='keyword-to-detail'){
     const s=subject();
     const selected=(folderSelection?.length?folderSelection:defaultFolderSelection()).filter(f=>allFolders().includes(f));
     const selectedSet=new Set(selected);
@@ -925,43 +957,42 @@ KEYWORD / / —"></textarea>
       const chunks=[];
       selected.forEach(folder=>{
         const folderRows=shuffleInPlace(rows.filter(r=>r.folder===folder).slice());
-        folderRows.forEach(r=>{const chunk=buildRowChunk(r,fields,cycleNo);if(chunk.length)chunks.push(chunk)});
+        folderRows.forEach(r=>{const chunk=buildRowChunk(r,fields,cycleNo,direction);if(chunk.length)chunks.push(chunk)});
       });
       return chunks.flat();
     }
 
-    const chunks=shuffleInPlace(rows.slice()).map(r=>buildRowChunk(r,fields,cycleNo)).filter(chunk=>chunk.length);
+    const chunks=shuffleInPlace(rows.slice()).map(r=>buildRowChunk(r,fields,cycleNo,direction)).filter(chunk=>chunk.length);
     return shuffleInPlace(chunks).flat();
   }
 
-  function createCycle(fields,folderSelection,orderMode){
+  function createCycle(fields,folderSelection,orderMode,direction='keyword-to-detail'){
     const s=subject();
     const folders=(folderSelection?.length?folderSelection:defaultFolderSelection()).slice();
     const mode=orderMode||'random';
     let cycleNo=s.cycleNo;
-    let pool=buildCyclePool(fields,cycleNo,folders,mode);
+    let pool=buildCyclePool(fields,cycleNo,folders,mode,direction);
     if(!pool.length){
-      // 출제 가능한 항목이 모두 간격 반복으로 미뤄졌다면, 가장 먼저 돌아오는 Cycle까지 건너뛴다.
-      const futurePool=buildCyclePool(fields,Number.MAX_SAFE_INTEGER,folders,mode);
+      const futurePool=buildCyclePool(fields,Number.MAX_SAFE_INTEGER,folders,mode,direction);
       const nextCycles=futurePool
         .filter(card=>isMaster(card))
         .map(card=>Number(card.m.nextCycle)||1)
         .filter(next=>next>cycleNo);
       if(nextCycles.length){
         cycleNo=Math.min(...nextCycles);
-        pool=buildCyclePool(fields,cycleNo,folders,mode);
+        pool=buildCyclePool(fields,cycleNo,folders,mode,direction);
       }
     }
     if(!pool.length)return false;
     s.cycleNo=cycleNo;
-    s.cycle={number:cycleNo,fields:fields.slice(),folders,orderMode:mode,poolKeys:pool.map(c=>c.key),remainingKeys:pool.map(c=>c.key),answers:{}};
+    s.cycle={number:cycleNo,fields:fields.slice(),folders,orderMode:mode,directions:[direction],poolKeys:pool.map(c=>c.key),remainingKeys:pool.map(c=>c.key),answers:{}};
     s.lastFields=fields.slice();s.lastFolders=folders.slice();s.lastOrderMode=mode;s.activeTest=null;
     save();return true;
   }
 
-  function nextScheduledCycle(fields,folders,orderMode){
+  function nextScheduledCycle(fields,folders,orderMode,direction='keyword-to-detail'){
     const current=subject().cycleNo;
-    const future=buildCyclePool(fields,Number.MAX_SAFE_INTEGER,folders,orderMode)
+    const future=buildCyclePool(fields,Number.MAX_SAFE_INTEGER,folders,orderMode,direction)
       .filter(card=>isMaster(card))
       .map(card=>Number(card.m.nextCycle)||1)
       .filter(next=>next>current);
@@ -993,35 +1024,50 @@ KEYWORD / / —"></textarea>
     s.cycle=null;s.cycleNo=cycle.number+1;s.activeTest=null;save();
   }
 
-  function ensureSessionQueue(limitValue){
+  function keyMatchesDirection(key,direction){
+    const p=parseKey(key);
+    return direction==='detail-to-keyword' ? p?.[1]==='keyword' : !!p && p[1]!=='keyword';
+  }
+
+  function addDirectionToCycle(cycle,direction){
+    if(!cycle)return 0;
+    cycle.directions=Array.isArray(cycle.directions)?cycle.directions:[];
+    const pool=buildCyclePool(cycle.fields,cycle.number,cycle.folders,cycle.orderMode,direction);
+    const seen=new Set(cycle.poolKeys||[]);
+    const additions=pool.filter(card=>!seen.has(card.key));
+    additions.forEach(card=>{seen.add(card.key);cycle.poolKeys.push(card.key);cycle.remainingKeys.push(card.key)});
+    if(!cycle.directions.includes(direction))cycle.directions.push(direction);
+    return additions.length;
+  }
+
+  function ensureSessionQueue(limitValue,direction='keyword-to-detail'){
     const s=subject();if(!s.cycle)return null;
     const limit=Math.max(1,Math.floor(Number(limitValue ?? s.activeTest?.limit ?? s.lastLimit ?? DEFAULT_TEST_LIMIT)||DEFAULT_TEST_LIMIT));
-    return s.cycle.remainingKeys.slice(0,limit);
+    return s.cycle.remainingKeys.filter(key=>keyMatchesDirection(key,direction)).slice(0,limit);
   }
 
   function startSession(){
     const s=subject();
     if(s.activeTest){resumeSession();return}
+    const direction=['keyword-to-detail','detail-to-keyword'].includes($('quizDirectionSelect').value)?$('quizDirectionSelect').value:'keyword-to-detail';
+    state.quizDirection=direction;
     if(!s.cycle){
       const checked=[...document.querySelectorAll('#scopeChoices input[data-field]:checked')].map(i=>i.dataset.field);
       const folders=[...document.querySelectorAll('#folderScopeChoices input[data-folder]:checked')].map(i=>i.dataset.folder);
       const orderMode=$('testOrderMode').value||'random';
-      if(!checked.length){alert('출제 속성 골라줘!');return}
-      if(!folders.length){alert('출제 범위 골라줘!');return}
-      if(!createCycle(checked,folders,orderMode)){
-        alert('출제할 수 있는 항목이 없어. 속성이랑 범위 확인해줘!');
-        return;
-      }
-    }
+      if(!checked.length){alert('출제 속성을 골라줘!');return}
+      if(!folders.length){alert('출제 범위를 골라줘!');return}
+      if(!createCycle(checked,folders,orderMode,direction)){
+        alert('선택한 속성과 범위에서 더이상 출제할 문제가 없어.');return;}
+    }else{addDirectionToCycle(s.cycle,direction);}
     const limit=Math.max(1,Math.floor(Number($('questionLimit').value)||s.lastLimit||DEFAULT_TEST_LIMIT));
-    const keys=ensureSessionQueue(limit);
-    if(!keys.length){alert('이번 회독 끝!');return}
+    const keys=ensureSessionQueue(limit,direction);
+    if(!keys.length){alert('선택한 모드로 더이상 출제할 문제가 없어.');return;}
     s.testNo=(Number(s.testNo)||0)+1;
-    s.activeTest={testNo:s.testNo,cycleNo:s.cycle.number,limit,queueKeys:keys,index:0,currentKey:keys[0],confidence:null,revealed:false,remainingSeconds:state.settings.seconds,paused:false,waitingForResume:false};
+    s.activeTest={testNo:s.testNo,cycleNo:s.cycle.number,quizDirection:direction,limit,queueKeys:keys,index:0,currentKey:keys[0],confidence:null,revealed:false,remainingSeconds:state.settings.seconds,paused:false,waitingForResume:false};
     s.lastLimit=limit;
     save();startQuizView();
   }
-
 
   function resumeSession(){
     const s=subject();if(!s.activeTest)return startSession();
@@ -1045,7 +1091,6 @@ KEYWORD / / —"></textarea>
 
   function startQuizView(){
     const s=subject(),a=s.activeTest;if(!a)return;
-    // Repair legacy/interrupted sessions whose saved reveal state and confidence disagree.
     const validConfidences=['known','unsure','unknown'];
     if(validConfidences.includes(a.confidence)){
       confidence=a.confidence;
@@ -1089,9 +1134,22 @@ KEYWORD / / —"></textarea>
     folderContext.textContent=isReferenceHeading?currentCard.row.folder:'';
     folderContext.style.display=isReferenceHeading?'block':'none';
     renderBridgeAnswer();
-    $('quizName').textContent=currentCard.row.name;
-    $('quizPrompt').textContent=`[${currentCard.field}]?`;
-    $('answerValue').textContent=currentCard.value!==''?currentCard.value:'필기노트 확인하기!';
+    const reverse=currentCard.type==='keyword';
+    $('quizName').textContent=reverse?'':currentCard.row.name;
+    $('quizName').style.display=reverse?'none':'';
+    const hintsBox=$('quizHints');
+    $('quizQuestion').classList.toggle('is-reverse',reverse);
+    if(reverse){
+      const hints=reverseHintEntries(currentCard.row,s.cycle?.fields||s.lastFields||selectedFieldsForUI(),s);
+      hintsBox.innerHTML=hints.map(h=>`<div class="quiz-hint"><div class="quiz-hint-label">🌻 ${esc(h.label)}</div><div class="quiz-hint-value">${esc(h.value)}</div></div>`).join('');
+      hintsBox.style.display=hints.length?'grid':'none';
+      $('quizPrompt').textContent=`[${s.nameLabel}]?`;
+      $('quizFolderContext').style.display='none';
+    }else{
+      hintsBox.innerHTML='';hintsBox.style.display='none';
+      $('quizPrompt').textContent=`[${currentCard.field}]?`;
+    }
+    $('answerValue').textContent=reverse?currentCard.row.name:(currentCard.value!==''?currentCard.value:'필기노트 확인하기!');
     const hasDecision=['known','unsure','unknown'].includes(confidence);
     a.confidence=hasDecision?confidence:null;
     a.revealed=hasDecision;
@@ -1149,9 +1207,6 @@ KEYWORD / / —"></textarea>
 
   function saveActiveSession(){
     const s=subject(),a=s.activeTest;if(!a)return;
-    // Only copy the live question state when a question is actually on screen.
-    // After "이따풀기", currentCard/confidence are intentionally cleared; don't overwrite
-    // the saved answer stage with those cleared UI variables on a later tab switch.
     if(currentCard){
       a.currentKey=currentCard.key||a.currentKey;
       a.confidence=['known','unsure','unknown'].includes(confidence)?confidence:null;
@@ -1241,8 +1296,6 @@ KEYWORD / / —"></textarea>
     const previousPage=state.page;
     const activeBefore=subject().activeTest;
 
-    // Keep an already-running quiz intact when its tab is tapped again, but repair
-    // a legacy session if all answer controls somehow ended up hidden.
     if(page===previousPage&&page==='test'&&activeBefore&&$('quizView').style.display!=='none'){
       const valid=['known','unsure','unknown'].includes(activeBefore.confidence);
       const expectedRow=valid?(activeBefore.confidence==='known'?'judgeRow':'confirmRow'):'confidenceRow';
@@ -1260,8 +1313,9 @@ KEYWORD / / —"></textarea>
     }
 
     if(previousPage==='test'&&page!=='test'&&activeBefore&&$('quizView').style.display!=='none'){
-      // Leaving an active question accidentally: pause/save, then auto-resume on return.
-      stopTimer();paused=true;activeBefore.waitingForResume=false;saveActiveSession();
+      stopTimer();paused=true;saveActiveSession();
+      activeBefore.waitingForResume=true;activeBefore.paused=true;
+      currentCard=null;confidence=null;paused=true;save();
     }else{
       stopTimer();
     }
@@ -1274,11 +1328,9 @@ KEYWORD / / —"></textarea>
     if(page==='test'){
       const active=subject().activeTest;
       if(previousPage!=='test'&&active&&!active.waitingForResume){
-        // An accidentally interrupted quiz returns to its question automatically.
         if(!active.currentKey&&active.queueKeys?.[active.index])active.currentKey=active.queueKeys[active.index];
         active.paused=false;paused=false;save();startQuizView();
       }else{
-        // An intentional "이따풀기" stays on the landing screen until Resume is tapped.
         currentCard=null;confidence=null;paused=!!active?.paused;
         $('quizView').style.display='none';$('testLanding').style.display='grid';
       }
@@ -1287,23 +1339,9 @@ KEYWORD / / —"></textarea>
 
   function switchSubject(index){
     if(index===state.currentSubject)return;
-
-    // IMPORTANT: leave/save the currently selected topic before changing currentSubject.
-    // Otherwise setPage('main') can try to save the old live UI state into the next topic's activeTest,
-    // causing a revealed answer with no matching answer buttons when switching back.
-    if(state.page!=='main'){
-      setPage('main');
-    }else{
-      stopTimer();
-    }
-
+    if(state.page!=='main'){setPage('main');}else{stopTimer();}
     stopTimer();
-    state.currentSubject=index;
-    state.folder='';
-    state.filter='all';
-    currentCard=null;
-    confidence=null;
-    paused=false;
+    state.currentSubject=index;state.folder='';state.filter='all';currentCard=null;confidence=null;paused=false;
     $('quizView').style.display='none';
     $('testLanding').style.display='grid';
     save();
@@ -1316,16 +1354,18 @@ KEYWORD / / —"></textarea>
     const add=document.createElement('button');add.className='subject-tab subject-add';add.textContent='NEW TOPIC';add.onclick=addSubject;box.appendChild(add);
   }
 
-  function stats(){
-    const cs=cardsForSubject();let master=0,known=0,blue=0,red=0,purple=0,newN=0;
+  function stats(mode=state.statsMode||'attributes'){
+    const cs=cardsForSubject().filter(c=>mode==='keyword'?c.type==='keyword':c.type!=='keyword');let master=0,known=0,blue=0,red=0,purple=0,newN=0;
     cs.forEach(c=>{const st=cardStatus(c);if(st==='master')master++;else if(st==='green')known++;else if(st==='blue')blue++;else if(st==='red')red++;else if(st==='purple')purple++;else newN++});
     return {total:cs.length,master,known,blue,red,purple,newN};
   }
 
   function renderMain(){
-    const s=subject(),st=stats();
-    $('subjectTitle').textContent=s.name;$('subjectSummary').textContent=`${s.folderLabel} · ${s.nameLabel} · 출제 포인트 ${st.total}개`;
+    const s=subject(),mode=state.statsMode==='keyword'?'keyword':'attributes',st=stats(mode),toggle=$('statsModeToggle');
+    $('subjectTitle').textContent=s.name;
+    $('subjectSummary').textContent=mode==='keyword'?`${s.nameLabel} - 출제 포인트 ${st.total}개`:`${s.folderLabel} · ${s.detailFields.join(' · ')} - 출제 포인트 ${st.total}개`;
     $('statsTotal').textContent=`${s.cycleNo}번째 회독 · 총 ${s.totalAnswered||0}번 성공`;
+    if(toggle){toggle.textContent=mode==='keyword'?'🍇':'🍒'}
     $('masterPct').textContent=(st.total?Math.round(st.master/st.total*100):0)+'%';
     $('statKnown').textContent=st.known;$('statMaster').textContent=st.master;$('statUnsure').textContent=st.blue;$('statRed').textContent=st.red+st.purple;$('statNew').textContent=st.newN;
     let p=0;const seg=[];[[st.known,'#8fd8b9'],[st.master,'#f6c86b'],[st.blue,'#91c7f3'],[st.red+st.purple,'#f48ca5'],[st.newN,'#d9d8de']].forEach(([v,col])=>{const a=st.total?p/st.total*100:0;p+=v;const b=st.total?p/st.total*100:a;seg.push(`${col} ${a}% ${b}%`)});
@@ -1362,21 +1402,26 @@ KEYWORD / / —"></textarea>
 
   function renderTestLanding(){
     const s=subject();
-    $('roundNumber').textContent=`#${Math.max(1,(s.testNo||0)+1)}`;
+    const selectedDirection=['keyword-to-detail','detail-to-keyword'].includes(s.activeTest?.quizDirection)?s.activeTest.quizDirection:(['keyword-to-detail','detail-to-keyword'].includes(state.quizDirection)?state.quizDirection:'keyword-to-detail');
+    if($('quizDirectionSelect'))$('quizDirectionSelect').value=s.activeTest?.quizDirection||selectedDirection;
+    if($('scopeSubtitle'))$('scopeSubtitle').textContent=(selectedDirection==='detail-to-keyword'?'① 힌트 속성':'① 출제 속성');
+    if($('quizDirectionSelect'))$('quizDirectionSelect').disabled=!!s.activeTest;
+    $('roundNumber').textContent=`#${s.activeTest?.testNo || Math.max(1,(s.testNo||0)+1)}`;
     $('cycleNumber').textContent=`#${s.cycleNo}`;
     renderScopeChoices();
     renderFolderScopeChoices();
     const cycle=s.cycle;
     if(s.activeTest){
-      $('resumeBanner').style.display='block';
-      $('resumeBanner').innerHTML=`<b>쪽지 시험 #${s.activeTest.testNo}</b> - <span>${s.activeTest.index+1}/${s.activeTest.queueKeys.length}번부터 다시 시작하자!</span>`;
-      $('startQuiz').textContent='▶️ 이어하기';
+      $('resumeBanner').style.display='none';
+      $('startQuiz').classList.add('resume-mode');
+      $('startQuiz').innerHTML=`Q${s.activeTest.index+1}부터 RESUME`;
       disableScopeChoices(true);
       syncScopeChoices(cycle?.fields||[]);
       syncFolderScopeChoices(cycle?.folders||[]);
       $('testOrderMode').value=cycle?.orderMode||'random';
     }else{
       $('resumeBanner').style.display='none';
+      $('startQuiz').classList.remove('resume-mode');
       if(cycle){
         $('startQuiz').textContent='NEW QUIZ';
         disableScopeChoices(true);
@@ -1395,15 +1440,20 @@ KEYWORD / / —"></textarea>
     $('questionLimit').value=limit;$('questionLimit').disabled=!!s.activeTest;
     $('testOrderMode').disabled=!!s.activeTest||!!cycle;
     const folders=cycle?.folders||defaultFolderSelection(),fields=cycle?.fields||defaultFieldSelection(),orderMode=cycle?.orderMode||s.lastOrderMode||'random';
-    const pool=cycle?null:buildCyclePool(fields,s.cycleNo,folders,orderMode);
-    const available=cycle?cycle.remainingKeys.length:pool.length;
+    const pool=buildCyclePool(fields,cycle?.number||s.cycleNo,folders,orderMode,selectedDirection);
+    const existingKeys=new Set(cycle?.poolKeys||[]);
+    const available=cycle
+      ? cycle.remainingKeys.filter(key=>keyMatchesDirection(key,selectedDirection)).length+pool.filter(card=>!existingKeys.has(card.key)).length
+      : pool.length;
     if(available){
       $('testAvailability').textContent=`출제될 질문 ${available}개`;
     }else if(!cycle){
-      const next=nextScheduledCycle(fields,folders,orderMode);
+      const next=nextScheduledCycle(fields,folders,orderMode,selectedDirection);
       $('testAvailability').textContent=next
-        ? `이번 회독에서 출제할 질문이 없어. ${next}번째 회독부터 문제가 다시 출제될 거야.`
-        : `출제할 질문이 없어.`;
+        ? `이번 회독에서 출제할 문제가 없어. ${next}번째 회독부터 다시하면 돼!`
+        : `출제할 문제가 없어.`;
+    }else if(cycle&&cycle.remainingKeys.length){
+      $('testAvailability').textContent='선택한 모드에서 출제할 문제가 없어. 모드를 바꿔보는 건 어때?';
     }else{
       $('testAvailability').textContent='회독 COMPLETE 🎉';
     }
@@ -1456,6 +1506,10 @@ KEYWORD / / —"></textarea>
     const rows=s.rows.filter(r=>r.folder===state.folder);let html='';
     rows.forEach(r=>{
       const details=[];
+      if(r.quizEnabled!==false){
+        const km=r.keywordMeta||meta(r.name),ks=cardStatus({m:km});
+        if(filterMatch(ks,state.filter))details.push(`<span class="detail-tag keyword-tag">🔑 키워드 · ${esc(r.name)} ${ks==='master'?'✨'+km.stars:ks==='red'?'🧣':ks==='blue'?'🫧':ks==='purple'?'💎':ks==='green'?'🌿':'☁️'}${km.stars?` · ⭐${km.stars}`:''}</span>`);
+      }
       s.detailFields.forEach(f=>{const m=r.fields[f];if(isNoQuiz(m?.value))return;const st=cardStatus({m});if(filterMatch(st,state.filter))details.push(tag(f,st,m));});
       if(details.length)html+=`<div class="weak-row"><div class="weak-name">${esc(r.name)}</div><div class="weak-details">${details.join('')}</div></div>`;
     });
@@ -1496,9 +1550,9 @@ KEYWORD / / —"></textarea>
     const folderSelect=$('bridgeTargetFolder');folderSelect.innerHTML=folders.map(f=>`<option value="${esc(f)}">${esc(f)}</option>`).join('');
     updateBridgeTargetItems();
     const list=$('bridgeList');list.innerHTML=s.bridges.length?s.bridges.map(b=>{
-      const target=b.targetType==='folder'?`챕터 · ${b.folder}`:`키워드 · ${b.folder} / ${s.rows.find(r=>r.id===b.targetRowId)?.name||'삭제된 항목'}`;
+      const target=b.targetType==='folder'?`${b.folder}`:`${b.folder}: ${s.rows.find(r=>r.id===b.targetRowId)?.name||'삭제된 항목'}`;
       return `<div class="bridge-entry"><div class="bridge-entry-main"><div class="bridge-entry-name">${esc(b.name)}</div><div class="bridge-entry-target">${esc(target)}</div>${b.note?`<div class="bridge-entry-target">${esc(b.note)}</div>`:''}</div><div class="bridge-entry-actions"><button class="mini-button" data-edit-bridge="${esc(b.id)}">🪄</button><button class="mini-button" data-delete-bridge="${esc(b.id)}" style="color:#da2f46">🧨</button></div></div>`;
-    }).join(''):'<div class="empty">힌트가 없어.</div>';
+    }).join(''):'<div class="empty">힌트 없어!</div>';
     list.querySelectorAll('[data-edit-bridge]').forEach(b=>b.onclick=()=>editBridge(b.dataset.editBridge));
     list.querySelectorAll('[data-delete-bridge]').forEach(b=>b.onclick=()=>deleteBridge(b.dataset.deleteBridge));
   }
@@ -1518,7 +1572,7 @@ KEYWORD / / —"></textarea>
   function updateBridgeFormMode(){const item=$('bridgeTargetTypeItem').checked; $('bridgeTargetItem').style.display=item?'block':'none';}
   function saveBridge(){
     const s=subject();s.bridges=s.bridges||[];const id=$('bridgeEditId').value;const name=$('bridgeName').value.trim();const folder=$('bridgeTargetFolder').value;const targetType=$('bridgeTargetTypeItem').checked?'item':'folder';const targetRowId=$('bridgeTargetItem').value;const note=$('bridgeNote').value.trim();
-    if(!name||!folder||(targetType==='item'&&!targetRowId)){alert('힌트를 연결할 대상을 골라줘!');return}
+    if(!name||!folder||(targetType==='item'&&!targetRowId)){alert('어떤 대상의 힌트야?');return}
     if(id){const b=s.bridges.find(x=>x.id===id);if(b){Object.assign(b,{name,folder,targetType,targetRowId:targetType==='item'?targetRowId:'',note})}}
     else s.bridges.push({id:uid(),name,folder,targetType,targetRowId:targetType==='item'?targetRowId:'',note});
     save();renderBridgeManager();resetBridgeForm();renderAll();
@@ -1529,7 +1583,7 @@ KEYWORD / / —"></textarea>
 
   function saveStructure(){
     const s=subject();
-    if(s.cycle || s.activeTest){alert('진행 중인 쪽지 시험 끝내고 와!');return}
+    if(s.cycle || s.activeTest){alert('진행 중인 쪽지 시험부터 끝내고 와!');return}
     s.name=$('subjectNameInput').value.trim()||s.name;s.folderLabel=$('folderFieldInput').value.trim()||'챕터';s.nameLabel=$('nameFieldInput').value.trim()||'키워드';const newFields=$('detailFieldsInput').value.split(',').map(v=>v.trim()).filter(Boolean);s.detailFields=newFields.length?newFields:['속성1'];s.rows.forEach(r=>normalizeRow(s,r));$('scopeChoices').dataset.subject='';save();renderAll()
   }
 
@@ -1550,7 +1604,7 @@ KEYWORD / / —"></textarea>
     return sameName.length===1?sameName[0]:-1;
   }
   function importSheet(){
-    const text=$('sheetInput').value.trim();if(!text){alert('쪽지 시험 항목을 채워줘!');return}
+    const text=$('sheetInput').value.trim();if(!text){alert('항목을 채워줘!');return}
     const s=subject();const actions=parseSheet(text);
     actions.forEach(a=>{
       const idx=locateRow(s,a);
@@ -1574,7 +1628,7 @@ KEYWORD / / —"></textarea>
     save();renderAll();setPage('data');
   }
 
-  function example(){const a=subject().detailFields;const line=(n,...v)=>[n,...a.map((_,i)=>v[i]||'')].join(' / ');$('sheetInput').value=`# 챕터1\n${line('키워드','속성1','—')}\n${line('키워드','—','속성2')}\n\n# 챕터2\n${line('키워드','','')}`}
+  function example(){const a=subject().detailFields;const line=(n,...v)=>[n,...a.map((_,i)=>v[i]||'')].join(' / ');$('sheetInput').value=`# 챕터1\n${line('키워드1','속성1','—')}\n${line('키워드2','—','속성2')}\n\n# 챕터2\n${line('키워드3','','')}`}
   function addSubject(){const n=prompt('새로운 토픽의 이름을 입력해줘.');if(!n)return;state.subjects.push(makeSubject(n.trim(),'챕터','키워드',['속성1','속성2']));state.currentSubject=state.subjects.length-1;state.folder='';save();setPage('data')}
   function deleteSubject(){if(state.subjects.length<=1){alert('공부할 토픽 하나는 있어야지!');return}if(!confirm(`'${subject().name}' 토픽을 삭제할까?`))return;stopTimer();state.subjects.splice(state.currentSubject,1);state.currentSubject=Math.min(state.currentSubject,state.subjects.length-1);state.folder='';state.filter='all';currentCard=null;confidence=null;save();closeSettings();setPage('main')}
 
@@ -1698,31 +1752,25 @@ KEYWORD / / —"></textarea>
     try{
       const raw=(await file.text()).replace(/^\uFEFF/,'');
       let parsed;
-      try{parsed=JSON.parse(raw)}catch(_){throw new Error('JSON 문법을 해석할 수 없어. 백업 파일이 손상되었는지 확인해줘.')}
-      if(!parsed||typeof parsed!=='object'||!Array.isArray(parsed.subjects))throw new Error('쪽지시험 백업 형식이 아니야. 이 게임에서 내보낸 JSON 파일을 선택해줘.')
+      try{parsed=JSON.parse(raw);}catch(_){throw new Error('백업 파일이 손상된 것 같아.');}
+      if(!parsed || typeof parsed!=='object' || !Array.isArray(parsed.subjects)){throw new Error('JSON 파일을 선택해줘.');}
       let candidate=await compactStateImages(migrate(parsed));
       const packed=JSON.stringify(candidate);
-      const previousValue=localStorage.getItem(PREVIOUS_STORAGE_KEY);
-      // Remove the legacy copy only after holding it in memory; this can free space on import.
-      localStorage.removeItem(PREVIOUS_STORAGE_KEY);
-      try{localStorage.setItem(STORAGE_KEY,packed)}catch(err){
-        if(previousValue!==null){try{localStorage.setItem(PREVIOUS_STORAGE_KEY,previousValue)}catch(_){}}
-        if(err&& (err.name==='QuotaExceededError'||err.name==='NS_ERROR_DOM_QUOTA_REACHED')){
-          const dropImage=!!candidate.settings.mainImage&&confirm('브라우저 저장공간이 부족해서 백업을 저장하지 못했어. 사진을 빼고 학습 데이터만 불러올까? 원본 JSON 파일은 바뀌지 않아.');
-          if(dropImage){candidate.settings.mainImage='';localStorage.removeItem(PREVIOUS_STORAGE_KEY);try{localStorage.setItem(STORAGE_KEY,JSON.stringify(candidate))}catch(_){if(previousValue!==null){try{localStorage.setItem(PREVIOUS_STORAGE_KEY,previousValue)}catch(__){}}throw new Error('사진을 제외해도 저장공간이 부족해. 브라우저 사이트 데이터의 여유 공간을 확보한 뒤 다시 시도해줘.')}}
-          else throw new Error('브라우저 저장공간이 부족해서 불러오지 못했어. 기존 학습 데이터는 유지했어.');
-        }else throw err;
-      }
-      localStorage.removeItem(PREVIOUS_STORAGE_KEY);
-      state=candidate;currentCard=null;confidence=null;paused=false;stopTimer();closeSettings();renderAll();
-      alert('💗 백업을 불러왔어! 학습 데이터와 설정을 확인해줘.');
-    }catch(err){
-      console.error('Backup import failed:',err);
-      alert('💫 백업을 불러오지 못했어.\n'+(err&&err.message?err.message:'알 수 없는 오류가 발생했어.'));
-    }finally{if(input)input.value=''}
+      try{localStorage.setItem(STORAGE_KEY,packed);}catch(err){if(err && (err.name==='QuotaExceededError' || err.name==='NS_ERROR_DOM_QUOTA_REACHED')){
+          const dropImage=!!candidate.settings.mainImage && confirm('브라우저 저장공간이 부족해. 사진을 제외한 학습 데이터만 불러와도 될까?');
+
+          if(dropImage){candidate.settings.mainImage='';
+            try{localStorage.setItem(STORAGE_KEY,JSON.stringify(candidate));}catch(_){throw new Error('사진을 제외해도 저장공간이 부족해. 브라우저의 여유 공간을 확보한 뒤 다시 시도해줘.');}}else{throw new Error('브라우저 저장공간이 부족해서 불러오지 못했어. 기존 학습 데이터는 유지했어.');}}else{throw err;}}
+
+      state=candidate;currentCard=null;confidence=null;paused=false;
+      stopTimer();
+      closeSettings();
+      renderAll();
+
+      alert('데이터 불러오기 성공 ✅');}catch{alert('데이터 불러오기 실패 ❎');}finally{if(input) input.value='';}
   }
-  function resetProgress(){if(!confirm('🧨 학습 기록만 지울게!'))return;const s=subject();s.rows.forEach(r=>{r.folderMeta=meta(r.folder);s.detailFields.forEach(f=>{r.fields[f]=meta(r.fields[f]?.value||'')})});s.testNo=0;s.cycleNo=1;s.totalAnswered=0;s.cycle=null;s.activeTest=null;save();closeSettings();renderAll()}
-  function fullReset(){if(!confirm('💥 초기 상태로 되돌려 놓을게!'))return;localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(PREVIOUS_STORAGE_KEY);state=fresh();save();closeSettings();currentCard=null;confidence=null;paused=false;stopTimer();renderAll();setPage('main')}
+  function resetProgress(){if(!confirm('🧨 학습 기록만 지울게!'))return;const s=subject();s.rows.forEach(r=>{r.folderMeta=meta(r.folder);r.keywordMeta=meta(r.name);s.detailFields.forEach(f=>{r.fields[f]=meta(r.fields[f]?.value||'')})});s.testNo=0;s.cycleNo=1;s.totalAnswered=0;s.cycle=null;s.activeTest=null;save();closeSettings();renderAll()}
+  function fullReset(){if(!confirm('💥 초기 상태로 되돌려 놓을게!'))return;localStorage.removeItem(STORAGE_KEY);state=fresh();save();closeSettings();currentCard=null;confidence=null;paused=false;stopTimer();renderAll();setPage('main')}
 
   let lastTrail=0;
   document.addEventListener('mousemove',e=>{
@@ -1733,8 +1781,9 @@ KEYWORD / / —"></textarea>
   // UI events
   document.querySelectorAll('.page-tab').forEach(b=>b.onclick=()=>setPage(b.dataset.page));
   $('settingsButton').onclick=openSettings;$('closeSettings').onclick=closeSettings;$('settingsModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeSettings()});$('bridgeManager').addEventListener('click',e=>{if(e.target===e.currentTarget)closeBridgeManager()});
+  $('statsModeToggle').onclick=()=>{state.statsMode=state.statsMode==='keyword'?'attributes':'keyword';save();renderMain()};
   $('cheerImage').parentElement.onclick=cheerClick;
-  $('startQuiz').onclick=startSession;$('pauseButton').onclick=togglePause;$('resumeButton').onclick=togglePause;$('resumeExitButton').onclick=saveAndExitQuiz;$('correctButton').onclick=()=>recordResult(true);$('wrongButton').onclick=()=>recordResult(false);$('confirmButton').onclick=confirmWeak;
+  $('startQuiz').onclick=startSession;$('quizDirectionSelect').onchange=e=>{if(subject().activeTest){e.target.value=subject().activeTest.quizDirection||state.quizDirection||'keyword-to-detail';return}state.quizDirection=e.target.value;save();renderTestLanding()};$('pauseButton').onclick=togglePause;$('resumeButton').onclick=togglePause;$('resumeExitButton').onclick=saveAndExitQuiz;$('correctButton').onclick=()=>recordResult(true);$('wrongButton').onclick=()=>recordResult(false);$('confirmButton').onclick=confirmWeak;
   document.querySelectorAll('[data-confidence]').forEach(b=>b.onclick=()=>chooseConfidence(b.dataset.confidence));
   document.querySelectorAll('.filter-btn').forEach(b=>b.onclick=()=>{state.filter=b.dataset.filter;save();renderWeak()});
   $('saveStructure').onclick=saveStructure;$('newSubject').onclick=addSubject;$('deleteSubjectData').onclick=deleteSubject;$('deleteSubjectSetting').onclick=deleteSubject;$('importSheet').onclick=importSheet;$('loadCurrentData').onclick=loadCurrentData;$('clearSubjectData').onclick=clearSubjectData;$('openBridgeManager').onclick=openBridgeManager;$('closeBridgeManager').onclick=closeBridgeManager;$('bridgeSaveButton').onclick=saveBridge;$('bridgeResetButton').onclick=resetBridgeForm;$('bridgeTargetFolder').onchange=updateBridgeTargetItems;$('bridgeTargetTypeFolder').onchange=updateBridgeFormMode;$('bridgeTargetTypeItem').onchange=updateBridgeFormMode;$('folderModeTest').onclick=()=>setFolderQuizMode('test');$('folderModeReference').onclick=()=>setFolderQuizMode('reference');$('folderModeSelect').onchange=e=>{state.folder=e.target.value;save();renderData();renderWeak()};$('fillExample').onclick=example;$('clearSheet').onclick=()=>{$('sheetInput').value=''};
@@ -1743,7 +1792,7 @@ KEYWORD / / —"></textarea>
   $('addStickerImageBtn').onclick=()=>$('stickerImagePicker').click();
   $('stickerImagePicker').onchange=e=>{if(e.target.files?.[0])addImageSticker(e.target.files[0]);e.target.value=''};
   $('clearStickers').onclick=()=>{if(confirm('보관함 비우기!')){state.stickers.library=[];save();renderStickerLibrary();renderStickerPicker()}};
-  $('mainImagePicker').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;const r=new FileReader();r.onerror=()=>alert('사진 파일을 읽지 못했어.');r.onload=async ev=>{const compact=await compactImageDataUrl(ev.target.result,1000,0.62);const old=state.settings.mainImage;state.settings.mainImage=compact;try{save();renderSettings();renderMain()}catch(err){state.settings.mainImage=old;alert('사진을 저장하지 못했어. 더 작은 사진으로 다시 시도해줘.')}finally{$('mainImagePicker').value=''}};r.readAsDataURL(f)};
+  $('mainImagePicker').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;const r=new FileReader();r.onerror=()=>alert('사진 파일을 읽지 못했어.');r.onload=async ev=>{const compact=await compactImageDataUrl(ev.target.result,1000,0.62);const old=state.settings.mainImage;state.settings.mainImage=compact;try{save();renderSettings();renderMain()}catch(err){state.settings.mainImage=old;alert('조금 더 작은 사진으로 다시 시도해줘.')}finally{$('mainImagePicker').value=''}};r.readAsDataURL(f)};
   $('removeMainImage').onclick=()=>{state.settings.mainImage='';save();renderSettings();renderMain()};$('exportData').onclick=exportData;$('importData').onchange=e=>{if(e.target.files?.[0])importDataFile(e.target.files[0])};$('resetProgress').onclick=resetProgress;$('fullReset').onclick=fullReset;
   ['setSeconds','setMasterStars','setBaseGap'].forEach(k=>$(k).onchange=()=>{state.settings.seconds=Math.max(1,Math.min(30,parseFloat($('setSeconds').value)||5));state.settings.masterStars=Math.max(1,Math.min(10,parseInt($('setMasterStars').value)||3));state.settings.baseGap=Math.max(1,Math.min(50,parseInt($('setBaseGap').value)||1));save();renderAll()});
   $('questionLimit').onchange=()=>{if(subject()?.activeTest)return;const n=Math.max(1,Math.min(9999,parseInt($('questionLimit').value)||DEFAULT_TEST_LIMIT));$('questionLimit').value=n;subject().lastLimit=n;save();};
