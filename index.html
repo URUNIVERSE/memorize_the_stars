@@ -1584,12 +1584,20 @@ KEYWORD / / —"></textarea>
     const rows=s.rows.filter(r=>r.folder===state.folder);let html='';
     rows.forEach(r=>{
       const details=[];
+      // Put the keyword status first so it is always the leftmost LOG tag.
       if(r.quizEnabled!==false){
         if(!r.keywordMeta||typeof r.keywordMeta!=='object')r.keywordMeta=meta(r.name);
         else if(String(r.keywordMeta.value??'')!==r.name)r.keywordMeta.value=r.name;
         normalizeMeta(r.keywordMeta);
         const km=r.keywordMeta,ks=cardStatus({m:km});
         if(filterMatch(ks,state.filter))details.push(`<span class="detail-tag keyword-tag">키워드${ks==='master'?'✨'+km.stars:ks==='red'?'🧣':ks==='blue'?'🫧':ks==='purple'?'💎':ks==='green'?'🌿':'☁️'}${km.stars?` · ⭐${km.stars}`:''}</span>`);
+      }
+      // Show the CHAPTER/folder card's learning status in LOG too.
+      // Reference-only folders and excluded rows are not quiz items, so keep them out.
+      if(r.quizEnabled!==false && s.folderQuiz?.[r.folder]!==false && !isNoQuiz(r.folder) && r.folderMeta){
+        normalizeMeta(r.folderMeta);
+        const fm=r.folderMeta,fs=cardStatus({m:fm});
+        if(filterMatch(fs,state.filter))details.push(tag(s.folderLabel||'CHAPTER',fs,fm));
       }
       s.detailFields.forEach(f=>{const m=r.fields[f];if(isNoQuiz(m?.value))return;const st=cardStatus({m});if(filterMatch(st,state.filter))details.push(tag(f,st,m));});
       if(details.length)html+=`<div class="weak-row"><div class="weak-name">${esc(r.name)}</div><div class="weak-details">${details.join('')}</div></div>`;
