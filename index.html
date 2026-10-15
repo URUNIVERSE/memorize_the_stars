@@ -860,7 +860,10 @@ KEYWORD / / —"></textarea>
 
   function normalizeRow(s,r){
     r.id=r.id||uid();r.folder=r.folder||'';r.name=r.name||'';r.fields=r.fields||{};r.quizEnabled=r.quizEnabled!==false;
-    if(!r.keywordMeta||typeof r.keywordMeta!=='object'||String(r.keywordMeta.value??'')!==r.name)r.keywordMeta=meta(r.name);
+    // Keep existing keyword learning progress when the keyword text needs syncing.
+    // Replacing the whole metadata object here would erase its status, stars and history.
+    if(!r.keywordMeta||typeof r.keywordMeta!=='object')r.keywordMeta=meta(r.name);
+    else if(String(r.keywordMeta.value??'')!==r.name)r.keywordMeta.value=r.name;
     s.detailFields.forEach(f=>{if(!r.fields[f])r.fields[f]=meta('')});
     if(!r.folderMeta)r.folderMeta=meta(r.folder);
     if(r.fields)Object.values(r.fields).forEach(m=>normalizeMeta(m));
@@ -912,8 +915,9 @@ KEYWORD / / —"></textarea>
     return 'new';
   }
   function cycleDue(card,cycleNo){
-    if(isMaster(card))return (card.m.nextCycle||1)<=cycleNo;
-    return true;
+    // Spaced repetition is based on completed full cycles for every card,
+    // not on the number of tests and not only after reaching Master status.
+    return (Number(card.m.nextCycle)||1)<=cycleNo;
   }
 
   function selectedFieldsForUI(){
@@ -1029,7 +1033,6 @@ KEYWORD / / —"></textarea>
     if(!pool.length){
       const futurePool=buildCyclePool(fields,Number.MAX_SAFE_INTEGER,folders,mode,direction,sequential);
       const nextCycles=futurePool
-        .filter(card=>isMaster(card))
         .map(card=>Number(card.m.nextCycle)||1)
         .filter(next=>next>cycleNo);
       if(nextCycles.length){
@@ -1047,7 +1050,6 @@ KEYWORD / / —"></textarea>
   function nextScheduledCycle(fields,folders,orderMode,direction='keyword-to-detail',sequential=false){
     const current=subject().cycleNo;
     const future=buildCyclePool(fields,Number.MAX_SAFE_INTEGER,folders,orderMode,direction,sequential)
-      .filter(card=>isMaster(card))
       .map(card=>Number(card.m.nextCycle)||1)
       .filter(next=>next>current);
     return future.length?Math.min(...future):null;
@@ -1057,6 +1059,11 @@ KEYWORD / / —"></textarea>
     const s=subject(),cycle=s.cycle;if(!cycle)return;
     cycle.poolKeys.forEach(key=>{
       const c=findCard(key);const result=cycle.answers[key];if(!c||!result)return;
+      if(c.type==='keyword'){
+        if(!c.row.keywordMeta||typeof c.row.keywordMeta!=='object')c.row.keywordMeta=meta(c.row.name);
+        c.row.keywordMeta.value=c.row.name;
+        c.m=c.row.keywordMeta;
+      }
       const m=c.m;
       if(result.confidence==='known'&&result.correct){
         m.stars=(m.stars||0)+1;
@@ -1067,10 +1074,13 @@ KEYWORD / / —"></textarea>
         else if(result.confidence==='unsure') m.status='unsure';
         else m.status='unknown';
       }
-      if(isMaster(c) && result.confidence==='known' && result.correct){
+      if(result.confidence==='known' && result.correct){
+        // Every earned star lengthens the interval, whether or not the card is Master yet.
+        // baseGap=1: 1 star -> +1 cycle, 2 stars -> +2 cycles, 3 stars -> +4 cycles.
         const gap=state.settings.baseGap*Math.pow(2,Math.max(0,m.stars-1));
         m.nextCycle=cycle.number+Math.max(1,Math.round(gap));
       }else{
+        // Missed/uncertain cards return in the next full cycle.
         m.nextCycle=cycle.number+1;
       }
       m.lastAskedCycle=cycle.number;
@@ -1321,13 +1331,21 @@ KEYWORD / / —"></textarea>
   function recordResult(correct){
     const s=subject(),a=s.activeTest;if(!currentCard||!a||!confidence)return;
     const key=currentCard.key;
-    currentCard.m.total=(currentCard.m.total||0)+1;
-    if(correct)currentCard.m.correct=(currentCard.m.correct||0)+1;else currentCard.m.wrong=(currentCard.m.wrong||0)+1;
+    // For reverse quizzes, always write directly to the row's persistent keywordMeta.
+    // This avoids updating a stale/transient metadata reference and keeps LOG in sync.
+    if(currentCard.type==='keyword'){
+      if(!currentCard.row.keywordMeta||typeof currentCard.row.keywordMeta!=='object')currentCard.row.keywordMeta=meta(currentCard.row.name);
+      currentCard.row.keywordMeta.value=currentCard.row.name;
+      currentCard.m=currentCard.row.keywordMeta;
+    }
+    const m=currentCard.m;
+    m.total=(m.total||0)+1;
+    if(correct)m.correct=(m.correct||0)+1;else m.wrong=(m.wrong||0)+1;
     s.cycle.answers[key]={confidence,correct};
-    if(confidence==='known'&&!correct)currentCard.m.status='misconception';
-    else if(confidence==='known'&&correct)currentCard.m.status='known';
-    else if(confidence==='unsure')currentCard.m.status='unsure';
-    else currentCard.m.status='unknown';
+    if(confidence==='known'&&!correct)m.status='misconception';
+    else if(confidence==='known'&&correct)m.status='known';
+    else if(confidence==='unsure')m.status='unsure';
+    else m.status='unknown';
     s.cycle.remainingKeys=s.cycle.remainingKeys.filter(k=>k!==key);
     s.totalAnswered=(s.totalAnswered||0)+1;
     a.index++;
@@ -1567,7 +1585,10 @@ KEYWORD / / —"></textarea>
     rows.forEach(r=>{
       const details=[];
       if(r.quizEnabled!==false){
-        const km=r.keywordMeta||meta(r.name),ks=cardStatus({m:km});
+        if(!r.keywordMeta||typeof r.keywordMeta!=='object')r.keywordMeta=meta(r.name);
+        else if(String(r.keywordMeta.value??'')!==r.name)r.keywordMeta.value=r.name;
+        normalizeMeta(r.keywordMeta);
+        const km=r.keywordMeta,ks=cardStatus({m:km});
         if(filterMatch(ks,state.filter))details.push(`<span class="detail-tag keyword-tag">키워드${ks==='master'?'✨'+km.stars:ks==='red'?'🧣':ks==='blue'?'🫧':ks==='purple'?'💎':ks==='green'?'🌿':'☁️'}${km.stars?` · ⭐${km.stars}`:''}</span>`);
       }
       s.detailFields.forEach(f=>{const m=r.fields[f];if(isNoQuiz(m?.value))return;const st=cardStatus({m});if(filterMatch(st,state.filter))details.push(tag(f,st,m));});
