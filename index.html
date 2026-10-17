@@ -12,6 +12,7 @@
 @font-face{font-family:"starry_ui";src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ChosunSg.woff') format('woff');}
 @font-face{font-family:"starry_quiz";src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Arita-dotum-Medium.woff') format('woff');unicode-range: U+AC00-D7A3;}
 @font-face{font-family:"starry_hanja";src:local("본고딕 Light"),url('./fonts/SourceHanSansK-Light.otf');}
+@font-face{font-family:"starry_noto";src:local("Noto Color Emoji"), url('./fonts/NotoColorEmoji-Regular.ttf');unicode-range:U+1F380, U+1FABB-1FABC;}
 
 :root{
   --ui-font: 'starry_emoji', 'starry_english', 'starry_ui';
@@ -149,9 +150,11 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .round-label{font-size:12px;color:var(--muted)}
 .round-label b{color:var(--ink)}
 .test-logo{font-size:18px;color:var(--pink-deep);font-weight:900;margin-top:8px}
-.start-quiz{flex:0 0 auto;margin-top:22px;border:0;background:var(--pink);color:#fff;border-radius:18px;padding:16px 44px;font-size:18px;font-weight:950;box-shadow:0 12px 24px rgba(255,90,130,.32)}
+.start-quiz{flex:0 0 auto;margin-top:22px;border:0;background:var(--pink);color:#fff;border-radius:18px;padding:16px 44px;font-family:'starry_noto','starry_english','starry_ui';font-size:18px;font-weight:950;box-shadow:0 12px 24px rgba(255,90,130,.32)}
 .start-quiz:hover{transform:translateY(-2px)}
 .start-quiz.resume-mode {background:var(--lav);box-shadow:0 12px 24px rgba(150, 120, 220, .32);}
+.start-quiz.new-quiz-mode {background:#83d0f7;box-shadow:0 12px 24px rgba(74,174,229,.30);}
+.start-quiz.new-quiz-mode:hover {background:#70c5f2;}
 .quiz-wrap{max-width:760px;width:100%;height:100%;margin:0 auto;display:flex;flex-direction:column}
 .quiz-meta{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px}
 .quiz-progress{font-size:11px;color:var(--muted)}
@@ -534,7 +537,7 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
       <div class="test-landing" id="testLanding">
         <div class="test-landing-inner">
           <div class="round-label">쪽지 시험 <b id="roundNumber">#1</b> · 전체 회독 <b id="cycleNumber">#1</b></div>
-          <div class="test-logo">TODAY'S QUIZ</div>
+          <div class="test-logo">⋅ ˚₊‧ ୨୧ ‧₊˚ ⋅</div>
           <div class="resume-banner" id="resumeBanner" style="display:none"></div>
           <div class="test-config-card">
             <div class="quiz-direction-heading" style="display:flex;align-items:center;justify-content:flex-start;gap:10px;flex-wrap:wrap;margin:0 0 10px">
@@ -564,7 +567,7 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
             </div>
           </div>
           <button class="start-quiz" id="startQuiz">QUIZ START</button>
-          <div class="hint" style="margin-top:11px">LET'S GO!</div>
+          <div class="hint" style="margin-top:11px">가, 너만의 승리를 이뤄!</div>
         </div>
       </div>
       <div class="quiz-wrap" id="quizView" style="display:none">
@@ -860,8 +863,6 @@ KEYWORD / / —"></textarea>
 
   function normalizeRow(s,r){
     r.id=r.id||uid();r.folder=r.folder||'';r.name=r.name||'';r.fields=r.fields||{};r.quizEnabled=r.quizEnabled!==false;
-    // Keep existing keyword learning progress when the keyword text needs syncing.
-    // Replacing the whole metadata object here would erase its status, stars and history.
     if(!r.keywordMeta||typeof r.keywordMeta!=='object')r.keywordMeta=meta(r.name);
     else if(String(r.keywordMeta.value??'')!==r.name)r.keywordMeta.value=r.name;
     s.detailFields.forEach(f=>{if(!r.fields[f])r.fields[f]=meta('')});
@@ -915,8 +916,6 @@ KEYWORD / / —"></textarea>
     return 'new';
   }
   function cycleDue(card,cycleNo){
-    // Spaced repetition is based on completed full cycles for every card,
-    // not on the number of tests and not only after reaching Master status.
     return (Number(card.m.nextCycle)||1)<=cycleNo;
   }
 
@@ -1002,8 +1001,6 @@ KEYWORD / / —"></textarea>
 
     if(orderMode==='folder'){
       const chunks=[];
-      // Sequential mode keeps each folder's rows in data-sheet order,
-      // while allowing the folder blocks themselves to be shuffled.
       const folderOrder=sequential
         ? shuffleInPlace(selected.filter(folder=>rows.some(r=>r.folder===folder)).slice())
         : selected;
@@ -1016,8 +1013,6 @@ KEYWORD / / —"></textarea>
     }
 
     if(sequential){
-      // Random mode + checked checkbox means one continuous data-sheet sequence,
-      // even when the selected rows belong to different folders.
       return rows.map(r=>buildRowChunk(r,fields,cycleNo,direction,true)).filter(chunk=>chunk.length).flat();
     }
     const chunks=shuffleInPlace(rows.slice()).map(r=>buildRowChunk(r,fields,cycleNo,direction,false)).filter(chunk=>chunk.length);
@@ -1075,12 +1070,9 @@ KEYWORD / / —"></textarea>
         else m.status='unknown';
       }
       if(result.confidence==='known' && result.correct){
-        // Every earned star lengthens the interval, whether or not the card is Master yet.
-        // baseGap=1: 1 star -> +1 cycle, 2 stars -> +2 cycles, 3 stars -> +4 cycles.
         const gap=state.settings.baseGap*Math.pow(2,Math.max(0,m.stars-1));
         m.nextCycle=cycle.number+Math.max(1,Math.round(gap));
       }else{
-        // Missed/uncertain cards return in the next full cycle.
         m.nextCycle=cycle.number+1;
       }
       m.lastAskedCycle=cycle.number;
@@ -1206,7 +1198,7 @@ KEYWORD / / —"></textarea>
     $('quizQuestion').classList.toggle('is-reverse',reverse);
     if(reverse){
       const hints=reverseHintEntries(currentCard.row,s.cycle?.fields||s.lastFields||selectedFieldsForUI(),s);
-      hintsBox.innerHTML=hints.map(h=>`<div class="quiz-hint"><div class="quiz-hint-label">🌻 ${esc(h.label)}</div><div class="quiz-hint-value">${esc(h.value)}</div></div>`).join('');
+      hintsBox.innerHTML=hints.map(h=>`<div class="quiz-hint"><div class="quiz-hint-label">🌙 ${esc(h.label)}</div><div class="quiz-hint-value">${esc(h.value)}</div></div>`).join('');
       hintsBox.style.display=hints.length?'grid':'none';
       $('quizPrompt').textContent=`[${s.nameLabel}]?`;
       $('quizFolderContext').style.display='none';
@@ -1331,8 +1323,6 @@ KEYWORD / / —"></textarea>
   function recordResult(correct){
     const s=subject(),a=s.activeTest;if(!currentCard||!a||!confidence)return;
     const key=currentCard.key;
-    // For reverse quizzes, always write directly to the row's persistent keywordMeta.
-    // This avoids updating a stale/transient metadata reference and keeps LOG in sync.
     if(currentCard.type==='keyword'){
       if(!currentCard.row.keywordMeta||typeof currentCard.row.keywordMeta!=='object')currentCard.row.keywordMeta=meta(currentCard.row.name);
       currentCard.row.keywordMeta.value=currentCard.row.name;
@@ -1487,7 +1477,8 @@ KEYWORD / / —"></textarea>
     if(s.activeTest){
       $('resumeBanner').style.display='none';
       $('startQuiz').classList.add('resume-mode');
-      $('startQuiz').innerHTML=`Q${s.activeTest.index+1}부터 RESUME`;
+      $('startQuiz').classList.remove('new-quiz-mode');
+      $('startQuiz').innerHTML=`🪻 Q${s.activeTest.index+1} 부터 시작 🪻`;
       disableScopeChoices(true);
       syncScopeChoices(cycle?.fields||[]);
       syncFolderScopeChoices(cycle?.folders||[]);
@@ -1497,14 +1488,16 @@ KEYWORD / / —"></textarea>
       $('resumeBanner').style.display='none';
       $('startQuiz').classList.remove('resume-mode');
       if(cycle){
-        $('startQuiz').textContent='NEW QUIZ';
+        $('startQuiz').classList.add('new-quiz-mode');
+        $('startQuiz').textContent='🪼 회독 마무리 🪼';
         disableScopeChoices(true);
         syncScopeChoices(cycle.fields);
         syncFolderScopeChoices(cycle.folders);
         $('testOrderMode').value=cycle.orderMode||'random';
         $('sequentialOrder').checked=!!cycle.sequential;
       }else{
-        $('startQuiz').textContent='QUIZ START';
+        $('startQuiz').classList.remove('new-quiz-mode');
+        $('startQuiz').textContent = `🎀 ${s.cycleNo} 회독 시작 🎀`;
         disableScopeChoices(false);
         syncScopeChoices(defaultFieldSelection());
         syncFolderScopeChoices(defaultFolderSelection());
@@ -1584,16 +1577,14 @@ KEYWORD / / —"></textarea>
     const rows=s.rows.filter(r=>r.folder===state.folder);let html='';
     rows.forEach(r=>{
       const details=[];
-      // Put the keyword status first so it is always the leftmost LOG tag.
       if(r.quizEnabled!==false){
         if(!r.keywordMeta||typeof r.keywordMeta!=='object')r.keywordMeta=meta(r.name);
         else if(String(r.keywordMeta.value??'')!==r.name)r.keywordMeta.value=r.name;
         normalizeMeta(r.keywordMeta);
         const km=r.keywordMeta,ks=cardStatus({m:km});
-        if(filterMatch(ks,state.filter))details.push(`<span class="detail-tag keyword-tag">키워드${ks==='master'?'✨'+km.stars:ks==='red'?'🧣':ks==='blue'?'🫧':ks==='purple'?'💎':ks==='green'?'🌿':'☁️'}${km.stars?` · ⭐${km.stars}`:''}</span>`);
+        const keywordStars=starMarks(km.stars);
+        if(filterMatch(ks,state.filter))details.push(`<span class="detail-tag keyword-tag">키워드${ks==='master'?'✨':ks==='red'?'🧣':ks==='blue'?'🫧':ks==='purple'?'💎':ks==='green'?'🌿':'☁️'}${keywordStars?` · ${keywordStars}`:''}</span>`);
       }
-      // Show the CHAPTER/folder card's learning status in LOG too.
-      // Reference-only folders and excluded rows are not quiz items, so keep them out.
       if(r.quizEnabled!==false && s.folderQuiz?.[r.folder]!==false && !isNoQuiz(r.folder) && r.folderMeta){
         normalizeMeta(r.folderMeta);
         const fm=r.folderMeta,fs=cardStatus({m:fm});
@@ -1605,7 +1596,8 @@ KEYWORD / / —"></textarea>
     $('weakList').innerHTML=html||'<div class="empty">૮꒰ ◌´ ⁰ `◌ ꒱ა</div>';
   }
   function filterMatch(st,filter){return filter==='all'||(filter==='red'&&st==='red')||(filter==='blue'&&st==='blue')||(filter==='purple'&&st==='purple')||(filter==='master'&&st==='master')}
-  function tag(label,st,m){const stars=m.stars?` · ⭐${m.stars}`:'';if(st==='red')return `<span class="detail-tag red">${esc(label)} 🧣${stars}</span>`;if(st==='blue')return `<span class="detail-tag blue">${esc(label)} 🫧${stars}</span>`;if(st==='purple')return `<span class="detail-tag purple">${esc(label)} 💎${stars}</span>`;if(st==='master')return `<span class="detail-tag gold">${esc(label)} ✨${m.stars}${(m.nextCycle||0)>subject().cycleNo?` · Cycle #${m.nextCycle} 재출현`:''}</span>`;if(st==='green')return `<span class="detail-tag green">${esc(label)} 🌿${stars}</span>`;return `<span class="detail-tag gray">${esc(label)} ☁️</span>`}
+  function starMarks(count){return '⭐'.repeat(Math.max(0,Math.floor(Number(count)||0)))}
+  function tag(label,st,m){const marks=starMarks(m.stars),stars=marks?` · ${marks}`:'';if(st==='red')return `<span class="detail-tag red">${esc(label)} 🧣${stars}</span>`;if(st==='blue')return `<span class="detail-tag blue">${esc(label)} 🫧${stars}</span>`;if(st==='purple')return `<span class="detail-tag purple">${esc(label)} 💎${stars}</span>`;if(st==='master')return `<span class="detail-tag gold">${esc(label)} ✨${marks?` ${marks}`:''}${(m.nextCycle||0)>subject().cycleNo?` · Cycle #${m.nextCycle} 재출현`:''}</span>`;if(st==='green')return `<span class="detail-tag green">${esc(label)} 🌿${stars}</span>`;return `<span class="detail-tag gray">${esc(label)} ☁️${stars}</span>`}
 
   function renderData(){
     const s=subject();$('subjectNameInput').value=s.name;$('folderFieldInput').value=s.folderLabel;$('nameFieldInput').value=s.nameLabel;$('detailFieldsInput').value=s.detailFields.join(', ');
@@ -1934,8 +1926,8 @@ KEYWORD / / —"></textarea>
     }
 
     if(confidence==='known'){
-      if(e.key==='ArrowUp'){e.preventDefault();recordResult(true);}
-      else if(e.key==='ArrowDown'){e.preventDefault();recordResult(false);}
+      if(e.key==='ArrowUp'||e.key==='ArrowRight'){e.preventDefault();recordResult(true);}
+      else if(e.key==='ArrowDown'||e.key==='ArrowLeft'){e.preventDefault();recordResult(false);}
       return;
     }
 
