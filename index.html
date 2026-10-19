@@ -908,7 +908,9 @@ KEYWORD / / —"></textarea>
   }
   function isMaster(card){return (card.m.stars||0)>=state.settings.masterStars}
   function cardStatus(card){
-    if(isMaster(card))return 'master';
+    const stars=Math.max(0,Math.floor(Number(card?.m?.stars)||0));
+    // 별이 0개인 카드는 과거의 master 상태/설정값 때문에 마스터 색으로 남지 않게 한다.
+    if(stars>0 && isMaster(card))return 'master';
     if(card.m.status==='misconception')return 'purple';
     if(card.m.status==='unknown')return 'red';
     if(card.m.status==='unsure')return 'blue';
@@ -1061,16 +1063,21 @@ KEYWORD / / —"></textarea>
       }
       const m=c.m;
       if(result.confidence==='known'&&result.correct){
-        m.stars=(m.stars||0)+1;
+        m.stars=Math.max(0,Math.floor(Number(m.stars)||0))+1;
         m.status=m.stars>=state.settings.masterStars?'master':'known';
       }else{
-        m.stars=Math.max(0,(m.stars||0)-1);
+        // 별은 0개 아래로 내려가지 않으며, 별이 0개가 되더라도 이번 응답의 원인 태그 색을 유지한다.
+        m.stars=Math.max(0,Math.floor(Number(m.stars)||0)-1);
         if(result.confidence==='known'&&!result.correct) m.status='misconception';
         else if(result.confidence==='unsure') m.status='unsure';
         else m.status='unknown';
       }
+      // 0개일 때도 원인별 상태가 명확하게 남도록 한 번 더 보정한다.
+      if(m.stars===0 && !(result.confidence==='known'&&result.correct)){
+        m.status=result.confidence==='known'?'misconception':result.confidence==='unsure'?'unsure':'unknown';
+      }
       if(result.confidence==='known' && result.correct){
-        const gap=state.settings.baseGap*Math.pow(2,Math.max(0,m.stars-1));
+        const gap=state.settings.baseGap*Math.pow(2,Math.max(1,m.stars));
         m.nextCycle=cycle.number+Math.max(1,Math.round(gap));
       }else{
         m.nextCycle=cycle.number+1;
@@ -1597,7 +1604,7 @@ KEYWORD / / —"></textarea>
   }
   function filterMatch(st,filter){return filter==='all'||(filter==='red'&&st==='red')||(filter==='blue'&&st==='blue')||(filter==='purple'&&st==='purple')||(filter==='master'&&st==='master')}
   function starMarks(count){return '⭐'.repeat(Math.max(0,Math.floor(Number(count)||0)))}
-  function tag(label,st,m){const marks=starMarks(m.stars),stars=marks?` · ${marks}`:'';if(st==='red')return `<span class="detail-tag red">${esc(label)} 🧣${stars}</span>`;if(st==='blue')return `<span class="detail-tag blue">${esc(label)} 🫧${stars}</span>`;if(st==='purple')return `<span class="detail-tag purple">${esc(label)} 💎${stars}</span>`;if(st==='master')return `<span class="detail-tag gold">${esc(label)} ✨${marks?` ${marks}`:''}${(m.nextCycle||0)>subject().cycleNo?` · Cycle #${m.nextCycle} 재출현`:''}</span>`;if(st==='green')return `<span class="detail-tag green">${esc(label)} 🌿${stars}</span>`;return `<span class="detail-tag gray">${esc(label)} ☁️${stars}</span>`}
+  function tag(label,st,m){const marks=starMarks(m.stars),stars=marks?` · ${marks}`:'';if(st==='red')return `<span class="detail-tag red">${esc(label)} 🧣${stars}</span>`;if(st==='blue')return `<span class="detail-tag blue">${esc(label)} 🫧${stars}</span>`;if(st==='purple')return `<span class="detail-tag purple">${esc(label)} 💎${stars}</span>`;if(st==='master')return `<span class="detail-tag gold">${esc(label)} ✨${marks?` · ${marks}`:''}${(m.nextCycle||0)>subject().cycleNo?`⠀(RE: ${m.nextCycle}번째 회독)`:''}</span>`;if(st==='green')return `<span class="detail-tag green">${esc(label)} 🌿${stars}</span>`;return `<span class="detail-tag gray">${esc(label)} ☁️${stars}</span>`}
 
   function renderData(){
     const s=subject();$('subjectNameInput').value=s.name;$('folderFieldInput').value=s.folderLabel;$('nameFieldInput').value=s.nameLabel;$('detailFieldsInput').value=s.detailFields.join(', ');
