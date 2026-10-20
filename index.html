@@ -217,10 +217,9 @@ input[type="checkbox"]:focus-visible{outline:2px solid var(--lav);outline-offset
 input[type="checkbox"]:disabled{opacity:.42;cursor:not-allowed}
 .session-options input[type="checkbox"]{width:18px;height:18px;min-width:18px;padding:0;border:0;background-color:var(--dreamy-rose-bright)}
 .session-options input[type="checkbox"]:checked{background-color:var(--dreamy-rose-sparkle)}
-.sequence-option{gap:6px!important;white-space:nowrap}
 .order-options{display:flex;align-items:center;gap:10px;flex:0 0 auto;min-width:0}
 .order-options>label{display:flex;align-items:center;gap:7px;white-space:nowrap}
-.sequence-option{display:flex;align-items:center;gap:6px!important;padding:6px 8px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer}
+.sequence-option{display:flex;align-items:center;gap:6px!important;padding:6px 8px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;white-space:nowrap}
 .sequence-option:hover{border-color:var(--pink);background:#fff7fa}
 .resume-banner{margin:10px auto 0;width:min(620px,100%);background:var(--lav-soft);border:1px solid #cbbdf8;border-radius:13px;padding:10px;font-size:11px;line-height:1.6;text-align:left}.resume-banner b{color:#5441a8}
 .bridge-manager{position:fixed;inset:0;background:rgba(60,35,55,.38);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:18px;z-index:110}
@@ -235,8 +234,6 @@ input[type="checkbox"]:disabled{opacity:.42;cursor:not-allowed}
 #page-data .action-row:has(#folderModeSelect){align-items:center;min-height:36px;line-height:1.25}.folder-mode-label{font-size:10px;color:var(--muted);font-weight:900}.folder-mode-btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 9px;font-size:10px;font-weight:900}.folder-mode-btn.active.test{background:var(--pink);color:#fff;border-color:var(--pink)}.folder-mode-btn.active.reference{background:var(--lav);color:#fff;border-color:var(--lav)}
 .danger-card{background:#fff0f2;border-color:#f5b0bc}.danger-button{color:#ba293e;border-color:#f09ea9}.trail-particle{position:fixed;z-index:9999;pointer-events:none;user-select:none;font-size:14px;animation:trailFloat .7s ease-out forwards}@keyframes trailFloat{0%{opacity:.95;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-30px) scale(.55)}}
 
-#app{min-height:0}
-.diary-shell{min-height:0}
 
 /* Weakness */
 .weak-layout{display:grid;grid-template-columns:185px minmax(0,1fr) 88px;grid-template-rows:minmax(0,1fr);gap:12px;min-height:0;height:auto;flex:1 1 auto;overflow:hidden}
@@ -254,7 +251,6 @@ input[type="checkbox"]:disabled{opacity:.42;cursor:not-allowed}
 .detail-tag.red{background:var(--red-soft);color:#c4334f}.detail-tag.blue{background:var(--blue-soft);color:#2e64a8}.detail-tag.green{background:#d8f5e8;color:#226e50}.detail-tag.gold{background:var(--gold-soft);color:#8f6513}.detail-tag.purple{background:#eddcfc;color:#6b3fa8}.detail-tag.gray{background:#ededee;color:#6e6673}.detail-tag.keyword-tag{background:linear-gradient(135deg,#ffdfeb,#f4e7ff);border:1.5px solid #f17ca6;color:#a92d60;font-weight:950;box-shadow:0 2px 7px rgba(240,76,120,.16);padding:7px 10px}
 .filter-rail{display:flex;flex-direction:column;gap:7px;min-width:0;min-height:0;overflow:hidden}
 .filter-btn{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 5px;font-size:10px;font-weight:900}
-.filter-emoji{display:none}
 .filter-label{display:inline}
 .filter-btn.active{background:var(--pink);color:#fff;border-color:var(--pink)}
 .filter-emoji{display:none}
@@ -270,7 +266,6 @@ input[type="checkbox"]:disabled{opacity:.42;cursor:not-allowed}
 .quiz-direction-heading{align-items:center}
 .quiz-direction-heading label{display:flex;align-items:center;min-height:34px;line-height:1.2}
 textarea{min-height:330px;resize:vertical;line-height:1.7}
-.toggle-line{display:flex;align-items:center;gap:7px;font-size:11px;padding:8px 0}
 .action-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
 .mini-button{padding:8px 11px}.primary{background:var(--pink);color:#fff;border-color:var(--pink)}.soft{background:var(--lav-soft);color:#5441a8;border-color:#cbbdf8}
 .format-box{margin-top:10px;background:#f3edfd;border:1px dashed var(--lav);border-radius:12px;padding:10px;font:11px/1.7 ui-monospace,Consolas,monospace;white-space:pre-wrap}
@@ -455,7 +450,6 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
     min-width:0;
     display:flex;
     flex-wrap:wrap;
-    align-items:flex-start;
     gap:5px;
     align-items: center;
   }
@@ -891,12 +885,12 @@ KEYWORD / / —"></textarea>
   }
   function cardsForSubject(){
     const s=subject();normalizeAll();const arr=[];
-    s.rows.forEach((r,ri)=>{
+    s.rows.forEach(r=>{
       const folderIsReference=s.folderQuiz?.[r.folder]===false;
       if(r.quizEnabled!==false && !folderIsReference && r.folderMeta && !isNoQuiz(r.folder)){
         arr.push({type:'folder',row:r,field:s.folderLabel,m:r.folderMeta,value:r.folder,key:cardKey({row:r,type:'folder',field:s.folderLabel})});
       }
-      s.detailFields.forEach((f,fi)=>{
+      s.detailFields.forEach(f=>{
         const m=r.fields[f];if(!m || isNoQuiz(m.value))return;
         arr.push({type:'detail',row:r,field:f,m,value:m.value,key:cardKey({row:r,type:'detail',field:f})});
       });
@@ -929,7 +923,6 @@ KEYWORD / / —"></textarea>
     const s=subject();
     return s.lastFields?.length?s.lastFields.slice():selectedFieldsForUI();
   }
-  function fieldLabel(key){return key==='folder'?subject().folderLabel:key}
 
   function shuffleInPlace(arr){
     for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}
@@ -1516,21 +1509,43 @@ KEYWORD / / —"></textarea>
     const limit=cycle&&s.activeTest?s.activeTest.limit:(s.lastLimit||DEFAULT_TEST_LIMIT);
     $('questionLimit').value=limit;$('questionLimit').disabled=!!s.activeTest;
     $('testOrderMode').disabled=!!s.activeTest||!!cycle;
-    const folders=cycle?.folders||defaultFolderSelection(),fields=cycle?.fields||defaultFieldSelection(),orderMode=cycle?.orderMode||s.lastOrderMode||'random';
-    const sequential=cycle?!!cycle.sequential:!!s.lastSequential;
-    const pool=buildCyclePool(fields,cycle?.number||s.cycleNo,folders,orderMode,selectedDirection,sequential);
+    updateTestAvailability();
+  }
+
+  // 출제 범위/속성 체크박스의 현재 선택 상태를 기준으로 질문 수를 다시 계산한다.
+  function updateTestAvailability(){
+    const s=subject();
+    if(!s || !$('testAvailability'))return;
+    const cycle=s.cycle;
+    const direction=['keyword-to-detail','detail-to-keyword'].includes($('quizDirectionSelect')?.value)
+      ? $('quizDirectionSelect').value : 'keyword-to-detail';
+    const fields=cycle
+      ? cycle.fields.slice()
+      : [...document.querySelectorAll('#scopeChoices input[data-field]:checked')].map(i=>i.dataset.field);
+    const folders=cycle
+      ? cycle.folders.slice()
+      : [...document.querySelectorAll('#folderScopeChoices input[data-folder]:checked')].map(i=>i.dataset.folder);
+    const orderMode=cycle?.orderMode||$('testOrderMode').value||s.lastOrderMode||'random';
+    const sequential=cycle?!!cycle.sequential:!!$('sequentialOrder').checked;
+
+    if(!fields.length||!folders.length){
+      $('testAvailability').textContent='출제될 질문 0개 · 속성과 범위를 골라줘!';
+      return;
+    }
+
+    const pool=buildCyclePool(fields,cycle?.number||s.cycleNo,folders,orderMode,direction,sequential);
     const existingKeys=new Set(cycle?.poolKeys||[]);
     const available=cycle
-      ? cycle.remainingKeys.filter(key=>keyMatchesDirection(key,selectedDirection)).length+pool.filter(card=>!existingKeys.has(card.key)).length
+      ? cycle.remainingKeys.filter(key=>keyMatchesDirection(key,direction)).length+pool.filter(card=>!existingKeys.has(card.key)).length
       : pool.length;
     if(available){
       $('testAvailability').textContent=`출제될 질문 ${available}개`;
     }else if(!cycle){
-      const next=nextScheduledCycle(fields,folders,orderMode,selectedDirection,sequential);
+      const next=nextScheduledCycle(fields,folders,orderMode,direction,sequential);
       $('testAvailability').textContent=next
         ? `이번 회독에서 출제할 문제가 없어. ${next}번째 회독부터 다시하면 돼!`
-        : `출제할 문제가 없어.`;
-    }else if(cycle&&cycle.remainingKeys.length){
+        : '출제할 문제가 없어.';
+    }else if(cycle.remainingKeys.length){
       $('testAvailability').textContent='선택한 모드에서 출제할 문제가 없어. 모드를 바꿔보는 건 어때?';
     }else{
       $('testAvailability').textContent='회독 COMPLETE 🎉';
@@ -1542,7 +1557,15 @@ KEYWORD / / —"></textarea>
     const fields=[{key:'folder',label:s.folderLabel},...s.detailFields.map(f=>({key:f,label:f}))];
     fields.forEach(f=>{const label=document.createElement('label');label.className='scope-chip';label.innerHTML=`<input type="checkbox" data-field="${esc(f.key)}"> <span>${esc(f.label)}</span>`;box.appendChild(label)});
     const all=document.createElement('label');all.className='scope-chip all';all.innerHTML='<input type="checkbox" id="scopeAll"> <span>전체</span>';box.prepend(all);
-    $('scopeAll').onchange=e=>{box.querySelectorAll('input[data-field]').forEach(i=>i.checked=e.target.checked)};
+    box.querySelectorAll('input[data-field]').forEach(i=>i.onchange=()=>{
+      const items=[...box.querySelectorAll('input[data-field]')];
+      $('scopeAll').checked=items.length>0&&items.every(item=>item.checked);
+      updateTestAvailability();
+    });
+    $('scopeAll').onchange=e=>{
+      box.querySelectorAll('input[data-field]').forEach(i=>i.checked=e.target.checked);
+      updateTestAvailability();
+    };
   }
 
   function renderFolderScopeChoices(){
@@ -1554,7 +1577,15 @@ KEYWORD / / —"></textarea>
       const label=document.createElement('label');label.className='scope-chip';label.innerHTML=`<input type="checkbox" data-folder="${esc(f)}"> <span>${esc(f)}</span><small style="color:var(--muted);font-size:9px">(${count})</small>`;box.appendChild(label);
     });
     const all=document.createElement('label');all.className='scope-chip all';all.innerHTML='<input type="checkbox" id="folderScopeAll"> <span>전체</span>';box.prepend(all);
-    $('folderScopeAll').onchange=e=>{box.querySelectorAll('input[data-folder]').forEach(i=>i.checked=e.target.checked)};
+    box.querySelectorAll('input[data-folder]').forEach(i=>i.onchange=()=>{
+      const items=[...box.querySelectorAll('input[data-folder]')];
+      $('folderScopeAll').checked=items.length>0&&items.every(item=>item.checked);
+      updateTestAvailability();
+    });
+    $('folderScopeAll').onchange=e=>{
+      box.querySelectorAll('input[data-folder]').forEach(i=>i.checked=e.target.checked);
+      updateTestAvailability();
+    };
   }
 
   function syncScopeChoices(fields){
@@ -1863,7 +1894,7 @@ KEYWORD / / —"></textarea>
   let lastTrail=0;
   document.addEventListener('mousemove',e=>{
     if(!state.settings.mouseTrail)return;const now=Date.now();if(now-lastTrail<120)return;lastTrail=now;
-    const p=document.createElement('span');p.className='trail-particle';p.textContent=['💕', '🫧', '🌸', '✨', '🌺'][Math.floor(Math.random()*4)];p.style.left=e.clientX+'px';p.style.top=e.clientY+'px';document.body.appendChild(p);setTimeout(()=>p.remove(),700);
+    const p=document.createElement('span');p.className='trail-particle';p.textContent=['💕', '🫧', '🌸', '✨', '🌺'][Math.floor(Math.random()*5)];p.style.left=e.clientX+'px';p.style.top=e.clientY+'px';document.body.appendChild(p);setTimeout(()=>p.remove(),700);
   });
 
   // UI events
