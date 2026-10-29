@@ -234,7 +234,6 @@ input[type="checkbox"]:disabled{opacity:.42;cursor:not-allowed}
 #page-data .action-row:has(#folderModeSelect){align-items:center;min-height:36px;line-height:1.25}.folder-mode-label{font-size:10px;color:var(--muted);font-weight:900}.folder-mode-btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 9px;font-size:10px;font-weight:900}.folder-mode-btn.active.test{background:var(--pink);color:#fff;border-color:var(--pink)}.folder-mode-btn.active.reference{background:var(--lav);color:#fff;border-color:var(--lav)}
 .danger-card{background:#fff0f2;border-color:#f5b0bc}.danger-button{color:#ba293e;border-color:#f09ea9}.trail-particle{position:fixed;z-index:9999;pointer-events:none;user-select:none;font-size:14px;animation:trailFloat .7s ease-out forwards}@keyframes trailFloat{0%{opacity:.95;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-30px) scale(.55)}}
 
-
 /* Weakness */
 .weak-layout{display:grid;grid-template-columns:185px minmax(0,1fr) 88px;grid-template-rows:minmax(0,1fr);gap:12px;min-height:0;height:auto;flex:1 1 auto;overflow:hidden}
 .folder-index{display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden;border-right:1px dashed var(--line);padding-right:10px}
@@ -280,7 +279,45 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
 .modal-title{font-size:18px;font-weight:950}.close-btn{border:0;background:#fcebf0;border-radius:10px;width:34px;height:34px}
 .modal-body{padding:16px;display:grid;gap:13px}.setting-card{border:1px solid var(--line);border-radius:16px;padding:13px;background:#fff2f6}.setting-head{font-weight:950;font-size:13px;margin-bottom:9px}.helper{font-size:10px;color:var(--muted);line-height:1.6}
 .modal-preview{height:150px;border:1px dashed var(--line);border-radius:13px;display:grid;place-items:center;overflow:hidden;background:#fff}
-.modal-preview img{width:100%;height:100%;object-fit:cover}
+ .modal-preview img{width:100%;height:100%;object-fit:cover}
+.review-launch-btn{width:100%;border:1px solid #f4a0bd;background:linear-gradient(135deg,#fff0f6,#f1eaff);color:#a53f6b;border-radius:11px;padding:9px 6px;font-size:11px;font-weight:950;line-height:1.35;box-shadow:0 3px 8px rgba(220,100,140,.1);flex:0 0 auto}
+.review-launch-btn:hover{border-color:var(--pink);transform:translateY(-1px)}
+.filter-rail .review-launch-btn{margin-top:auto}
+.review-answer-box{cursor:pointer;transition:filter .18s ease,transform .18s ease}
+.review-answer-box.is-blurred{filter:blur(8px);user-select:none;-webkit-user-select:none}
+.review-answer-box.is-blurred:hover{transform:scale(1.01)}
+.review-modal-card{width:min(560px,100%)}
+.review-body{gap:12px;text-align:center}
+.review-topline{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--muted);font-size:11px;font-weight:850;text-align:left}
+.review-question-box{background:#fff5f8;border:1px solid var(--line);border-radius:17px;padding:18px 14px}
+.review-question-name{font-size:24px;font-weight:950;line-height:1.4;overflow-wrap:anywhere}
+.review-question-prompt{margin-top:8px;font-size:14px;font-weight:900;color:#a54b70;line-height:1.5;overflow-wrap:anywhere}
+.review-hints{display:grid;gap:6px;margin-top:10px;text-align:left}
+.review-hint{background:#fff;border:1px solid #f3d2e0;border-radius:10px;padding:8px 10px;font-size:12px;line-height:1.5}
+.review-hint b{display:block;color:#a54b70;font-size:10px;margin-bottom:2px}
+.review-answer-box{background:#f4efff;border:1.5px dashed #c9b8f7;border-radius:16px;padding:16px 14px;font-size:20px;font-weight:950;line-height:1.55;overflow-wrap:anywhere;white-space:pre-line}
+.review-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.review-action-btn{border:0;border-radius:13px;padding:13px 8px;font-size:13px;font-weight:950;min-height:48px}
+.review-action-wrong{background:#ffe5eb;color:#b52c50}
+.review-action-correct{background:#dff7eb;color:#23714f}
+.review-finish{background:#f4efff;border-radius:14px;padding:18px;font-weight:900;line-height:1.7}
+.conflict-modal-card{width:min(680px,100%)}
+.conflict-body{gap:11px}
+.conflict-intro{font-size:12px;line-height:1.65;color:var(--muted)}
+.conflict-preview{border:1px solid var(--line);border-radius:12px;padding:10px;font-size:11px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}
+.conflict-existing-preview{background:#fff0f6;border-color:#f0a4c2}
+.conflict-incoming-preview{background:#f4efff;border-color:#c9b8f7}
+.conflict-fields{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.conflict-label{display:block;font-size:10px;font-weight:900;color:var(--muted);margin-bottom:5px}
+.conflict-existing-field{background:#fff5f9!important;border-color:#efa4c2!important}
+.conflict-new-field{background:#f8f4ff!important;border-color:#c9b8f7!important}
+.conflict-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.conflict-action{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px;font-size:11px;font-weight:950;line-height:1.5;min-height:48px}
+.conflict-action.primary{background:var(--pink);color:white;border-color:var(--pink)}
+.conflict-action.soft{background:var(--lav-soft);color:#5441a8;border-color:#cbbdf8}
+.conflict-action.subtle{background:#fff7fa}
+.conflict-action.danger{background:#fff0f2;color:#aa3348;border-color:#f0a7b4}
+@media(max-width:620px){.conflict-fields{grid-template-columns:1fr}.review-question-name{font-size:21px}.review-answer-box{font-size:18px}.conflict-actions{grid-template-columns:1fr}}
 
 /* Stickers */
 .sticker-library{display:flex;gap:7px;flex-wrap:wrap}.library-sticker{width:48px;height:48px;border:1px solid var(--line);background:#fff;border-radius:15px;box-shadow:0 2px 8px rgba(100,40,70,.1);display:grid;place-items:center;font-size:24px;overflow:hidden}
@@ -463,6 +500,61 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
     min-width:0;
     width:100%;
   }
+  .filter-rail .review-launch-btn{
+    position:fixed;right:18px;bottom:18px;z-index:70;
+    width:60px;height:60px;min-width:60px;padding:0;margin:0;
+    display:grid;place-items:center;border-radius:50%;
+    font-size:0;line-height:1;border:1.5px solid #efa4c2;
+    background:linear-gradient(145deg,#fff0f6,#e9ddff);
+    color:#a53f6b;box-shadow:0 7px 20px rgba(164,96,155,.28);
+  }
+  .filter-rail .review-launch-btn .review-launch-label{display:none}
+  .filter-rail .review-launch-btn::before{content:"☄️";font-size:20px;line-height:1}
+  .filter-rail .review-launch-btn:hover{transform:translateY(-2px) scale(1.03)}
+}
+
+.conflict-actions{align-items:start}
+.conflict-create-column{display:flex;flex-direction:column;gap:8px;min-width:0}
+.conflict-rename-panel{
+  position:fixed;z-index:140;width:290px;max-width:calc(100vw - 24px);max-height:calc(100vh - 24px);overflow:auto;
+  display:grid;gap:10px;padding:14px;border:1px solid #cbbdf8;border-radius:16px;
+  background:linear-gradient(145deg,#fffaff,#f5efff);box-shadow:0 14px 38px rgba(91,65,145,.25);box-sizing:border-box;
+}
+.conflict-rename-panel::before{content:"";position:absolute;left:-8px;top:18px;width:14px;height:14px;background:#fffaff;border-left:1px solid #cbbdf8;border-bottom:1px solid #cbbdf8;transform:rotate(45deg)}
+.tooltip-title{font-size:12px;font-weight:950;color:#7051b2;padding-bottom:3px}
+.conflict-rename-panel .input{width:100%;min-width:0;box-sizing:border-box}
+.tooltip-create-submit{width:100%;background:#e9ddff!important;border-color:#c7b2f7!important;color:#6043a5!important}
+.review-topline{justify-content:space-between}
+.review-scoreline{justify-content:space-between;align-items:center;padding:0 2px;min-height:34px}
+.review-scoreline #reviewQueueCount,.review-scoreline #reviewProgress{display:inline-flex;align-items:center;justify-content:center;min-height:30px;box-sizing:border-box;padding:6px 11px;border-radius:999px;font-size:12px;font-weight:950;font-variant-numeric:tabular-nums;white-space:nowrap}
+.review-scoreline #reviewQueueCount{color:#a54b70;background:#fff0f6;border:1px solid #f2cadb}
+.review-scoreline #reviewProgress{margin-left:auto;background:#f2eaff;border:1px solid #dacaf7;color:#684ca8}
+.review-question-box{background:linear-gradient(145deg,#fff0f6,#fff7fb 58%,#f7f0ff)!important;border:1px solid #f2cada;border-radius:19px;padding:17px 15px;text-align:center;min-height:0;display:block;box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 5px 15px rgba(194,117,155,.08)}
+.review-question-lead{display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;background:transparent;border:0;border-radius:0;padding:0;box-shadow:none;min-height:0;box-sizing:border-box}
+.review-question-moon{display:inline-grid;place-items:center;flex:0 0 auto;width:auto;height:auto;border-radius:0;background:transparent;font-size:22px;box-shadow:none}
+.review-question-prompt{display:block!important;margin:0!important;font-size:16px!important;font-weight:900!important;color:#a54b70!important;line-height:1.5;overflow-wrap:anywhere;flex:0 1 auto}
+.review-question-name{display:block!important;font-size:30px;font-weight:1000;line-height:1.4;overflow-wrap:anywhere;color:#533b55;margin:10px 0 0;letter-spacing:-.025em}
+.review-hints{display:grid;gap:7px;margin-top:12px!important;text-align:left}
+.review-hint{background:#fff;border:1px solid #f3d2e0;border-radius:11px;padding:9px 11px;font-size:12px;line-height:1.5;box-shadow:0 2px 5px rgba(179,104,143,.04)}
+.review-hint b{display:block;color:#a54b70!important;font-size:10px;margin-bottom:2px}
+.review-actions{display:grid!important;grid-template-columns:1fr 1fr;gap:9px;min-height:50px;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease;}
+.review-actions.is-revealed{visibility:visible;opacity:1;pointer-events:auto}
+.review-modal-card{position:relative}
+.review-body{position:relative;z-index:1}
+.review-celebration{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:5;display:none}
+.review-celebration.is-active{display:block}
+.review-confetti{position:absolute;left:50%;top:46%;display:block;font-size:23px;line-height:1;opacity:0;animation:reviewConfettiBurst 1.45s cubic-bezier(.12,.65,.2,1) forwards;animation-delay:var(--delay,0s);filter:drop-shadow(0 2px 2px rgba(110,60,100,.15));will-change:transform,opacity}
+.review-burst-ring{position:absolute;left:50%;top:46%;width:18px;height:18px;box-sizing:border-box;border:3px solid var(--ring-color,#f38db0);border-radius:50%;transform:translate(-50%,-50%) scale(.1);opacity:0;animation:reviewRingBurst .95s ease-out forwards;animation-delay:var(--delay,0s)}
+@keyframes reviewConfettiBurst{0%{opacity:0;transform:translate(-50%,-50%) scale(.25) rotate(0deg)}12%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.72) rotate(var(--rot,180deg))}}
+@keyframes reviewRingBurst{0%{opacity:0;transform:translate(-50%,-50%) scale(.1)}14%{opacity:.8}100%{opacity:0;transform:translate(-50%,-50%) scale(9)}}
+@media(max-width:620px){
+  .conflict-actions{grid-template-columns:1fr}
+  .review-question-name{font-size:25px}
+  .review-question-prompt{font-size:14px!important}
+  .review-answer-box{font-size:18px}
+  .review-question-box{padding:15px 12px}
+  .review-question-prompt{font-size:13px!important}
+  .review-actions{grid-template-columns:1fr 1fr}
 }
 
 </style>
@@ -593,7 +685,7 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
     <section class="page" id="page-weak">
       <div class="weak-layout">
         <aside class="folder-index">
-          <div class="folder-index-head">📂 <span id="weakFolderLabel">CHAPTER</span></div>
+          <div class="folder-index-head"><div>📂 <span id="weakFolderLabel">CHAPTER</span></div></div>
           <div class="folder-tabs" id="folderTabs"></div>
         </aside>
         <div class="weak-list" id="weakList"></div>
@@ -603,6 +695,7 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
           <button class="filter-btn" data-filter="blue" aria-label="헷갈린 개념" title="헷갈린 개념"><span class="filter-emoji" aria-hidden="true">🫧</span><span class="filter-label">헷갈린 개념</span></button>
           <button class="filter-btn" data-filter="purple" aria-label="잘못된 개념" title="잘못된 개념"><span class="filter-emoji" aria-hidden="true">💎</span><span class="filter-label">잘못된 개념</span></button>
           <button class="filter-btn" data-filter="master" aria-label="마스터 개념" title="마스터 개념"><span class="filter-emoji" aria-hidden="true">✨</span><span class="filter-label">마스터 개념</span></button>
+          <button class="review-launch-btn" id="openReview" type="button" aria-label="약점 공략" title="약점 공략"><span class="review-launch-label">☄️ 약점</span></button>
         </div>
       </div>
     </section>
@@ -639,7 +732,7 @@ KEYWORD / / —"></textarea>
             <button class="mini-button soft" id="loadCurrentData">데이터 불러오기</button>
             <button class="mini-button" id="fillExample">형식 불러오기</button>
             <button class="mini-button" id="clearSheet">입력창 비우기</button>
-            <button class="mini-button" id="clearSubjectData" style="color:#da2f46">데이터 삭제하기</button><button class="mini-button soft" id="openBridgeManager">🗝</button>
+            <button class="mini-button" id="clearSubjectData" style="color:#da2f46">데이터 삭제하기</button><button class="mini-button soft" id="openBridgeManager">🔑</button>
           </div>
           <div class="action-row" style="align-items:center;margin-top:12px">
             <span class="folder-mode-label">소속 여부</span>
@@ -679,6 +772,60 @@ KEYWORD / / —"></textarea>
 </div>
 
 <!-- SETTINGS MODAL -->
+<div class="modal" id="reviewModal" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle">
+  <div class="modal-card review-modal-card">
+    <div class="modal-head"><div class="modal-title" id="reviewModalTitle">💘 약점 공략 💘</div><button class="close-btn" id="closeReview" type="button" aria-label="복습 닫기">×</button></div>
+    <div class="modal-body review-body">
+      <div class="review-topline review-scoreline"><span id="reviewQueueCount">0 questions left</span><span id="reviewProgress">Result: 100%</span></div>
+      <div class="review-question-box">
+        <div class="review-question-lead"><div class="review-question-prompt" id="reviewQuestionPrompt"></div></div>
+        <div class="review-question-name" id="reviewQuestionName"></div>
+        <div class="review-hints" id="reviewHints" style="display:none"></div>
+      </div>
+      <div class="review-answer-box is-blurred" id="reviewAnswer" role="button" tabindex="0" aria-label="정답 보기" title="🍀 I'm so LUCKY ✨"></div>
+      <div class="helper">𖹭<!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+      </head>
+      <body>
+        
+      </body>
+      </html></div>
+      <div class="review-actions" id="reviewActions" aria-hidden="true">
+        <button class="review-action-btn review-action-correct" id="reviewCorrect" type="button">O</button>
+        <button class="review-action-btn review-action-wrong" id="reviewWrong" type="button">X</button>
+      </div>
+      <div class="review-finish" id="reviewFinish" style="display:none"></div>
+    </div>
+    <div class="review-celebration" id="reviewCelebration" aria-hidden="true"></div>
+  </div>
+</div>
+
+<div class="modal" id="keywordConflictModal" role="dialog" aria-modal="true" aria-labelledby="keywordConflictTitle">
+  <div class="modal-card conflict-modal-card">
+    <div class="modal-head"><div class="modal-title" id="keywordConflictTitle">💫 키워드 충돌 💫</div><button class="close-btn" id="closeKeywordConflict" type="button" aria-label="이 항목 건너뛰기">×</button></div>
+    <div class="modal-body conflict-body">
+      <div class="conflict-intro" id="conflictIntro">이 키워드는 이미 존재해!</div>
+      <div class="conflict-preview conflict-existing-preview" id="conflictExistingPreview"></div>
+      <div class="conflict-preview conflict-incoming-preview" id="conflictIncomingPreview"></div>
+      <div class="conflict-actions">
+        <button class="conflict-action primary" id="conflictMerge" type="button">속성 업데이트</button>
+        <div class="conflict-create-column">
+          <button class="conflict-action soft" id="conflictCreate" type="button" aria-expanded="false" aria-controls="conflictRenamePanel">키워드 만들기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="conflict-rename-panel" id="conflictRenamePanel" style="display:none" role="dialog" aria-label="새 키워드 이름 설정">
+    <div class="field" style="margin:0"><label class="conflict-label" for="conflictExistingName">기존 키워드</label><input class="input conflict-existing-field" id="conflictExistingName" type="text"></div>
+    <div class="field" style="margin:0"><label class="conflict-label" for="conflictNewName">신규 키워드</label><input class="input conflict-new-field" id="conflictNewName" type="text"></div>
+    <button class="conflict-action soft tooltip-create-submit" id="conflictCreateSubmit" type="button">생성하기</button>
+  </div>
+</div>
+
 <div class="modal" id="settingsModal">
   <div class="modal-card">
     <div class="modal-head"><div class="modal-title">⚙️ PERSONALIZE ⚙️</div><button class="close-btn" id="closeSettings">×</button></div>
@@ -693,7 +840,6 @@ KEYWORD / / —"></textarea>
         <div class="helper">분산 반복의 간격이 <b>1</b>인 경우,⠀① ⭐ = 전체 회독 1번 후, 재출제⠀② ⭐⭐ = 전체 회독 2번 후, 재출제⠀③ ⭐⭐⭐ = 전체 회독 4번 후, 재출제</div>
         <label class="check-line"><input type="checkbox" id="setTimeoutFail">타이머 끝나기 전까지 풀지 않으면 오답 처리</label>
       </div>
-
 
       <div class="setting-card">
         <div class="setting-head">마우스 꾸미기</div>
@@ -780,6 +926,8 @@ KEYWORD / / —"></textarea>
   let state = load();
   let timer=null, timerStart=0, remaining=0, paused=false;
   let currentCard=null, confidence=null;
+  let reviewSession=null;
+  let pendingSheetImport=null;
 
   function load(){
     try{
@@ -903,7 +1051,6 @@ KEYWORD / / —"></textarea>
   function isMaster(card){return (card.m.stars||0)>=state.settings.masterStars}
   function cardStatus(card){
     const stars=Math.max(0,Math.floor(Number(card?.m?.stars)||0));
-    // 별이 0개인 카드는 과거의 master 상태/설정값 때문에 마스터 색으로 남지 않게 한다.
     if(stars>0 && isMaster(card))return 'master';
     if(card.m.status==='misconception')return 'purple';
     if(card.m.status==='unknown')return 'red';
@@ -1059,13 +1206,11 @@ KEYWORD / / —"></textarea>
         m.stars=Math.max(0,Math.floor(Number(m.stars)||0))+1;
         m.status=m.stars>=state.settings.masterStars?'master':'known';
       }else{
-        // 별은 0개 아래로 내려가지 않으며, 별이 0개가 되더라도 이번 응답의 원인 태그 색을 유지한다.
         m.stars=Math.max(0,Math.floor(Number(m.stars)||0)-1);
         if(result.confidence==='known'&&!result.correct) m.status='misconception';
         else if(result.confidence==='unsure') m.status='unsure';
         else m.status='unknown';
       }
-      // 0개일 때도 원인별 상태가 명확하게 남도록 한 번 더 보정한다.
       if(m.stars===0 && !(result.confidence==='known'&&result.correct)){
         m.status=result.confidence==='known'?'misconception':result.confidence==='unsure'?'unsure':'unknown';
       }
@@ -1512,7 +1657,6 @@ KEYWORD / / —"></textarea>
     updateTestAvailability();
   }
 
-  // 출제 범위/속성 체크박스의 현재 선택 상태를 기준으로 질문 수를 다시 계산한다.
   function updateTestAvailability(){
     const s=subject();
     if(!s || !$('testAvailability'))return;
@@ -1606,6 +1750,121 @@ KEYWORD / / —"></textarea>
     $('testOrderMode').disabled=disabled||!!subject().cycle;
   }
 
+  function reviewZeroStars(m){return Math.max(0,Math.floor(Number(m?.stars)||0))===0;}
+  function reviewEligible(m){
+    return !!m && reviewZeroStars(m) && String(m.status||'new')!=='new' && Number(m.stars||0)<1;
+  }
+  function buildReviewQueue(){
+    const s=subject();normalizeAll();
+    const folder=state.folder||s.rows[0]?.folder||'';
+    const rows=s.rows.filter(r=>r.folder===folder);
+    const queue=[];
+    const fields=Array.isArray(s.lastFields)&&s.lastFields.length?s.lastFields:selectedFieldsForUI();
+    rows.forEach(r=>{
+      if(r.quizEnabled!==false&&r.keywordMeta&&reviewEligible(r.keywordMeta)){
+        const hints=reverseHintEntries(r,fields,s);
+        if(hints.length)queue.push({type:'keyword',row:r,field:'keyword',m:r.keywordMeta,value:r.name,hints});
+      }
+      if(r.quizEnabled!==false&&s.folderQuiz?.[r.folder]!==false&&String(r.folder||'').trim()&&!isNoQuiz(r.folder)&&r.folderMeta&&reviewEligible(r.folderMeta)){
+        queue.push({type:'folder',row:r,field:s.folderLabel,m:r.folderMeta,value:r.folder});
+      }
+      if(r.quizEnabled===false)return;
+      s.detailFields.forEach(f=>{
+        const m=r.fields?.[f];
+        if(!m||isNoQuiz(m.value)||!reviewEligible(m))return;
+        queue.push({type:'detail',row:r,field:f,m,value:m.value});
+      });
+    });
+    return {queue:shuffleInPlace(queue),folder};
+  }
+  function reviewAccuracy(rs){
+    const attempts=(Number(rs.correct)||0)+(Number(rs.wrong)||0);
+    return attempts?Math.round((Number(rs.correct)||0)/attempts*100):100;
+  }
+  function launchReviewCelebration(){
+    const layer=$('reviewCelebration');if(!layer)return;
+    layer.innerHTML='';layer.classList.add('is-active');
+    const rings=['#f38db0','#b7a2f5','#ffd166'];
+    rings.forEach((color,i)=>{
+      const ring=document.createElement('span');ring.className='review-burst-ring';
+      ring.style.setProperty('--ring-color',color);ring.style.setProperty('--delay',`${i*.12}s`);layer.appendChild(ring);
+    });
+    const confetti=['🎉','🎊','✨','🌟','💖','🎀','🫧','🌸','⭐','💜','🌈','🥳'];
+    for(let i=0;i<42;i++){
+      const p=document.createElement('span');p.className='review-confetti';p.textContent=confetti[i%confetti.length];
+      const angle=(Math.PI*2*i/42)+(Math.random()-.5)*.22;
+      const dist=80+Math.random()*190;
+      p.style.setProperty('--dx',`${Math.cos(angle)*dist}px`);
+      p.style.setProperty('--dy',`${Math.sin(angle)*dist+40}px`);
+      p.style.setProperty('--rot',`${Math.round(Math.random()*600-300)}deg`);
+      p.style.setProperty('--delay',`${Math.random()*.12}s`);
+      layer.appendChild(p);
+    }
+    window.setTimeout(()=>{if(layer.isConnected){layer.classList.remove('is-active');layer.innerHTML='';}},1900);
+  }
+  function openReviewQuiz(){
+    const built=buildReviewQueue();
+    if(!built.queue.length){alert('완벽히 마스터했어!');return;}
+    reviewSession={queue:built.queue,total:built.queue.length,correct:0,wrong:0,folder:built.folder,direction:built.direction,celebrated:false};
+    $('reviewCelebration').classList.remove('is-active');$('reviewCelebration').innerHTML='';
+    $('reviewModal').classList.add('show');
+    $('reviewFinish').style.display='none';$('reviewActions').classList.remove('is-revealed');$('reviewActions').setAttribute('aria-hidden','true');
+    renderReviewQuestion();
+  }
+  function renderReviewQuestion(){
+    const rs=reviewSession;if(!rs)return;
+    $('reviewActions').classList.remove('is-revealed');$('reviewActions').setAttribute('aria-hidden','true');
+    $('reviewProgress').textContent=`${reviewAccuracy(rs)}%`;
+    if(!rs.queue.length){
+      $('reviewQueueCount').textContent='🎉';
+      $('reviewQuestionPrompt').textContent='CONGRATULATIONS';
+      $('reviewQuestionName').textContent='지식 구멍 메우기 성공';
+      $('reviewHints').style.display='none';$('reviewHints').innerHTML='';$('reviewAnswer').style.display='none';
+      if(!rs.celebrated){rs.celebrated=true;launchReviewCelebration();}
+      return;
+    }
+    const c=rs.queue[0],s=subject();
+    $('reviewQueueCount').textContent=`${rs.queue.length}`;
+    $('reviewAnswer').style.display='block';
+    rs.revealed=false;
+    $('reviewAnswer').classList.add('is-blurred');
+    $('reviewAnswer').setAttribute('aria-label','정답 보기');
+    $('reviewAnswer').title='🍀 I\'m so LUCKY ✨';
+    const hints=$('reviewHints');
+    hints.innerHTML='';hints.style.display='none';
+    if(c.type==='keyword'){
+      const attributes=c.hints||reverseHintEntries(c.row,s.lastFields||selectedFieldsForUI(),s);
+      $('reviewQuestionPrompt').textContent='[키워드]?';
+      $('reviewQuestionName').textContent=attributes.map(h=>`${h.value}`).join(', ')||'속성?';
+      $('reviewAnswer').textContent=c.row.name||'키워드 확인하기!';
+    }else{
+      $('reviewQuestionName').textContent=c.row.name;
+      const questionField=c.type==='folder'?s.folderLabel:c.field;
+      $('reviewQuestionPrompt').textContent=`[${questionField}]?`;
+      $('reviewAnswer').textContent=c.value!==''?c.value:'필기노트 확인하기!';
+    }
+    $('reviewFinish').style.display='none';
+  }
+  function revealReviewAnswer(){
+    if(!reviewSession||!reviewSession.queue.length||reviewSession.revealed)return;
+    reviewSession.revealed=true;
+    $('reviewAnswer').classList.remove('is-blurred');
+    $('reviewAnswer').setAttribute('aria-label','정답');
+    $('reviewAnswer').title='🍀 I\'m so SMART ✨';
+    $('reviewActions').classList.add('is-revealed');$('reviewActions').setAttribute('aria-hidden','false');
+  }
+  function judgeReview(correct){
+    if(!reviewSession||!reviewSession.queue.length||!reviewSession.revealed)return;
+    const current=reviewSession.queue.shift();
+    if(correct)reviewSession.correct++;
+    else{reviewSession.wrong++;reviewSession.queue.push(current);}
+    renderReviewQuestion();
+  }
+  function closeReviewQuiz(){
+    $('reviewModal').classList.remove('show');
+    reviewSession=null;
+  }
+
   function renderWeak(){
     const s=subject();$('weakFolderLabel').textContent=s.folderLabel||'챕터';
     const folders=[...new Set(s.rows.map(r=>r.folder||'0'))];if(!state.folder||!folders.includes(state.folder))state.folder=folders[0]||'';
@@ -1635,7 +1894,7 @@ KEYWORD / / —"></textarea>
   }
   function filterMatch(st,filter){return filter==='all'||(filter==='red'&&st==='red')||(filter==='blue'&&st==='blue')||(filter==='purple'&&st==='purple')||(filter==='master'&&st==='master')}
   function starMarks(count){return '⭐'.repeat(Math.max(0,Math.floor(Number(count)||0)))}
-  function tag(label,st,m){const marks=starMarks(m.stars),stars=marks?` · ${marks}`:'';if(st==='red')return `<span class="detail-tag red">${esc(label)} 🧣${stars}</span>`;if(st==='blue')return `<span class="detail-tag blue">${esc(label)} 🫧${stars}</span>`;if(st==='purple')return `<span class="detail-tag purple">${esc(label)} 💎${stars}</span>`;if(st==='master')return `<span class="detail-tag gold">${esc(label)} ✨${marks?` · ${marks}`:''}${(m.nextCycle||0)>subject().cycleNo?`⠀(RE: ${m.nextCycle}번째 회독)`:''}</span>`;if(st==='green')return `<span class="detail-tag green">${esc(label)} 🌿${stars}</span>`;return `<span class="detail-tag gray">${esc(label)} ☁️${stars}</span>`}
+  function tag(label,st,m){const marks=starMarks(m.stars),stars=marks?` · ${marks}`:'';if(st==='red')return `<span class="detail-tag red">${esc(label)} 🧣${stars}</span>`;if(st==='blue')return `<span class="detail-tag blue">${esc(label)} 🫧${stars}</span>`;if(st==='purple')return `<span class="detail-tag purple">${esc(label)} 💎${stars}</span>`;if(st==='master')return `<span class="detail-tag gold">${esc(label)} ✨${marks?` · ${marks}`:''}${(m.nextCycle||0)>subject().cycleNo?`⠀(RE: ${m.nextCycle})`:''}</span>`;if(st==='green')return `<span class="detail-tag green">${esc(label)} 🌿${stars}</span>`;return `<span class="detail-tag gray">${esc(label)} ☁️${stars}</span>`}
 
   function renderData(){
     const s=subject();$('subjectNameInput').value=s.name;$('folderFieldInput').value=s.folderLabel;$('nameFieldInput').value=s.nameLabel;$('detailFieldsInput').value=s.detailFields.join(', ');
@@ -1722,29 +1981,140 @@ KEYWORD / / —"></textarea>
     const sameName=s.rows.map((r,i)=>r.name===a.name?i:-1).filter(i=>i>=0);
     return sameName.length===1?sameName[0]:-1;
   }
-  function importSheet(){
-    const text=$('sheetInput').value.trim();if(!text){alert('항목을 채워줘!');return}
-    const s=subject();const actions=parseSheet(text);
-    actions.forEach(a=>{
-      const idx=locateRow(s,a);
-      if(a.type==='delete'){if(idx>=0){const rid=s.rows[idx].id;s.rows.splice(idx,1);removeRowFromCycle(rid)}return}
-      if(idx<0){
-        const r={id:uid(),folder:a.folder,name:a.name,fields:{},folderMeta:meta(a.folder),quizEnabled:a.bridge!==true};
-        s.detailFields.forEach((f,i)=>r.fields[f]=meta(a.cells[i]??''));s.rows.push(r);
-      }else{
-        const r=s.rows[idx];
-        r.folder=a.folder || r.folder;
-        r.name=a.name || r.name;
-        if(a.bridge)r.quizEnabled=false;
-        r.folderMeta = meta(r.folder,r.folderMeta?.status,r.folderMeta?.stars);
-        s.detailFields.forEach((f,i)=>{
-          if(a.cells[i]===undefined||a.cells[i]==='')return;const value=a.cells[i]==='~'?'':a.cells[i];
-          const old=r.fields[f]||meta('');
-          if(old.value!==value)r.fields[f]=meta(value,old.status,old.stars);
-        });
-      }
+  function sameKeywordRows(s,a){
+    const matches=s.rows.filter(r=>r.name===a.name);
+    if(!matches.length)return [];
+    return matches.slice().sort((x,y)=>Number(y.folder===a.folder)-Number(x.folder===a.folder));
+  }
+  function rowPreview(s,r,displayName=r.name){
+    const lines=[`챕터: ${r.folder||'—'}`,`키워드: ${displayName}`];
+    s.detailFields.forEach(f=>lines.push(`${f}: ${r.fields?.[f]?.value??''}`));
+    return lines.join('\n');
+  }
+  function incomingPreview(s,a,name){
+    const lines=[`챕터: ${a.folder||'—'}`,`키워드: ${name||a.name}`];
+    s.detailFields.forEach((f,i)=>{
+      const value=a.cells[i];
+      lines.push(`${f}: ${value===undefined?'(입력 없음 · 기존 내용 유지)':value===''?'(빈칸 · 기존 내용 유지)':value==='~'?'(비우기)':value}`);
     });
+    if(a.bridge)lines.push('퀴즈: 제외');
+    return lines.join('\n');
+  }
+  function updateConflictPreview(){
+    const imp=pendingSheetImport;if(!imp)return;
+    const s=imp.subject,a=imp.action;
+    const r=s.rows.find(row=>row.id===imp.conflictRowId);
+    const editedExisting=$('conflictExistingName').value.trim();
+    const editedNew=$('conflictNewName').value.trim();
+    $('conflictExistingPreview').textContent=r?`기존 항목\n${rowPreview(s,r,editedExisting||r.name)}`:'기존 항목을 찾을 수 없어.';
+    $('conflictIncomingPreview').textContent=`새로 입력한 내용\n${incomingPreview(s,a,editedNew||a.name)}`;
+  }
+  function openKeywordConflict(s,a,candidates,done){
+    const preferred=candidates.find(r=>r.folder===a.folder)||candidates[0];
+    pendingSheetImport.action=a;pendingSheetImport.candidates=candidates;pendingSheetImport.conflictRowId=preferred?.id||null;pendingSheetImport.done=done;
+    $('conflictIntro').textContent=`❝${a.name}❞ 키워드는 이미 존재해!`;
+    $('conflictExistingName').value=preferred?.name||a.name;
+    $('conflictNewName').value=a.name;
+    $('conflictRenamePanel').style.display='none';
+    $('conflictCreate').textContent='키워드 만들기';
+    $('conflictCreate').setAttribute('aria-expanded','false');
+    updateConflictPreview();
+    $('keywordConflictModal').classList.add('show');
+  }
+  function closeKeywordConflict(){ $('keywordConflictModal').classList.remove('show');hideKeywordRenameTooltip(); }
+  function finishKeywordConflict(choice){
+    const imp=pendingSheetImport;if(!imp)return;
+    const s=imp.subject,a=imp.action;
+    const row=s.rows.find(r=>r.id===imp.conflictRowId);
+    const existingName=$('conflictExistingName').value.trim();
+    const newName=$('conflictNewName').value.trim();
+    const nameAlreadyUsed=(name,excludeId='')=>s.rows.some(r=>r.id!==excludeId&&r.name===name);
+    if(choice==='merge'){
+      if(!row){alert('키워드를 찾을 수 없어.');return;}
+      applyIncomingToRow(s,row,a);
+    }else if(choice==='create'){
+      if(!row){alert('키워드를 찾을 수 없어.');return;}
+      if(!existingName){alert('키워드를 찾을 수 없어.');$('conflictExistingName').focus();return;}
+      if(nameAlreadyUsed(existingName,row.id)){alert(`❝${existingName}❞ 키워드는 이미 존재해!`);$('conflictExistingName').focus();return;}
+      if(!newName){alert('겹치지 않는 키워드로 등록해줘.');$('conflictNewName').focus();return;}
+      if(newName===a.name || newName===existingName || nameAlreadyUsed(newName,row.id)){
+        alert('입력한 이름이 기존 등록된 키워드와 겹쳐.');$('conflictNewName').focus();return;
+      }
+      row.name=existingName;
+      if(row.keywordMeta)row.keywordMeta.value=existingName;
+      createImportedRow(s,a,newName);
+    }else{
+      //
+    }
+    const done=imp.done;
+    delete imp.action;delete imp.candidates;delete imp.conflictRowId;delete imp.done;
+    closeKeywordConflict();
+    done();
+  }
+  function createImportedRow(s,a,name=a.name){
+    const r={id:uid(),folder:a.folder,name,fields:{},folderMeta:meta(a.folder),quizEnabled:a.bridge!==true};
+    s.detailFields.forEach((f,i)=>r.fields[f]=meta(a.cells[i]??''));
+    s.rows.push(r);
+    return r;
+  }
+  function applyIncomingToRow(s,r,a){
+    r.folder=a.folder || r.folder;
+    if(a.bridge)r.quizEnabled=false;
+    r.folderMeta=meta(r.folder,r.folderMeta?.status,r.folderMeta?.stars);
+    s.detailFields.forEach((f,i)=>{
+      if(a.cells[i]===undefined||a.cells[i]==='')return;
+      const value=a.cells[i]==='~'?'':a.cells[i];
+      const old=r.fields[f]||meta('');
+      if(old.value!==value)r.fields[f]=meta(value,old.status,old.stars);
+    });
+  }
+  function finishSheetImport(){
+    const imp=pendingSheetImport;
+    if(imp)return;
     save();renderAll();setPage('data');
+  }
+  function incomingWouldChangeRow(s,r,a){
+    if((a.folder||r.folder)!==r.folder)return true;
+    if(a.bridge===true&&r.quizEnabled!==false)return true;
+    for(let i=0;i<s.detailFields.length;i++){
+      const f=s.detailFields[i],incoming=a.cells?.[i];
+      if(incoming===undefined||incoming==='')continue;
+      const next=incoming==='~'?'':String(incoming);
+      const existing=String(r.fields?.[f]?.value??'');
+      if(existing!==next)return true;
+    }
+    return false;
+  }
+  function processSheetImportActions(){
+    const imp=pendingSheetImport;
+    if(!imp||imp.waitingForConflict)return;
+    const {subject:s,actions}=imp;
+    while(imp.index<actions.length){
+      const a=actions[imp.index++];
+      if(a.type==='delete'){
+        const idx=locateRow(s,a);
+        if(idx>=0){const rid=s.rows[idx].id;s.rows.splice(idx,1);removeRowFromCycle(rid);}
+        continue;
+      }
+      const candidates=sameKeywordRows(s,a);
+      if(!candidates.length){createImportedRow(s,a);continue;}
+      const preferred=candidates.find(r=>r.folder===a.folder)||candidates[0];
+      if(preferred&&!incomingWouldChangeRow(s,preferred,a))continue;
+      imp.waitingForConflict=true;
+      openKeywordConflict(s,a,candidates,()=>{
+        if(!pendingSheetImport)return;
+        pendingSheetImport.waitingForConflict=false;
+        processSheetImportActions();
+      });
+      return;
+    }
+    pendingSheetImport=null;
+    save();renderAll();setPage('data');
+  }
+  function importSheet(){
+    const text=$('sheetInput').value.trim();if(!text){alert('항목을 채워줘!');return;}
+    pendingSheetImport={subject:subject(),actions:parseSheet(text),index:0,waitingForConflict:false};
+    processSheetImportActions();
   }
 
   function example(){const a=subject().detailFields;const line=(n,...v)=>[n,...a.map((_,i)=>v[i]||'')].join(' / ');$('sheetInput').value=`# 챕터1\n${line('키워드1','속성1','—')}\n${line('키워드2','—','속성2')}\n\n# 챕터2\n${line('키워드3','','')}`}
@@ -1886,7 +2256,7 @@ KEYWORD / / —"></textarea>
       closeSettings();
       renderAll();
 
-      alert('데이터 불러오기 성공 ✅');}catch{alert('데이터 불러오기 실패 ❎');}finally{if(input) input.value='';}
+      alert('데이터 불러오기 성공✅');}catch{alert('데이터 불러오기 실패❎');}finally{if(input) input.value='';}
   }
   function resetProgress(){if(!confirm('🧨 학습 기록만 지울게!'))return;const s=subject();s.rows.forEach(r=>{r.folderMeta=meta(r.folder);r.keywordMeta=meta(r.name);s.detailFields.forEach(f=>{r.fields[f]=meta(r.fields[f]?.value||'')})});s.testNo=0;s.cycleNo=1;s.totalAnswered=0;s.cycle=null;s.activeTest=null;save();closeSettings();renderAll()}
   function fullReset(){if(!confirm('💥 초기 상태로 되돌려 놓을게!'))return;localStorage.removeItem(STORAGE_KEY);state=fresh();save();closeSettings();currentCard=null;confidence=null;paused=false;stopTimer();renderAll();setPage('main')}
@@ -1899,12 +2269,43 @@ KEYWORD / / —"></textarea>
 
   // UI events
   document.querySelectorAll('.page-tab').forEach(b=>b.onclick=()=>setPage(b.dataset.page));
-  $('settingsButton').onclick=openSettings;$('closeSettings').onclick=closeSettings;$('settingsModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeSettings()});$('bridgeManager').addEventListener('click',e=>{if(e.target===e.currentTarget)closeBridgeManager()});
+  $('settingsButton').onclick=openSettings;$('closeSettings').onclick=closeSettings;$('openReview').onclick=openReviewQuiz;$('closeReview').onclick=closeReviewQuiz;$('reviewWrong').onclick=()=>judgeReview(false);$('reviewCorrect').onclick=()=>judgeReview(true);$('reviewAnswer').onclick=revealReviewAnswer;$('reviewAnswer').onkeydown=e=>{if(e.key==='Enter'&&$('reviewAnswer').classList.contains('is-blurred')){e.preventDefault();revealReviewAnswer()}};$('reviewModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeReviewQuiz()});$('settingsModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeSettings()});$('bridgeManager').addEventListener('click',e=>{if(e.target===e.currentTarget)closeBridgeManager()});
   $('statsModeToggle').onclick=()=>{state.statsMode=state.statsMode==='keyword'?'attributes':'keyword';save();renderMain()};
   $('cheerImage').parentElement.onclick=cheerClick;
   $('startQuiz').onclick=startSession;$('quizDirectionSelect').onchange=e=>{if(subject().activeTest){e.target.value=subject().activeTest.quizDirection||state.quizDirection||'keyword-to-detail';return}state.quizDirection=e.target.value;save();renderTestLanding()};$('pauseButton').onclick=togglePause;$('resumeButton').onclick=togglePause;$('resumeExitButton').onclick=saveAndExitQuiz;$('correctButton').onclick=()=>recordResult(true);$('wrongButton').onclick=()=>recordResult(false);$('confirmButton').onclick=confirmWeak;
   document.querySelectorAll('[data-confidence]').forEach(b=>b.onclick=()=>chooseConfidence(b.dataset.confidence));
   document.querySelectorAll('.filter-btn').forEach(b=>b.onclick=()=>{state.filter=b.dataset.filter;save();renderWeak()});
+  function positionKeywordRenameTooltip(){
+    const panel=$('conflictRenamePanel'),button=$('conflictCreate');
+    if(!panel||panel.style.display==='none'||!$('keywordConflictModal').classList.contains('show'))return;
+    const rect=button.getBoundingClientRect(),width=panel.getBoundingClientRect().width||290,gap=10,pad=12;
+    let left=rect.right+gap,top=rect.top;
+    if(left+width>window.innerWidth-pad)left=rect.left-width-gap;
+    if(left<pad){left=Math.max(pad,window.innerWidth-width-pad);top=rect.bottom+gap;}
+    const height=panel.getBoundingClientRect().height||250;
+    left=Math.max(pad,Math.min(left,window.innerWidth-width-pad));
+    top=Math.max(pad,Math.min(top,window.innerHeight-height-pad));
+    panel.style.left=`${left}px`;panel.style.top=`${top}px`;
+    panel.classList.toggle('tooltip-below',top>rect.bottom);
+  }
+  function hideKeywordRenameTooltip(){
+    const panel=$('conflictRenamePanel');if(panel)panel.style.display='none';
+    const button=$('conflictCreate');if(button)button.setAttribute('aria-expanded','false');
+  }
+  function toggleKeywordRenameTooltip(){
+    const panel=$('conflictRenamePanel'),button=$('conflictCreate');
+    if(panel.style.display!=='none'){hideKeywordRenameTooltip();return;}
+    panel.style.display='grid';button.setAttribute('aria-expanded','true');
+    positionKeywordRenameTooltip();updateConflictPreview();$('conflictExistingName').focus();
+  }
+  $('conflictExistingName').oninput=updateConflictPreview;$('conflictNewName').oninput=updateConflictPreview;
+  $('conflictMerge').onclick=()=>finishKeywordConflict('merge');
+  $('conflictCreate').onclick=toggleKeywordRenameTooltip;
+  $('conflictCreateSubmit').onclick=()=>finishKeywordConflict('create');
+  $('closeKeywordConflict').onclick=()=>finishKeywordConflict('skip');
+  $('keywordConflictModal').addEventListener('click',e=>{if(e.target===e.currentTarget)finishKeywordConflict('skip')});
+  window.addEventListener('resize',positionKeywordRenameTooltip);
+  window.addEventListener('scroll',positionKeywordRenameTooltip,true);
   $('saveStructure').onclick=saveStructure;$('newSubject').onclick=addSubject;$('deleteSubjectData').onclick=deleteSubject;$('deleteSubjectSetting').onclick=deleteSubject;$('importSheet').onclick=importSheet;$('loadCurrentData').onclick=loadCurrentData;$('clearSubjectData').onclick=clearSubjectData;$('openBridgeManager').onclick=openBridgeManager;$('closeBridgeManager').onclick=closeBridgeManager;$('bridgeSaveButton').onclick=saveBridge;$('bridgeResetButton').onclick=resetBridgeForm;$('bridgeTargetFolder').onchange=updateBridgeTargetItems;$('bridgeTargetTypeFolder').onchange=updateBridgeFormMode;$('bridgeTargetTypeItem').onchange=updateBridgeFormMode;$('folderModeTest').onclick=()=>setFolderQuizMode('test');$('folderModeReference').onclick=()=>setFolderQuizMode('reference');$('folderModeSelect').onchange=e=>{state.folder=e.target.value;save();renderData();renderWeak()};$('fillExample').onclick=example;$('clearSheet').onclick=()=>{$('sheetInput').value=''};
   $('stickerToggle').onclick=()=>{$('stickerPicker').classList.toggle('open')};
   $('addStickerEmoji').onclick=addEmojiSticker;
@@ -1941,6 +2342,21 @@ KEYWORD / / —"></textarea>
 
   document.addEventListener('keydown',e=>{
     if(e.target.matches('input,textarea,select'))return;
+    if($('reviewModal').classList.contains('show')){
+      if(e.key==='Escape'){closeReviewQuiz();return;}
+      if(e.code==='Space'){
+        e.preventDefault();
+        if(reviewSession?.queue.length&&!reviewSession.revealed)revealReviewAnswer();
+        return;
+      }
+      if((e.key==='ArrowUp'||e.key==='ArrowDown')&&reviewSession?.queue.length&&reviewSession.revealed){
+        e.preventDefault();
+        if(!e.repeat)judgeReview(e.key==='ArrowUp');
+        return;
+      }
+      return;
+    }
+    if($('keywordConflictModal').classList.contains('show')){if(e.key==='Escape')finishKeywordConflict('skip');return}
     if($('settingsModal').classList.contains('show')){if(e.key==='Escape')closeSettings();return}
     if($('bridgeManager').classList.contains('show'))return;
     if(state.page!=='test')return;
