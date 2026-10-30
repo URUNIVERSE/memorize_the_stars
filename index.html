@@ -18,7 +18,6 @@
   --ui-font: 'starry_emoji', 'starry_english', 'starry_ui';
   --quiz-font: 'starry_emoji', 'starry_english', 'starry_quiz', 'starry_hanja';
   --sticker-font: 'starry_ui';
-  --bg:#fff5f8;
   --paper:#fffdfd;
   --paper-2:#ffebf3;
   --ink:#71505b;
@@ -34,10 +33,8 @@
   --blue-soft:#d6e9ff;
   --red:#ff8093;
   --red-soft:#ffe5ea;
-  --gold:#ffca61;
   --gold-soft:#fff3d1;
   --shadow:0 14px 36px rgba(220,100,150,.15);
-  --radius:25px;
 }
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;height:100%;min-height:0;color:var(--ink);font-family:var(--ui-font);overflow:hidden}
@@ -190,7 +187,6 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .session-options{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;font-size:11px;flex-wrap:wrap}.session-options label{display:flex;align-items:center;gap:7px}.session-options input{width:86px;border:1px solid var(--line);border-radius:9px;padding:6px 8px;background:#fff}.availability{flex:1 1 170px;margin-top:0;font-size:10px;color:#a85371;text-align:right;line-height:1.5}
 
 :root{
-  --dreamy-rose-shine:#ffb9c8;
   --dreamy-rose-bright:var(--pink);
   --dreamy-rose-sparkle:var(--pink-deep);
 }
@@ -283,41 +279,32 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
 .review-launch-btn{width:100%;border:1px solid #f4a0bd;background:linear-gradient(135deg,#fff0f6,#f1eaff);color:#a53f6b;border-radius:11px;padding:9px 6px;font-size:11px;font-weight:950;line-height:1.35;box-shadow:0 3px 8px rgba(220,100,140,.1);flex:0 0 auto}
 .review-launch-btn:hover{border-color:var(--pink);transform:translateY(-1px)}
 .filter-rail .review-launch-btn{margin-top:auto}
-.review-answer-box{cursor:pointer;transition:filter .18s ease,transform .18s ease}
+.review-answer-box{cursor:pointer;transition:filter .18s ease,transform .18s ease;background:#f4efff;border:1.5px dashed #c9b8f7;border-radius:16px;padding:16px 14px;font-size:20px;font-weight:950;line-height:1.55;overflow-wrap:anywhere;white-space:pre-line}
 .review-answer-box.is-blurred{filter:blur(8px);user-select:none;-webkit-user-select:none}
 .review-answer-box.is-blurred:hover{transform:scale(1.01)}
-.review-modal-card{width:min(560px,100%)}
-.review-body{gap:12px;text-align:center}
+.review-modal-card{width:min(560px,100%);position:relative}
+.review-body{gap:12px;text-align:center;position:relative;z-index:1}
 .review-topline{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--muted);font-size:11px;font-weight:850;text-align:left}
-.review-question-box{background:#fff5f8;border:1px solid var(--line);border-radius:17px;padding:18px 14px}
-.review-question-name{font-size:24px;font-weight:950;line-height:1.4;overflow-wrap:anywhere}
-.review-question-prompt{margin-top:8px;font-size:14px;font-weight:900;color:#a54b70;line-height:1.5;overflow-wrap:anywhere}
-.review-hints{display:grid;gap:6px;margin-top:10px;text-align:left}
-.review-hint{background:#fff;border:1px solid #f3d2e0;border-radius:10px;padding:8px 10px;font-size:12px;line-height:1.5}
-.review-hint b{display:block;color:#a54b70;font-size:10px;margin-bottom:2px}
-.review-answer-box{background:#f4efff;border:1.5px dashed #c9b8f7;border-radius:16px;padding:16px 14px;font-size:20px;font-weight:950;line-height:1.55;overflow-wrap:anywhere;white-space:pre-line}
-.review-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.review-question-box{background:linear-gradient(145deg,#fff0f6,#fff7fb 58%,#f7f0ff)!important;border:1px solid #f2cada;border-radius:19px;padding:17px 15px;text-align:center;min-height:0;display:block;box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 5px 15px rgba(194,117,155,.08)}
+.review-question-name{display:block!important;font-size:30px;font-weight:1000;line-height:1.4;overflow-wrap:anywhere;color:#533b55;margin:10px 0 0;letter-spacing:-.025em}
+.review-question-prompt{display:block!important;margin:0!important;font-size:16px!important;font-weight:900!important;color:#a54b70!important;line-height:1.5;overflow-wrap:anywhere;flex:0 1 auto}
+.review-actions{display:grid!important;grid-template-columns:1fr 1fr;gap:9px;min-height:50px;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease}
 .review-action-btn{border:0;border-radius:13px;padding:13px 8px;font-size:13px;font-weight:950;min-height:48px}
 .review-action-wrong{background:#ffe5eb;color:#b52c50}
 .review-action-correct{background:#dff7eb;color:#23714f}
-.review-finish{background:#f4efff;border-radius:14px;padding:18px;font-weight:900;line-height:1.7}
 .conflict-modal-card{width:min(680px,100%)}
 .conflict-body{gap:11px}
 .conflict-intro{font-size:12px;line-height:1.65;color:var(--muted)}
 .conflict-preview{border:1px solid var(--line);border-radius:12px;padding:10px;font-size:11px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}
 .conflict-existing-preview{background:#fff0f6;border-color:#f0a4c2}
 .conflict-incoming-preview{background:#f4efff;border-color:#c9b8f7}
-.conflict-fields{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 .conflict-label{display:block;font-size:10px;font-weight:900;color:var(--muted);margin-bottom:5px}
 .conflict-existing-field{background:#fff5f9!important;border-color:#efa4c2!important}
 .conflict-new-field{background:#f8f4ff!important;border-color:#c9b8f7!important}
-.conflict-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.conflict-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:start}
 .conflict-action{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px;font-size:11px;font-weight:950;line-height:1.5;min-height:48px}
 .conflict-action.primary{background:var(--pink);color:white;border-color:var(--pink)}
 .conflict-action.soft{background:var(--lav-soft);color:#5441a8;border-color:#cbbdf8}
-.conflict-action.subtle{background:#fff7fa}
-.conflict-action.danger{background:#fff0f2;color:#aa3348;border-color:#f0a7b4}
-@media(max-width:620px){.conflict-fields{grid-template-columns:1fr}.review-question-name{font-size:21px}.review-answer-box{font-size:18px}.conflict-actions{grid-template-columns:1fr}}
 
 /* Stickers */
 .sticker-library{display:flex;gap:7px;flex-wrap:wrap}.library-sticker{width:48px;height:48px;border:1px solid var(--line);background:#fff;border-radius:15px;box-shadow:0 2px 8px rgba(100,40,70,.1);display:grid;place-items:center;font-size:24px;overflow:hidden}
@@ -513,7 +500,6 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
   .filter-rail .review-launch-btn:hover{transform:translateY(-2px) scale(1.03)}
 }
 
-.conflict-actions{align-items:start}
 .conflict-create-column{display:flex;flex-direction:column;gap:8px;min-width:0}
 .conflict-rename-panel{
   position:fixed;z-index:140;width:290px;max-width:calc(100vw - 24px);max-height:calc(100vh - 24px);overflow:auto;
@@ -521,26 +507,14 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
   background:linear-gradient(145deg,#fffaff,#f5efff);box-shadow:0 14px 38px rgba(91,65,145,.25);box-sizing:border-box;
 }
 .conflict-rename-panel::before{content:"";position:absolute;left:-8px;top:18px;width:14px;height:14px;background:#fffaff;border-left:1px solid #cbbdf8;border-bottom:1px solid #cbbdf8;transform:rotate(45deg)}
-.tooltip-title{font-size:12px;font-weight:950;color:#7051b2;padding-bottom:3px}
 .conflict-rename-panel .input{width:100%;min-width:0;box-sizing:border-box}
 .tooltip-create-submit{width:100%;background:#e9ddff!important;border-color:#c7b2f7!important;color:#6043a5!important}
-.review-topline{justify-content:space-between}
 .review-scoreline{justify-content:space-between;align-items:center;padding:0 2px;min-height:34px}
 .review-scoreline #reviewQueueCount,.review-scoreline #reviewProgress{display:inline-flex;align-items:center;justify-content:center;min-height:30px;box-sizing:border-box;padding:6px 11px;border-radius:999px;font-size:12px;font-weight:950;font-variant-numeric:tabular-nums;white-space:nowrap}
 .review-scoreline #reviewQueueCount{color:#a54b70;background:#fff0f6;border:1px solid #f2cadb}
 .review-scoreline #reviewProgress{margin-left:auto;background:#f2eaff;border:1px solid #dacaf7;color:#684ca8}
-.review-question-box{background:linear-gradient(145deg,#fff0f6,#fff7fb 58%,#f7f0ff)!important;border:1px solid #f2cada;border-radius:19px;padding:17px 15px;text-align:center;min-height:0;display:block;box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 5px 15px rgba(194,117,155,.08)}
 .review-question-lead{display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;background:transparent;border:0;border-radius:0;padding:0;box-shadow:none;min-height:0;box-sizing:border-box}
-.review-question-moon{display:inline-grid;place-items:center;flex:0 0 auto;width:auto;height:auto;border-radius:0;background:transparent;font-size:22px;box-shadow:none}
-.review-question-prompt{display:block!important;margin:0!important;font-size:16px!important;font-weight:900!important;color:#a54b70!important;line-height:1.5;overflow-wrap:anywhere;flex:0 1 auto}
-.review-question-name{display:block!important;font-size:30px;font-weight:1000;line-height:1.4;overflow-wrap:anywhere;color:#533b55;margin:10px 0 0;letter-spacing:-.025em}
-.review-hints{display:grid;gap:7px;margin-top:12px!important;text-align:left}
-.review-hint{background:#fff;border:1px solid #f3d2e0;border-radius:11px;padding:9px 11px;font-size:12px;line-height:1.5;box-shadow:0 2px 5px rgba(179,104,143,.04)}
-.review-hint b{display:block;color:#a54b70!important;font-size:10px;margin-bottom:2px}
-.review-actions{display:grid!important;grid-template-columns:1fr 1fr;gap:9px;min-height:50px;visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease;}
 .review-actions.is-revealed{visibility:visible;opacity:1;pointer-events:auto}
-.review-modal-card{position:relative}
-.review-body{position:relative;z-index:1}
 .review-celebration{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:5;display:none}
 .review-celebration.is-active{display:block}
 .review-confetti{position:absolute;left:50%;top:46%;display:block;font-size:23px;line-height:1;opacity:0;animation:reviewConfettiBurst 1.45s cubic-bezier(.12,.65,.2,1) forwards;animation-delay:var(--delay,0s);filter:drop-shadow(0 2px 2px rgba(110,60,100,.15));will-change:transform,opacity}
@@ -550,11 +524,9 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
 @media(max-width:620px){
   .conflict-actions{grid-template-columns:1fr}
   .review-question-name{font-size:25px}
-  .review-question-prompt{font-size:14px!important}
   .review-answer-box{font-size:18px}
   .review-question-box{padding:15px 12px}
   .review-question-prompt{font-size:13px!important}
-  .review-actions{grid-template-columns:1fr 1fr}
 }
 
 </style>
@@ -622,7 +594,7 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
     <section class="page" id="page-test">
       <div class="test-landing" id="testLanding">
         <div class="test-landing-inner">
-          <div class="round-label">쪽지 시험 <b id="roundNumber">#1</b> · 전체 회독 <b id="cycleNumber">#1</b></div>
+          <div class="round-label">쪽지 시험 <b id="roundNumber">#1</b> · 선택 챕터 <b id="cycleNumber">#1</b></div>
           <div class="test-logo">⋅ ˚₊‧ ୨୧ ‧₊˚ ⋅</div>
           <div class="resume-banner" id="resumeBanner" style="display:none"></div>
           <div class="test-config-card">
@@ -780,25 +752,13 @@ KEYWORD / / —"></textarea>
       <div class="review-question-box">
         <div class="review-question-lead"><div class="review-question-prompt" id="reviewQuestionPrompt"></div></div>
         <div class="review-question-name" id="reviewQuestionName"></div>
-        <div class="review-hints" id="reviewHints" style="display:none"></div>
       </div>
       <div class="review-answer-box is-blurred" id="reviewAnswer" role="button" tabindex="0" aria-label="정답 보기" title="🍀 I'm so LUCKY ✨"></div>
-      <div class="helper">𖹭<!DOCTYPE html>
-      <html lang="en">
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-      </head>
-      <body>
-        
-      </body>
-      </html></div>
+      <div class="helper">𖹭</div>
       <div class="review-actions" id="reviewActions" aria-hidden="true">
         <button class="review-action-btn review-action-correct" id="reviewCorrect" type="button">O</button>
         <button class="review-action-btn review-action-wrong" id="reviewWrong" type="button">X</button>
       </div>
-      <div class="review-finish" id="reviewFinish" style="display:none"></div>
     </div>
     <div class="review-celebration" id="reviewCelebration" aria-hidden="true"></div>
   </div>
@@ -837,7 +797,7 @@ KEYWORD / / —"></textarea>
           <div class="field"><label>마스터하기 위해 요구되는 ⭐</label><input class="input" id="setMasterStars" type="number" min="1" max="10"></div>
         <div class="field"><label>분산 반복 간격</label><input class="input" id="setBaseGap" type="number" min="1" max="50"></div>
         </div>
-        <div class="helper">분산 반복의 간격이 <b>1</b>인 경우,⠀① ⭐ = 전체 회독 1번 후, 재출제⠀② ⭐⭐ = 전체 회독 2번 후, 재출제⠀③ ⭐⭐⭐ = 전체 회독 4번 후, 재출제</div>
+        <div class="helper">기본 간격이 <b>1</b>인 경우, 각 챕터에서⠀① ⭐ = 1회독 후⠀② ⭐⭐ = 2회독 후⠀③ ⭐⭐⭐ = 4회독 후 재출제돼. 이후 별이 더 늘면 간격도 2배씩 증가해. 선택한 챕터의 회독을 완료할 때마다 해당 챕터의 대기 횟수만 줄어들어.</div>
         <label class="check-line"><input type="checkbox" id="setTimeoutFail">타이머 끝나기 전까지 풀지 않으면 오답 처리</label>
       </div>
 
@@ -918,7 +878,7 @@ KEYWORD / / —"></textarea>
   function makeSubject(name,folderLabel,nameLabel,detailFields){
     return {
       id:uid(),name,folderLabel,nameLabel,detailFields:[...detailFields],
-      testNo:0,cycleNo:1,totalAnswered:0,lastLimit:DEFAULT_TEST_LIMIT,lastFields:null,lastFolders:null,lastOrderMode:'random',lastSequential:false,
+      testNo:0,cycleNo:1,folderCycles:{},totalAnswered:0,lastLimit:DEFAULT_TEST_LIMIT,lastFields:null,lastFolders:null,lastOrderMode:'random',lastSequential:false,
       rows:[],folderQuiz:{},bridges:[],cycle:null,activeTest:null
     };
   }
@@ -982,7 +942,15 @@ KEYWORD / / —"></textarea>
       sub.activeTest=sub.activeTest&&typeof sub.activeTest==='object'?sub.activeTest:null;
       if(sub.activeTest && typeof sub.activeTest.waitingForResume!=='boolean')sub.activeTest.waitingForResume=true;
       sub.rows.forEach(row=>normalizeRow(sub,row));
+      // 이전 버전은 모든 챕터가 공통 cycleNo를 사용했으므로, 업그레이드 시
+      // 각 챕터를 그 시점의 전체 회독 번호에서 시작시켜 기존 대기 간격을 보존한다.
+      const hadFolderCycles=!!(sub.folderCycles&&typeof sub.folderCycles==='object'&&!Array.isArray(sub.folderCycles));
+      sub.folderCycles=hadFolderCycles?sub.folderCycles:{};
       const all=[...new Set(sub.rows.map(row=>row.folder).filter(Boolean))];
+      all.forEach(folder=>{
+        const saved=Number(sub.folderCycles[folder]);
+        sub.folderCycles[folder]=Number.isFinite(saved)&&saved>=1?Math.floor(saved):(hadFolderCycles?1:sub.cycleNo);
+      });
       const testable=all.filter(folder=>sub.folderQuiz[folder]!==false);
       const initial=testable.length?testable:all;
       if(!Array.isArray(sub.lastFolders)||!sub.lastFolders.length)sub.lastFolders=initial;
@@ -990,6 +958,14 @@ KEYWORD / / —"></textarea>
         sub.cycle.folders=Array.isArray(sub.cycle.folders)&&sub.cycle.folders.length?sub.cycle.folders:initial;
         sub.cycle.orderMode=['random','folder'].includes(sub.cycle.orderMode)?sub.cycle.orderMode:'random';
         sub.cycle.sequential=!!sub.cycle.sequential;
+        sub.cycle.folderNumbers=sub.cycle.folderNumbers&&typeof sub.cycle.folderNumbers==='object'?sub.cycle.folderNumbers:{};
+        sub.cycle.folders.forEach(folder=>{
+          const n=Number(sub.cycle.folderNumbers[folder]);
+          const value=Number.isFinite(n)&&n>=1?Math.floor(n):(Number(sub.folderCycles[folder])||sub.cycleNo);
+          sub.cycle.folderNumbers[folder]=value;
+          sub.folderCycles[folder]=value;
+        });
+        if(sub.activeTest)sub.activeTest.cycleLabel=formatFolderCycleLabel(sub.cycle.folders,sub.cycle.folderNumbers);
       }
     });
     return x;
@@ -1081,6 +1057,42 @@ KEYWORD / / —"></textarea>
     return [...new Set(s.rows.map(r=>r.folder).filter(Boolean))];
   }
 
+  function ensureFolderCycles(s=subject()){
+    if(!s.folderCycles||typeof s.folderCycles!=='object'||Array.isArray(s.folderCycles))s.folderCycles={};
+    const fallback=1;
+    [...new Set((s.rows||[]).map(r=>r.folder).filter(Boolean))].forEach(folder=>{
+      const n=Number(s.folderCycles[folder]);
+      s.folderCycles[folder]=Number.isFinite(n)&&n>=1?Math.floor(n):fallback;
+    });
+    return s.folderCycles;
+  }
+
+  function folderCycleNumbers(folders,s=subject()){
+    ensureFolderCycles(s);
+    const out={};
+    (folders||[]).forEach(folder=>{out[folder]=Math.max(1,Math.floor(Number(s.folderCycles[folder])||1));});
+    return out;
+  }
+
+  function cycleNumberForFolder(folder,cycleNumbers,s=subject()){
+    if(typeof cycleNumbers==='number')return Math.max(1,Math.floor(Number(cycleNumbers)||1));
+    return Math.max(1,Math.floor(Number(cycleNumbers?.[folder])||Number(folderCycleNumbers([folder],s)[folder])||1));
+  }
+
+  function formatFolderCycleLabel(folders,numbers){
+    const selected=(folders||[]).filter(Boolean);
+    if(!selected.length)return '회독';
+    const pairs=selected.map(folder=>[folder,Math.max(1,Math.floor(Number(numbers?.[folder])||1))]);
+    const values=[...new Set(pairs.map(pair=>pair[1]))];
+    if(values.length===1)return `${values[0]}회독`;
+    return pairs.map(([folder,n])=>`${folder} ${n}회독`).join(' · ');
+  }
+
+  function remainingCycles(metaValue,folder,s=subject()){
+    const target=Math.max(1,Math.floor(Number(metaValue?.nextCycle)||1));
+    return Math.max(0,target-cycleNumberForFolder(folder,folderCycleNumbers([folder],s),s));
+  }
+
   function testableFolders(){
     const s=subject();
     return allFolders().filter(f=>s.folderQuiz?.[f]!==false);
@@ -1109,14 +1121,15 @@ KEYWORD / / —"></textarea>
     return out;
   }
 
-  function buildRowChunk(r,fields,cycleNo,direction='keyword-to-detail',sequential=false){
+  function buildRowChunk(r,fields,cycleNumbers,direction='keyword-to-detail',sequential=false){
     const s=subject();
+    const chapterCycleNo=cycleNumberForFolder(r.folder,cycleNumbers,s);
     if(r.quizEnabled===false)return [];
     if(direction==='detail-to-keyword'){
       const hints=reverseHintEntries(r,fields,s);
       if(!hints.length||!r.keywordMeta)return [];
       const c={type:'keyword',row:r,field:'keyword',m:r.keywordMeta,value:r.name,key:cardKey({row:r,type:'keyword',field:'keyword'})};
-      return cycleDue(c,cycleNo)?[c]:[];
+      return cycleDue(c,chapterCycleNo)?[c]:[];
     }
     const rowCards=[];
     fields.forEach(f=>{
@@ -1130,12 +1143,12 @@ KEYWORD / / —"></textarea>
         c={type:'detail',row:r,field:f,m,value:m.value,key:cardKey({row:r,type:'detail',field:f})};
       }
       if(isNoQuiz(c.value))return;
-      if(cycleDue(c,cycleNo))rowCards.push(c);
+      if(cycleDue(c,chapterCycleNo))rowCards.push(c);
     });
     return sequential?rowCards:shuffleInPlace(rowCards);
   }
 
-  function buildCyclePool(fields,cycleNo,folderSelection,orderMode='random',direction='keyword-to-detail',sequential=false){
+  function buildCyclePool(fields,cycleNumbers,folderSelection,orderMode='random',direction='keyword-to-detail',sequential=false){
     const s=subject();
     const selected=(folderSelection?.length?folderSelection:defaultFolderSelection()).filter(f=>allFolders().includes(f));
     const selectedSet=new Set(selected);
@@ -1149,15 +1162,15 @@ KEYWORD / / —"></textarea>
       folderOrder.forEach(folder=>{
         const matchingRows=rows.filter(r=>r.folder===folder);
         const folderRows=sequential?matchingRows:shuffleInPlace(matchingRows.slice());
-        folderRows.forEach(r=>{const chunk=buildRowChunk(r,fields,cycleNo,direction,sequential);if(chunk.length)chunks.push(chunk)});
+        folderRows.forEach(r=>{const chunk=buildRowChunk(r,fields,cycleNumbers,direction,sequential);if(chunk.length)chunks.push(chunk)});
       });
       return chunks.flat();
     }
 
     if(sequential){
-      return rows.map(r=>buildRowChunk(r,fields,cycleNo,direction,true)).filter(chunk=>chunk.length).flat();
+      return rows.map(r=>buildRowChunk(r,fields,cycleNumbers,direction,true)).filter(chunk=>chunk.length).flat();
     }
-    const chunks=shuffleInPlace(rows.slice()).map(r=>buildRowChunk(r,fields,cycleNo,direction,false)).filter(chunk=>chunk.length);
+    const chunks=shuffleInPlace(rows.slice()).map(r=>buildRowChunk(r,fields,cycleNumbers,direction,false)).filter(chunk=>chunk.length);
     return shuffleInPlace(chunks).flat();
   }
 
@@ -1165,30 +1178,37 @@ KEYWORD / / —"></textarea>
     const s=subject();
     const folders=(folderSelection?.length?folderSelection:defaultFolderSelection()).slice();
     const mode=orderMode||'random';
-    let cycleNo=s.cycleNo;
-    let pool=buildCyclePool(fields,cycleNo,folders,mode,direction,sequential);
+    let numbers=folderCycleNumbers(folders,s);
+    let pool=buildCyclePool(fields,numbers,folders,mode,direction,sequential);
     if(!pool.length){
-      const futurePool=buildCyclePool(fields,Number.MAX_SAFE_INTEGER,folders,mode,direction,sequential);
-      const nextCycles=futurePool
-        .map(card=>Number(card.m.nextCycle)||1)
-        .filter(next=>next>cycleNo);
-      if(nextCycles.length){
-        cycleNo=Math.min(...nextCycles);
-        pool=buildCyclePool(fields,cycleNo,folders,mode,direction,sequential);
+      // 선택한 챕터 전체에 당장 출제할 카드가 없으면, 그 챕터들의 대기 간격을
+      // 함께 건너뛰어 가장 먼저 돌아오는 카드가 있는 회독부터 시작한다.
+      const futureNumbers=Object.fromEntries(folders.map(folder=>[folder,Number.MAX_SAFE_INTEGER]));
+      const futurePool=buildCyclePool(fields,futureNumbers,folders,mode,direction,sequential);
+      const waits=futurePool
+        .map(card=>Math.max(0,(Number(card.m.nextCycle)||1)-(Number(numbers[card.row.folder])||1)))
+        .filter(wait=>wait>0);
+      if(waits.length){
+        const jump=Math.min(...waits);
+        folders.forEach(folder=>{
+          numbers[folder]=(Number(numbers[folder])||1)+jump;
+          s.folderCycles[folder]=numbers[folder];
+        });
+        pool=buildCyclePool(fields,numbers,folders,mode,direction,sequential);
       }
     }
     if(!pool.length)return false;
-    s.cycleNo=cycleNo;
-    s.cycle={number:cycleNo,fields:fields.slice(),folders,orderMode:mode,sequential:!!sequential,directions:[direction],poolKeys:pool.map(c=>c.key),remainingKeys:pool.map(c=>c.key),answers:{}};
+    s.cycle={number:s.cycleNo,folderNumbers:{...numbers},fields:fields.slice(),folders,orderMode:mode,sequential:!!sequential,directions:[direction],poolKeys:pool.map(c=>c.key),remainingKeys:pool.map(c=>c.key),answers:{}};
     s.lastFields=fields.slice();s.lastFolders=folders.slice();s.lastOrderMode=mode;s.lastSequential=!!sequential;s.activeTest=null;
     save();return true;
   }
 
   function nextScheduledCycle(fields,folders,orderMode,direction='keyword-to-detail',sequential=false){
-    const current=subject().cycleNo;
-    const future=buildCyclePool(fields,Number.MAX_SAFE_INTEGER,folders,orderMode,direction,sequential)
-      .map(card=>Number(card.m.nextCycle)||1)
-      .filter(next=>next>current);
+    const currentNumbers=folderCycleNumbers(folders,subject());
+    const futureNumbers=Object.fromEntries((folders||[]).map(folder=>[folder,Number.MAX_SAFE_INTEGER]));
+    const future=buildCyclePool(fields,futureNumbers,folders,orderMode,direction,sequential)
+      .map(card=>Math.max(0,(Number(card.m.nextCycle)||1)-(Number(currentNumbers[card.row.folder])||1)))
+      .filter(wait=>wait>0);
     return future.length?Math.min(...future):null;
   }
 
@@ -1202,6 +1222,7 @@ KEYWORD / / —"></textarea>
         c.m=c.row.keywordMeta;
       }
       const m=c.m;
+      const chapterCycleNo=cycleNumberForFolder(c.row.folder,cycle.folderNumbers,s);
       if(result.confidence==='known'&&result.correct){
         m.stars=Math.max(0,Math.floor(Number(m.stars)||0))+1;
         m.status=m.stars>=state.settings.masterStars?'master':'known';
@@ -1215,14 +1236,22 @@ KEYWORD / / —"></textarea>
         m.status=result.confidence==='known'?'misconception':result.confidence==='unsure'?'unsure':'unknown';
       }
       if(result.confidence==='known' && result.correct){
-        const gap=state.settings.baseGap*Math.pow(2,Math.max(1,m.stars));
-        m.nextCycle=cycle.number+Math.max(1,Math.round(gap));
+        // 기본 간격 1: ⭐ 1회, ⭐⭐ 2회, ⭐⭐⭐ 4회 뒤 재출제.
+        const gap=state.settings.baseGap*Math.pow(2,Math.max(0,m.stars-1));
+        m.nextCycle=chapterCycleNo+Math.max(1,Math.round(gap));
       }else{
-        m.nextCycle=cycle.number+1;
+        m.nextCycle=chapterCycleNo+1;
       }
-      m.lastAskedCycle=cycle.number;
+      m.lastAskedCycle=chapterCycleNo;
     });
-    s.cycle=null;s.cycleNo=cycle.number+1;s.activeTest=null;save();
+    // 실제로 회독을 완료한 챕터만 다음 회독으로 이동한다.
+    (cycle.folders||[]).forEach(folder=>{
+      const completedAt=cycleNumberForFolder(folder,cycle.folderNumbers,s);
+      s.folderCycles[folder]=completedAt+1;
+    });
+    s.cycle=null;
+    s.cycleNo=Math.max(1,Math.floor(Number(s.cycleNo)||1))+1; // 과거 데이터와의 호환을 위한 누적 카운터
+    s.activeTest=null;save();
   }
 
   function keyMatchesDirection(key,direction){
@@ -1233,7 +1262,7 @@ KEYWORD / / —"></textarea>
   function addDirectionToCycle(cycle,direction){
     if(!cycle)return 0;
     cycle.directions=Array.isArray(cycle.directions)?cycle.directions:[];
-    const pool=buildCyclePool(cycle.fields,cycle.number,cycle.folders,cycle.orderMode,direction,!!cycle.sequential);
+    const pool=buildCyclePool(cycle.fields,cycle.folderNumbers||folderCycleNumbers(cycle.folders),cycle.folders,cycle.orderMode,direction,!!cycle.sequential);
     const seen=new Set(cycle.poolKeys||[]);
     const additions=pool.filter(card=>!seen.has(card.key));
     additions.forEach(card=>{seen.add(card.key);cycle.poolKeys.push(card.key);cycle.remainingKeys.push(card.key)});
@@ -1266,7 +1295,7 @@ KEYWORD / / —"></textarea>
     const keys=ensureSessionQueue(limit,direction);
     if(!keys.length){alert('선택한 모드로 더이상 출제할 문제가 없어.');return;}
     s.testNo=(Number(s.testNo)||0)+1;
-    s.activeTest={testNo:s.testNo,cycleNo:s.cycle.number,quizDirection:direction,limit,queueKeys:keys,index:0,currentKey:keys[0],confidence:null,revealed:false,remainingSeconds:state.settings.seconds,paused:false,waitingForResume:false};
+    s.activeTest={testNo:s.testNo,cycleNo:s.cycle.number,cycleLabel:formatFolderCycleLabel(s.cycle.folders,s.cycle.folderNumbers),quizDirection:direction,limit,queueKeys:keys,index:0,currentKey:keys[0],confidence:null,revealed:false,remainingSeconds:state.settings.seconds,paused:false,waitingForResume:false};
     s.lastLimit=limit;
     save();startQuizView();
   }
@@ -1330,7 +1359,7 @@ KEYWORD / / —"></textarea>
 
   function renderQuestion(){
     const s=subject(),a=s.activeTest;
-    $('quizContext').textContent=`Cycle #${a.cycleNo} · Test #${a.testNo}`;
+    $('quizContext').textContent=`${a.cycleLabel||`Cycle #${a.cycleNo}`} · Test #${a.testNo}`;
     const folderContext=$('quizFolderContext');
     const isReferenceHeading=!!currentCard.row.folder&&s.folderQuiz?.[currentCard.row.folder]===false;
     folderContext.textContent=isReferenceHeading?currentCard.row.folder:'';
@@ -1572,7 +1601,7 @@ KEYWORD / / —"></textarea>
     const s=subject(),mode=state.statsMode==='keyword'?'keyword':'attributes',st=stats(mode),toggle=$('statsModeToggle');
     $('subjectTitle').textContent=s.name;
     $('subjectSummary').textContent=mode==='keyword'?`${s.nameLabel} - 출제 포인트 ${st.total}개`:`${s.folderLabel} · ${s.detailFields.join(' · ')} - 출제 포인트 ${st.total}개`;
-    $('statsTotal').textContent=`${s.cycleNo}번째 회독 · 총 ${s.totalAnswered||0}번 성공`;
+    $('statsTotal').textContent=`회독은 챕터별 관리 · 총 ${s.totalAnswered||0}번 성공`;
     if(toggle){toggle.textContent=mode==='keyword'?'🍇':'🍒'}
     $('masterPct').textContent=(st.total?Math.round(st.master/st.total*100):0)+'%';
     $('statKnown').textContent=st.known;$('statMaster').textContent=st.master;$('statUnsure').textContent=st.blue;$('statRed').textContent=st.red+st.purple;$('statNew').textContent=st.newN;
@@ -1615,7 +1644,6 @@ KEYWORD / / —"></textarea>
     if($('scopeSubtitle'))$('scopeSubtitle').textContent=(selectedDirection==='detail-to-keyword'?'① 힌트 속성':'① 출제 속성');
     if($('quizDirectionSelect'))$('quizDirectionSelect').disabled=!!s.activeTest;
     $('roundNumber').textContent=`#${s.activeTest?.testNo || Math.max(1,(s.testNo||0)+1)}`;
-    $('cycleNumber').textContent=`#${s.cycleNo}`;
     renderScopeChoices();
     renderFolderScopeChoices();
     const cycle=s.cycle;
@@ -1642,7 +1670,7 @@ KEYWORD / / —"></textarea>
         $('sequentialOrder').checked=!!cycle.sequential;
       }else{
         $('startQuiz').classList.remove('new-quiz-mode');
-        $('startQuiz').textContent = `🎀 ${s.cycleNo} 회독 시작 🎀`;
+        $('startQuiz').textContent = '🎀 회독 시작 🎀';
         disableScopeChoices(false);
         syncScopeChoices(defaultFieldSelection());
         syncFolderScopeChoices(defaultFolderSelection());
@@ -1654,6 +1682,11 @@ KEYWORD / / —"></textarea>
     const limit=cycle&&s.activeTest?s.activeTest.limit:(s.lastLimit||DEFAULT_TEST_LIMIT);
     $('questionLimit').value=limit;$('questionLimit').disabled=!!s.activeTest;
     $('testOrderMode').disabled=!!s.activeTest||!!cycle;
+    const displayFolders=cycle?.folders||[...document.querySelectorAll('#folderScopeChoices input[data-folder]:checked')].map(i=>i.dataset.folder);
+    const displayNumbers=cycle?.folderNumbers||folderCycleNumbers(displayFolders,s);
+    const chapterLabel=formatFolderCycleLabel(displayFolders,displayNumbers);
+    $('cycleNumber').textContent=chapterLabel;
+    if(!cycle&&!s.activeTest)$('startQuiz').textContent=`🎀 ${chapterLabel} 시작 🎀`;
     updateTestAvailability();
   }
 
@@ -1677,7 +1710,8 @@ KEYWORD / / —"></textarea>
       return;
     }
 
-    const pool=buildCyclePool(fields,cycle?.number||s.cycleNo,folders,orderMode,direction,sequential);
+    const cycleNumbers=cycle?.folderNumbers||folderCycleNumbers(folders,s);
+    const pool=buildCyclePool(fields,cycleNumbers,folders,orderMode,direction,sequential);
     const existingKeys=new Set(cycle?.poolKeys||[]);
     const available=cycle
       ? cycle.remainingKeys.filter(key=>keyMatchesDirection(key,direction)).length+pool.filter(card=>!existingKeys.has(card.key)).length
@@ -1687,7 +1721,7 @@ KEYWORD / / —"></textarea>
     }else if(!cycle){
       const next=nextScheduledCycle(fields,folders,orderMode,direction,sequential);
       $('testAvailability').textContent=next
-        ? `이번 회독에서 출제할 문제가 없어. ${next}번째 회독부터 다시하면 돼!`
+        ? `선택한 챕터에서 ${next}회독 더 진행하면 다시 출제돼!`
         : '출제할 문제가 없어.';
     }else if(cycle.remainingKeys.length){
       $('testAvailability').textContent='선택한 모드에서 출제할 문제가 없어. 모드를 바꿔보는 건 어때?';
@@ -1808,7 +1842,7 @@ KEYWORD / / —"></textarea>
     reviewSession={queue:built.queue,total:built.queue.length,correct:0,wrong:0,folder:built.folder,direction:built.direction,celebrated:false};
     $('reviewCelebration').classList.remove('is-active');$('reviewCelebration').innerHTML='';
     $('reviewModal').classList.add('show');
-    $('reviewFinish').style.display='none';$('reviewActions').classList.remove('is-revealed');$('reviewActions').setAttribute('aria-hidden','true');
+    $('reviewActions').classList.remove('is-revealed');$('reviewActions').setAttribute('aria-hidden','true');
     renderReviewQuestion();
   }
   function renderReviewQuestion(){
@@ -1819,7 +1853,7 @@ KEYWORD / / —"></textarea>
       $('reviewQueueCount').textContent='🎉';
       $('reviewQuestionPrompt').textContent='CONGRATULATIONS';
       $('reviewQuestionName').textContent='지식 구멍 메우기 성공';
-      $('reviewHints').style.display='none';$('reviewHints').innerHTML='';$('reviewAnswer').style.display='none';
+      $('reviewAnswer').style.display='none';
       if(!rs.celebrated){rs.celebrated=true;launchReviewCelebration();}
       return;
     }
@@ -1830,8 +1864,6 @@ KEYWORD / / —"></textarea>
     $('reviewAnswer').classList.add('is-blurred');
     $('reviewAnswer').setAttribute('aria-label','정답 보기');
     $('reviewAnswer').title='🍀 I\'m so LUCKY ✨';
-    const hints=$('reviewHints');
-    hints.innerHTML='';hints.style.display='none';
     if(c.type==='keyword'){
       const attributes=c.hints||reverseHintEntries(c.row,s.lastFields||selectedFieldsForUI(),s);
       $('reviewQuestionPrompt').textContent='[키워드]?';
@@ -1843,7 +1875,6 @@ KEYWORD / / —"></textarea>
       $('reviewQuestionPrompt').textContent=`[${questionField}]?`;
       $('reviewAnswer').textContent=c.value!==''?c.value:'필기노트 확인하기!';
     }
-    $('reviewFinish').style.display='none';
   }
   function revealReviewAnswer(){
     if(!reviewSession||!reviewSession.queue.length||reviewSession.revealed)return;
@@ -1885,16 +1916,16 @@ KEYWORD / / —"></textarea>
       if(r.quizEnabled!==false && s.folderQuiz?.[r.folder]!==false && !isNoQuiz(r.folder) && r.folderMeta){
         normalizeMeta(r.folderMeta);
         const fm=r.folderMeta,fs=cardStatus({m:fm});
-        if(filterMatch(fs,state.filter))details.push(tag(s.folderLabel||'CHAPTER',fs,fm));
+        if(filterMatch(fs,state.filter))details.push(tag(s.folderLabel||'CHAPTER',fs,fm,r.folder));
       }
-      s.detailFields.forEach(f=>{const m=r.fields[f];if(isNoQuiz(m?.value))return;const st=cardStatus({m});if(filterMatch(st,state.filter))details.push(tag(f,st,m));});
+      s.detailFields.forEach(f=>{const m=r.fields[f];if(isNoQuiz(m?.value))return;const st=cardStatus({m});if(filterMatch(st,state.filter))details.push(tag(f,st,m,r.folder));});
       if(details.length)html+=`<div class="weak-row"><div class="weak-name">${esc(r.name)}</div><div class="weak-details">${details.join('')}</div></div>`;
     });
     $('weakList').innerHTML=html||'<div class="empty">૮꒰ ◌´ ⁰ `◌ ꒱ა</div>';
   }
   function filterMatch(st,filter){return filter==='all'||(filter==='red'&&st==='red')||(filter==='blue'&&st==='blue')||(filter==='purple'&&st==='purple')||(filter==='master'&&st==='master')}
   function starMarks(count){return '⭐'.repeat(Math.max(0,Math.floor(Number(count)||0)))}
-  function tag(label,st,m){const marks=starMarks(m.stars),stars=marks?` · ${marks}`:'';if(st==='red')return `<span class="detail-tag red">${esc(label)} 🧣${stars}</span>`;if(st==='blue')return `<span class="detail-tag blue">${esc(label)} 🫧${stars}</span>`;if(st==='purple')return `<span class="detail-tag purple">${esc(label)} 💎${stars}</span>`;if(st==='master')return `<span class="detail-tag gold">${esc(label)} ✨${marks?` · ${marks}`:''}${(m.nextCycle||0)>subject().cycleNo?`⠀(RE: ${m.nextCycle})`:''}</span>`;if(st==='green')return `<span class="detail-tag green">${esc(label)} 🌿${stars}</span>`;return `<span class="detail-tag gray">${esc(label)} ☁️${stars}</span>`}
+  function tag(label,st,m,folder){const marks=starMarks(m.stars),stars=marks?` · ${marks}`:'';if(st==='red')return `<span class="detail-tag red">${esc(label)} 🧣${stars}</span>`;if(st==='blue')return `<span class="detail-tag blue">${esc(label)} 🫧${stars}</span>`;if(st==='purple')return `<span class="detail-tag purple">${esc(label)} 💎${stars}</span>`;if(st==='master'){const remaining=remainingCycles(m,folder);return `<span class="detail-tag gold">${esc(label)} ✨${marks?` · ${marks}`:''}${remaining>0?`⠀(RE: ${remaining})`:''}</span>`;}if(st==='green')return `<span class="detail-tag green">${esc(label)} 🌿${stars}</span>`;return `<span class="detail-tag gray">${esc(label)} ☁️${stars}</span>`}
 
   function renderData(){
     const s=subject();$('subjectNameInput').value=s.name;$('folderFieldInput').value=s.folderLabel;$('nameFieldInput').value=s.nameLabel;$('detailFieldsInput').value=s.detailFields.join(', ');
@@ -1914,7 +1945,7 @@ KEYWORD / / —"></textarea>
   }
   function clearSubjectData(){
     const s=subject();if(!confirm(`'${s.name}' 토픽 데이터 지울게!`))return;
-    s.rows=[];s.cycle=null;s.activeTest=null;s.testNo=0;s.cycleNo=1;s.totalAnswered=0;s.folderQuiz={};s.bridges=[];save();renderAll();
+    s.rows=[];s.cycle=null;s.activeTest=null;s.testNo=0;s.cycleNo=1;s.folderCycles={};s.totalAnswered=0;s.folderQuiz={};s.bridges=[];save();renderAll();
   }
   function setFolderQuizMode(mode){
     const s=subject();const folder=$('folderModeSelect')?.value||state.folder||s.rows[0]?.folder||'';if(!folder)return;
@@ -2009,7 +2040,7 @@ KEYWORD / / —"></textarea>
     $('conflictExistingPreview').textContent=r?`기존 항목\n${rowPreview(s,r,editedExisting||r.name)}`:'기존 항목을 찾을 수 없어.';
     $('conflictIncomingPreview').textContent=`새로 입력한 내용\n${incomingPreview(s,a,editedNew||a.name)}`;
   }
-  function openKeywordConflict(s,a,candidates,done){
+  function openKeywordConflict(a,candidates,done){
     const preferred=candidates.find(r=>r.folder===a.folder)||candidates[0];
     pendingSheetImport.action=a;pendingSheetImport.candidates=candidates;pendingSheetImport.conflictRowId=preferred?.id||null;pendingSheetImport.done=done;
     $('conflictIntro').textContent=`❝${a.name}❞ 키워드는 이미 존재해!`;
@@ -2068,11 +2099,6 @@ KEYWORD / / —"></textarea>
       if(old.value!==value)r.fields[f]=meta(value,old.status,old.stars);
     });
   }
-  function finishSheetImport(){
-    const imp=pendingSheetImport;
-    if(imp)return;
-    save();renderAll();setPage('data');
-  }
   function incomingWouldChangeRow(s,r,a){
     if((a.folder||r.folder)!==r.folder)return true;
     if(a.bridge===true&&r.quizEnabled!==false)return true;
@@ -2101,7 +2127,7 @@ KEYWORD / / —"></textarea>
       const preferred=candidates.find(r=>r.folder===a.folder)||candidates[0];
       if(preferred&&!incomingWouldChangeRow(s,preferred,a))continue;
       imp.waitingForConflict=true;
-      openKeywordConflict(s,a,candidates,()=>{
+      openKeywordConflict(a,candidates,()=>{
         if(!pendingSheetImport)return;
         pendingSheetImport.waitingForConflict=false;
         processSheetImportActions();
@@ -2258,7 +2284,7 @@ KEYWORD / / —"></textarea>
 
       alert('데이터 불러오기 성공✅');}catch{alert('데이터 불러오기 실패❎');}finally{if(input) input.value='';}
   }
-  function resetProgress(){if(!confirm('🧨 학습 기록만 지울게!'))return;const s=subject();s.rows.forEach(r=>{r.folderMeta=meta(r.folder);r.keywordMeta=meta(r.name);s.detailFields.forEach(f=>{r.fields[f]=meta(r.fields[f]?.value||'')})});s.testNo=0;s.cycleNo=1;s.totalAnswered=0;s.cycle=null;s.activeTest=null;save();closeSettings();renderAll()}
+  function resetProgress(){if(!confirm('🧨 학습 기록만 지울게!'))return;const s=subject();s.rows.forEach(r=>{r.folderMeta=meta(r.folder);r.keywordMeta=meta(r.name);s.detailFields.forEach(f=>{r.fields[f]=meta(r.fields[f]?.value||'')})});s.testNo=0;s.cycleNo=1;s.folderCycles=Object.fromEntries(allFolders().map(folder=>[folder,1]));s.totalAnswered=0;s.cycle=null;s.activeTest=null;save();closeSettings();renderAll()}
   function fullReset(){if(!confirm('💥 초기 상태로 되돌려 놓을게!'))return;localStorage.removeItem(STORAGE_KEY);state=fresh();save();closeSettings();currentCard=null;confidence=null;paused=false;stopTimer();renderAll();setPage('main')}
 
   let lastTrail=0;
