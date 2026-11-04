@@ -594,7 +594,7 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
     <section class="page" id="page-test">
       <div class="test-landing" id="testLanding">
         <div class="test-landing-inner">
-          <div class="round-label">쪽지 시험 <b id="roundNumber">#1</b> · 선택 챕터 <b id="cycleNumber">#1</b></div>
+          <div class="round-label">쪽지 시험 <b id="roundNumber">#1</b> · Cycle <b id="cycleNumber">#1</b></div>
           <div class="test-logo">⋅ ˚₊‧ ୨୧ ‧₊˚ ⋅</div>
           <div class="resume-banner" id="resumeBanner" style="display:none"></div>
           <div class="test-config-card">
@@ -965,7 +965,7 @@ KEYWORD / / —"></textarea>
           sub.cycle.folderNumbers[folder]=value;
           sub.folderCycles[folder]=value;
         });
-        if(sub.activeTest)sub.activeTest.cycleLabel=formatFolderCycleLabel(sub.cycle.folders,sub.cycle.folderNumbers);
+        if(sub.activeTest){sub.activeTest.cycleNo=Number(sub.cycle.number)||sub.cycleNo;sub.activeTest.cycleLabel=`Cycle #${sub.cycle.number||sub.cycleNo}`;}
       }
     });
     return x;
@@ -1295,7 +1295,7 @@ KEYWORD / / —"></textarea>
     const keys=ensureSessionQueue(limit,direction);
     if(!keys.length){alert('선택한 모드로 더이상 출제할 문제가 없어.');return;}
     s.testNo=(Number(s.testNo)||0)+1;
-    s.activeTest={testNo:s.testNo,cycleNo:s.cycle.number,cycleLabel:formatFolderCycleLabel(s.cycle.folders,s.cycle.folderNumbers),quizDirection:direction,limit,queueKeys:keys,index:0,currentKey:keys[0],confidence:null,revealed:false,remainingSeconds:state.settings.seconds,paused:false,waitingForResume:false};
+    s.activeTest={testNo:s.testNo,cycleNo:s.cycle.number,cycleLabel:`Cycle #${s.cycle.number}`,quizDirection:direction,limit,queueKeys:keys,index:0,currentKey:keys[0],confidence:null,revealed:false,remainingSeconds:state.settings.seconds,paused:false,waitingForResume:false};
     s.lastLimit=limit;
     save();startQuizView();
   }
@@ -1601,7 +1601,7 @@ KEYWORD / / —"></textarea>
     const s=subject(),mode=state.statsMode==='keyword'?'keyword':'attributes',st=stats(mode),toggle=$('statsModeToggle');
     $('subjectTitle').textContent=s.name;
     $('subjectSummary').textContent=mode==='keyword'?`${s.nameLabel} - 출제 포인트 ${st.total}개`:`${s.folderLabel} · ${s.detailFields.join(' · ')} - 출제 포인트 ${st.total}개`;
-    $('statsTotal').textContent=`회독은 챕터별 관리 · 총 ${s.totalAnswered||0}번 성공`;
+    $('statsTotal').textContent=`${s.totalAnswered||0}번의 성공`;
     if(toggle){toggle.textContent=mode==='keyword'?'🍇':'🍒'}
     $('masterPct').textContent=(st.total?Math.round(st.master/st.total*100):0)+'%';
     $('statKnown').textContent=st.known;$('statMaster').textContent=st.master;$('statUnsure').textContent=st.blue;$('statRed').textContent=st.red+st.purple;$('statNew').textContent=st.newN;
@@ -1684,9 +1684,9 @@ KEYWORD / / —"></textarea>
     $('testOrderMode').disabled=!!s.activeTest||!!cycle;
     const displayFolders=cycle?.folders||[...document.querySelectorAll('#folderScopeChoices input[data-folder]:checked')].map(i=>i.dataset.folder);
     const displayNumbers=cycle?.folderNumbers||folderCycleNumbers(displayFolders,s);
-    const chapterLabel=formatFolderCycleLabel(displayFolders,displayNumbers);
-    $('cycleNumber').textContent=chapterLabel;
-    if(!cycle&&!s.activeTest)$('startQuiz').textContent=`🎀 ${chapterLabel} 시작 🎀`;
+    const cycleLabel=`#${Math.max(1,Math.floor(Number(s.cycleNo)||1))}`;
+    $('cycleNumber').textContent=cycleLabel;
+    if(!cycle&&!s.activeTest)$('startQuiz').textContent=`🎀 Cycle ${cycleLabel} 시작 🎀`;
     updateTestAvailability();
   }
 
