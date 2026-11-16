@@ -152,6 +152,9 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .start-quiz.resume-mode {background:var(--lav);box-shadow:0 12px 24px rgba(150, 120, 220, .32);}
 .start-quiz.new-quiz-mode {background:#83d0f7;box-shadow:0 12px 24px rgba(74,174,229,.30);}
 .start-quiz.new-quiz-mode:hover {background:#70c5f2;}
+.cycle-abort-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;margin:12px auto 0;padding:10px 17px;border:1px solid #efa4b2;border-radius:13px;background:#fff0f2;color:#a9324b;font-size:14px;font-weight:950;box-shadow:0 3px 9px rgba(190,70,100,.09);}
+.cycle-abort-button:hover{background:#ffe4e9;border-color:#e77991;transform:translateY(-1px)}
+.pause-box .cycle-abort-button{width:100%;margin-top:10px}
 .quiz-wrap{max-width:760px;width:100%;height:100%;margin:0 auto;display:flex;flex-direction:column}
 .quiz-meta{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px}
 .quiz-progress{font-size:11px;color:var(--muted)}
@@ -275,7 +278,7 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
 .modal-title{font-size:18px;font-weight:950}.close-btn{border:0;background:#fcebf0;border-radius:10px;width:34px;height:34px}
 .modal-body{padding:16px;display:grid;gap:13px}.setting-card{border:1px solid var(--line);border-radius:16px;padding:13px;background:#fff2f6}.setting-head{font-weight:950;font-size:13px;margin-bottom:9px}.helper{font-size:10px;color:var(--muted);line-height:1.6}
 .modal-preview{height:150px;border:1px dashed var(--line);border-radius:13px;display:grid;place-items:center;overflow:hidden;background:#fff}
- .modal-preview img{width:100%;height:100%;object-fit:cover}
+.modal-preview img{width:100%;height:100%;object-fit:cover}
 .review-launch-btn{width:100%;border:1px solid #f4a0bd;background:linear-gradient(135deg,#fff0f6,#f1eaff);color:#a53f6b;border-radius:11px;padding:9px 6px;font-size:11px;font-weight:950;line-height:1.35;box-shadow:0 3px 8px rgba(220,100,140,.1);flex:0 0 auto}
 .review-launch-btn:hover{border-color:var(--pink);transform:translateY(-1px)}
 .filter-rail .review-launch-btn{margin-top:auto}
@@ -625,6 +628,7 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
             </div>
           </div>
           <button class="start-quiz" id="startQuiz">QUIZ START</button>
+          <button class="cycle-abort-button" id="abortCycleButton" type="button" style="display:none">🍁 회독 종료 🍁</button>
           <div class="hint" style="margin-top:11px">가, 너만의 승리를 이뤄!</div>
         </div>
       </div>
@@ -648,7 +652,7 @@ table{width:100%;border-collapse:collapse;font-size:10px}th,td{text-align:left;p
               <div class="confirm-row" id="confirmRow" style="display:none"><button class="judge-btn btn-confirm" id="confirmButton">☑️ 확인했어</button></div>
             </div>
           </div>
-          <div class="pause-overlay" id="pauseOverlay"><div class="pause-box"><div style="font-size:24px;font-weight:950">일시정지</div><div class="action-row" style="justify-content:center"><button class="mini-button primary" id="resumeButton">✅ 이어풀기</button><button class="mini-button" id="resumeExitButton">❎ 이따풀기</button></div></div></div>
+          <div class="pause-overlay" id="pauseOverlay"><div class="pause-box"><div style="font-size:24px;font-weight:950">일시정지</div><div class="action-row" style="justify-content:center"><button class="mini-button primary" id="resumeButton">✅ 이어풀기</button><button class="mini-button" id="resumeExitButton">❎ 이따풀기</button></div><button class="cycle-abort-button" id="abortCycleFromPauseButton" type="button" style="display:none">✳️ 회독 종료</button></div></div>
         </div>
       </div>
     </section>
@@ -942,8 +946,6 @@ KEYWORD / / —"></textarea>
       sub.activeTest=sub.activeTest&&typeof sub.activeTest==='object'?sub.activeTest:null;
       if(sub.activeTest && typeof sub.activeTest.waitingForResume!=='boolean')sub.activeTest.waitingForResume=true;
       sub.rows.forEach(row=>normalizeRow(sub,row));
-      // 이전 버전은 모든 챕터가 공통 cycleNo를 사용했으므로, 업그레이드 시
-      // 각 챕터를 그 시점의 전체 회독 번호에서 시작시켜 기존 대기 간격을 보존한다.
       const hadFolderCycles=!!(sub.folderCycles&&typeof sub.folderCycles==='object'&&!Array.isArray(sub.folderCycles));
       sub.folderCycles=hadFolderCycles?sub.folderCycles:{};
       const all=[...new Set(sub.rows.map(row=>row.folder).filter(Boolean))];
@@ -959,6 +961,7 @@ KEYWORD / / —"></textarea>
         sub.cycle.orderMode=['random','folder'].includes(sub.cycle.orderMode)?sub.cycle.orderMode:'random';
         sub.cycle.sequential=!!sub.cycle.sequential;
         sub.cycle.folderNumbers=sub.cycle.folderNumbers&&typeof sub.cycle.folderNumbers==='object'?sub.cycle.folderNumbers:{};
+        sub.cycle.previousFolderNumbers=sub.cycle.previousFolderNumbers&&typeof sub.cycle.previousFolderNumbers==='object'?sub.cycle.previousFolderNumbers:{...sub.folderCycles};
         sub.cycle.folders.forEach(folder=>{
           const n=Number(sub.cycle.folderNumbers[folder]);
           const value=Number.isFinite(n)&&n>=1?Math.floor(n):(Number(sub.folderCycles[folder])||sub.cycleNo);
@@ -1179,10 +1182,9 @@ KEYWORD / / —"></textarea>
     const folders=(folderSelection?.length?folderSelection:defaultFolderSelection()).slice();
     const mode=orderMode||'random';
     let numbers=folderCycleNumbers(folders,s);
+    const previousFolderNumbers={...numbers};
     let pool=buildCyclePool(fields,numbers,folders,mode,direction,sequential);
     if(!pool.length){
-      // 선택한 챕터 전체에 당장 출제할 카드가 없으면, 그 챕터들의 대기 간격을
-      // 함께 건너뛰어 가장 먼저 돌아오는 카드가 있는 회독부터 시작한다.
       const futureNumbers=Object.fromEntries(folders.map(folder=>[folder,Number.MAX_SAFE_INTEGER]));
       const futurePool=buildCyclePool(fields,futureNumbers,folders,mode,direction,sequential);
       const waits=futurePool
@@ -1198,7 +1200,7 @@ KEYWORD / / —"></textarea>
       }
     }
     if(!pool.length)return false;
-    s.cycle={number:s.cycleNo,folderNumbers:{...numbers},fields:fields.slice(),folders,orderMode:mode,sequential:!!sequential,directions:[direction],poolKeys:pool.map(c=>c.key),remainingKeys:pool.map(c=>c.key),answers:{}};
+    s.cycle={number:s.cycleNo,folderNumbers:{...numbers},previousFolderNumbers,fields:fields.slice(),folders,orderMode:mode,sequential:!!sequential,directions:[direction],poolKeys:pool.map(c=>c.key),remainingKeys:pool.map(c=>c.key),answers:{}};
     s.lastFields=fields.slice();s.lastFolders=folders.slice();s.lastOrderMode=mode;s.lastSequential=!!sequential;s.activeTest=null;
     save();return true;
   }
@@ -1212,10 +1214,10 @@ KEYWORD / / —"></textarea>
     return future.length?Math.min(...future):null;
   }
 
-  function finalizeCycle(){
-    const s=subject(),cycle=s.cycle;if(!cycle)return;
-    cycle.poolKeys.forEach(key=>{
-      const c=findCard(key);const result=cycle.answers[key];if(!c||!result)return;
+  function applyCycleResults(cycle,s=subject()){
+    if(!cycle)return;
+    (cycle.poolKeys||[]).forEach(key=>{
+      const c=findCard(key);const result=cycle.answers?.[key];if(!c||!result)return;
       if(c.type==='keyword'){
         if(!c.row.keywordMeta||typeof c.row.keywordMeta!=='object')c.row.keywordMeta=meta(c.row.name);
         c.row.keywordMeta.value=c.row.name;
@@ -1236,7 +1238,6 @@ KEYWORD / / —"></textarea>
         m.status=result.confidence==='known'?'misconception':result.confidence==='unsure'?'unsure':'unknown';
       }
       if(result.confidence==='known' && result.correct){
-        // 기본 간격 1: ⭐ 1회, ⭐⭐ 2회, ⭐⭐⭐ 4회 뒤 재출제.
         const gap=state.settings.baseGap*Math.pow(2,Math.max(0,m.stars-1));
         m.nextCycle=chapterCycleNo+Math.max(1,Math.round(gap));
       }else{
@@ -1244,14 +1245,52 @@ KEYWORD / / —"></textarea>
       }
       m.lastAskedCycle=chapterCycleNo;
     });
-    // 실제로 회독을 완료한 챕터만 다음 회독으로 이동한다.
+  }
+
+
+  function finalizeCycle(){
+    const s=subject(),cycle=s.cycle;if(!cycle)return;
+    applyCycleResults(cycle,s);
     (cycle.folders||[]).forEach(folder=>{
       const completedAt=cycleNumberForFolder(folder,cycle.folderNumbers,s);
       s.folderCycles[folder]=completedAt+1;
     });
     s.cycle=null;
-    s.cycleNo=Math.max(1,Math.floor(Number(s.cycleNo)||1))+1; // 과거 데이터와의 호환을 위한 누적 카운터
+    s.cycleNo=Math.max(1,Math.floor(Number(s.cycleNo)||1))+1;
     s.activeTest=null;save();
+  }
+
+  function abortCycle(){
+    const s=subject(),cycle=s.cycle;
+    if(!cycle)return;
+    const answered=Object.keys(cycle.answers||{}).length;
+    const message=[
+      `이번 회독에서 ${answered} 문제 풀었어!`,
+      '',
+      '새로운 회독을 시작해볼까?'
+    ].join('\n');
+    if(!confirm(message))return;
+
+    stopTimer();
+    applyCycleResults(cycle,s);
+
+    const previous=cycle.previousFolderNumbers||{};
+    (cycle.folders||[]).forEach(folder=>{
+      const old=Number(previous[folder]);
+      if(Number.isFinite(old)&&old>=1)s.folderCycles[folder]=Math.floor(old);
+    });
+
+    s.cycle=null;
+    s.activeTest=null;
+    currentCard=null;confidence=null;paused=false;
+    $('quizView').style.display='none';
+    $('testLanding').style.display='grid';
+    $('pauseOverlay').classList.remove('show');
+    $('pauseButton').textContent='⏸️';
+    save();
+    renderAll();
+    $('quizView').style.display='none';
+    $('testLanding').style.display='grid';
   }
 
   function keyMatchesDirection(key,direction){
@@ -1322,6 +1361,7 @@ KEYWORD / / —"></textarea>
 
   function startQuizView(){
     const s=subject(),a=s.activeTest;if(!a)return;
+    if($('abortCycleFromPauseButton'))$('abortCycleFromPauseButton').style.display=s.cycle?'inline-flex':'none';
     const validConfidences=['known','unsure','unknown'];
     if(validConfidences.includes(a.confidence)){
       confidence=a.confidence;
@@ -1647,6 +1687,8 @@ KEYWORD / / —"></textarea>
     renderScopeChoices();
     renderFolderScopeChoices();
     const cycle=s.cycle;
+    if($('abortCycleButton'))$('abortCycleButton').style.display=cycle?'inline-flex':'none';
+    if($('abortCycleFromPauseButton'))$('abortCycleFromPauseButton').style.display=cycle?'inline-flex':'none';
     if(s.activeTest){
       $('resumeBanner').style.display='none';
       $('startQuiz').classList.add('resume-mode');
@@ -2293,12 +2335,12 @@ KEYWORD / / —"></textarea>
     const p=document.createElement('span');p.className='trail-particle';p.textContent=['💕', '🫧', '🌸', '✨', '🌺'][Math.floor(Math.random()*5)];p.style.left=e.clientX+'px';p.style.top=e.clientY+'px';document.body.appendChild(p);setTimeout(()=>p.remove(),700);
   });
 
-  // UI events
+  /* UI events */
   document.querySelectorAll('.page-tab').forEach(b=>b.onclick=()=>setPage(b.dataset.page));
   $('settingsButton').onclick=openSettings;$('closeSettings').onclick=closeSettings;$('openReview').onclick=openReviewQuiz;$('closeReview').onclick=closeReviewQuiz;$('reviewWrong').onclick=()=>judgeReview(false);$('reviewCorrect').onclick=()=>judgeReview(true);$('reviewAnswer').onclick=revealReviewAnswer;$('reviewAnswer').onkeydown=e=>{if(e.key==='Enter'&&$('reviewAnswer').classList.contains('is-blurred')){e.preventDefault();revealReviewAnswer()}};$('reviewModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeReviewQuiz()});$('settingsModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeSettings()});$('bridgeManager').addEventListener('click',e=>{if(e.target===e.currentTarget)closeBridgeManager()});
   $('statsModeToggle').onclick=()=>{state.statsMode=state.statsMode==='keyword'?'attributes':'keyword';save();renderMain()};
   $('cheerImage').parentElement.onclick=cheerClick;
-  $('startQuiz').onclick=startSession;$('quizDirectionSelect').onchange=e=>{if(subject().activeTest){e.target.value=subject().activeTest.quizDirection||state.quizDirection||'keyword-to-detail';return}state.quizDirection=e.target.value;save();renderTestLanding()};$('pauseButton').onclick=togglePause;$('resumeButton').onclick=togglePause;$('resumeExitButton').onclick=saveAndExitQuiz;$('correctButton').onclick=()=>recordResult(true);$('wrongButton').onclick=()=>recordResult(false);$('confirmButton').onclick=confirmWeak;
+  $('startQuiz').onclick=startSession;$('abortCycleButton').onclick=abortCycle;$('abortCycleFromPauseButton').onclick=abortCycle;$('quizDirectionSelect').onchange=e=>{if(subject().activeTest){e.target.value=subject().activeTest.quizDirection||state.quizDirection||'keyword-to-detail';return}state.quizDirection=e.target.value;save();renderTestLanding()};$('pauseButton').onclick=togglePause;$('resumeButton').onclick=togglePause;$('resumeExitButton').onclick=saveAndExitQuiz;$('correctButton').onclick=()=>recordResult(true);$('wrongButton').onclick=()=>recordResult(false);$('confirmButton').onclick=confirmWeak;
   document.querySelectorAll('[data-confidence]').forEach(b=>b.onclick=()=>chooseConfidence(b.dataset.confidence));
   document.querySelectorAll('.filter-btn').forEach(b=>b.onclick=()=>{state.filter=b.dataset.filter;save();renderWeak()});
   function positionKeywordRenameTooltip(){
